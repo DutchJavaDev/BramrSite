@@ -1,0 +1,11 @@
+﻿<h3>Register</h3>
+
+@page "/register"
+
+<p>
+    <input @bind="Email" />
+    <input @bind="Password" />
+</p>
+<button @onclick="btnPost_Click">Create user</button>
+
+<p>@response</p>
