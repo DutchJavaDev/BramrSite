@@ -6,6 +6,7 @@
     <input @bind="Email" />
     <input @bind="Password" />
 </p>
-<button @onclick="btnPost_Click">Create user</button>
-
+<button disabled="@Disabled" @onclick="@(async () => await btnPost_Click())">Create user</button>
 <p>@response</p>
+
+

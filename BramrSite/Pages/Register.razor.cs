@@ -14,14 +14,16 @@ namespace BramrSite.Pages
         string response;
         string Email { get; set; }
         string Password { get; set; }
-        private async void btnPost_Click()
+        bool Disabled { get; set; }
+        private async Task btnPost_Click()
         {
+            Disabled = true;
             RegisterModel register = new RegisterModel() { Email = Email, Password = Password };
             string someJson = JsonConvert.SerializeObject(register);
             RegisterProcessor p = new RegisterProcessor();
             var ruben = await p.CreateUser(someJson);
-            response = ruben.Message;
-
+            response = ruben.ToString();
+            Disabled = false;
 
         }
 
