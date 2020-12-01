@@ -22,7 +22,7 @@ namespace BramrSite.Pages
             string someJson = JsonConvert.SerializeObject(register);
             RegisterProcessor p = new RegisterProcessor();
             var ruben = await p.CreateUser(someJson);
-            response = ruben.ToString();
+            response = ruben.Message;
             Disabled = false;
 
         }

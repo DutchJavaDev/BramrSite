@@ -3,10 +3,9 @@
 @page "/register"
 
 <p>
-    <input @bind="Email" />
-    <input @bind="Password" />
+    <input @bind="Email" placeholder="Email" />
+    <input @bind="Password" placeholder="Password" type="password"/>
 </p>
 <button disabled="@Disabled" @onclick="@(async () => await btnPost_Click())">Create user</button>
 <p>@response</p>
-
 
