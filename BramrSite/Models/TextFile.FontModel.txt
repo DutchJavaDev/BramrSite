@@ -1,0 +1,23 @@
+﻿font-family: 'Nerko One', cursive;
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+
+font-family: 'Roboto', sans-serif;
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+font-family: 'Oswald', sans-serif;
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+psudo 
+Text binden 
+@bind=
+
+font selectere
+@onchange
+
+object er aan toevoegen
+
+
+font toevoegen aan dde text
