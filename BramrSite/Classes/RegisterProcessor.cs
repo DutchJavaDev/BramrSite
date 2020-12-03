@@ -11,7 +11,7 @@ namespace BramrSite.Classes
 {
     public class RegisterProcessor
     {
-        public async Task<ApiResponseModel> CreateUser(string someJson)
+        public async Task<ApiResponse> CreateUser(string someJson)
         {
 
             var content = new StringContent(someJson, Encoding.UTF8, "application/json");
@@ -25,7 +25,7 @@ namespace BramrSite.Classes
                 if (response.IsSuccessStatusCode)
                 {
 
-                    ApiResponseModel apiresponse = JsonConvert.DeserializeObject<ApiResponseModel>(await response.Content.ReadAsStringAsync());
+                    ApiResponse apiresponse = JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
                     return apiresponse;
                 }
                 else
