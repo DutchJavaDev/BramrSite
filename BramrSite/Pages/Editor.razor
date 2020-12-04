@@ -1,0 +1,297 @@
+﻿@page "/editor"
+@using BramrSite.Classes
+@using BramrSite.Models
+
+<head>
+    <meta charset="utf-8" />
+    <title>BRAMR - CV</title>
+    <link rel="Stylesheet" href="css/StylesheetCV.css">
+    <link rel="Stylesheet" href="css/menu.css">
+    <link rel="Stylesheet" href="css/all.min.css">
+    <link rel="Stylesheet" href="css/grid.css">
+</head>
+<body>
+    <div class="PopUp">
+        <div class="Icon">
+            <b>!</b>
+        </div>
+        <div class="Titel">
+            Duidelijk?
+        </div>
+        <div class="Uitleg">
+            1. Start met je <b>foto</b> en <b>persoonlijke gegevens</b>. <br>
+            2. Vul je <b>schoolervaringen</b> en <b>werkervaringen</b> nauwkeurig in. <br>
+            3. Beschrijf de <b>skills</b> waar jij het trots op bent. <br>
+            4. Geef aan waar jouw <b>interesses</b> liggen. <br>
+            5. Sla je <b>CV</b> op en je bent klaar voor je solicitatie! <br>
+        </div>
+        <div class="SluitAf-btn">
+            <button id="SluitAf-PopUp-btn">
+                Terug!
+            </button>
+        </div>
+    </div>
+
+    <div class="mastergrids">
+        <div class="navgrid">
+            <div class="center">
+                <button id="Open-PopUp-btn">
+                    <i class="fas fa-question"></i>
+                </button>
+            </div>
+            <div class="menu-wrap">
+                <input type="checkbox" class="toggler">
+                <div class="hamburger"><div></div></div>
+                <div class="menu">
+                    <div>
+                        <div>
+                            <ul>
+                                <li><a href="index.html">Home</a> </li>
+                                <li><a href="inlogpagina.html">Inloggen</a> </li>
+                                <li><a href="Templatepagina.html">Templates</a> </li>
+                                <li><a href="CVTemplate.html">CV-template</a> </li>
+                                <li><a href="PortfolioTemplate.html">Portfolio-template</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fotogrid">
+            <div class='nestedfoto'>
+                <img src="" alt="" class="afbeelding" />
+            </div>
+        </div>
+        <div class="maingrid">
+            <div class="nestedgrid">
+                <div id="pgegevens1">
+                    <div id="naam">
+                        <p>Naam</p>
+                        <i class="fa fa-user fa-lg-fw" aria-hidden="true"></i>
+                    </div>
+                    <div id="adres">
+                        <p>Adres</p>
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div id="postcode">
+                        <p>Postcode</p>
+                        <i class="fa fa-envelope fa-lg-fw" aria-hidden="true"></i>
+                    </div>
+                    <div id="woonplaats">
+                        <p>Woonplaats</p>
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <div id="telefoon">
+                        <p>Telefoon</p>
+                        <i class="fa fa-phone fa-lg-fw" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div id="textinput1">
+                    <div id="naaminput" @onclick="() => { Selection(Naam); }">
+                        <DesignComponent CurrentDesignElement="Naam"/>
+                    </div>
+                    <div id="adresinput" @onclick="() => { Selection(Adres); }">
+                        <DesignComponent CurrentDesignElement="Adres" />
+                    </div>
+                    <div id="postcodeinput" @onclick="() => { Selection(Postcode); }">
+                        <DesignComponent CurrentDesignElement="Postcode" />
+                    </div>
+                    <div id="woonplaatsinput" @onclick="() => { Selection(Woonplaats); }">
+                        <DesignComponent CurrentDesignElement="Woonplaats" />
+                    </div>
+                    <div id="telefooninput" @onclick="() => { Selection(Telefoon); }">
+                        <DesignComponent CurrentDesignElement="Telefoon" />
+                    </div>
+                </div>
+                <div id="pgegevens2">
+                    <div id="email">
+                        <p>Email</p>
+                        <i class="fas fa-at"></i>
+                    </div>
+                    <div id="geboortedatum">
+                        <p>Geboortedatum</p>
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <div id="nationaliteit">
+                        <p>Nationaliteit</p>
+                        <i class="fas fa-globe-europe"></i>
+                    </div>
+                    <div id="rijbewijs">
+                        <p>Rijbewijs</p>
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div id="linkedIn">
+                        <p>LinkedIn</p>
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                </div>
+                <div id="textinput2">
+                    <div id="emailinput" @onclick="() => { Selection(Email); }">
+                        <DesignComponent CurrentDesignElement="Email" />
+                    </div>
+                    <div id="geboortedatuminput" @onclick="() => { Selection(Geboortedatum); }">
+                        <DesignComponent CurrentDesignElement="Geboortedatum" />
+                    </div>
+                    <div id="nationaliteitinput" @onclick="() => { Selection(Nationaliteit); }">
+                        <DesignComponent CurrentDesignElement="Nationaliteit" />
+                    </div>
+                    <div id="rijbewijsinput" @onclick="() => { Selection(Rijbewijs); }">
+                        <DesignComponent CurrentDesignElement="Rijbewijs" />
+                    </div>
+                    <div id="linkedIninput" @onclick="() => { Selection(LinkedIn); }">
+                        <DesignComponent CurrentDesignElement="LinkedIn" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="zijbalkgrid">
+            <div class="nestedgridzijbalk">
+                <div class="afbeeldinggrid">
+                    <div class="gridceptionafbeelding">
+                        <div id="afbeeldingkiezen">
+                            <label for="afbeeldingkiezen">Kies een foto:</label>
+                            <input type="file"
+                                   id="fileselector" name="fileselector"
+                                   accept="image/png, image/jpeg">
+                        </div>
+                        <div id="hyperlinktext">
+                            <input type="text" placeholder="Type some text..." @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString()); }" @bind-value="CurrentTextElement.Text" />
+                        </div>
+                        <div id="animatietext">
+
+                        </div>
+                        <div id="grootebtn">
+                            @if (UndoButton)
+                            {
+                                <button class="buttonGroote" @onclick="async() => { await Undo(); }">1</button>
+                            }
+                            else
+                            {
+                                <button class="buttonGroote" disabled>1</button>
+                            }
+                        </div>
+                        <div id="opvullingbtn">
+                            @if (RedoButton)
+                            {
+                                <button class="buttonOpvulling" @onclick="async() => { await Redo(); }">3</button>
+                            }
+                            else
+                            {
+                                <button class="buttonOpvulling" disabled>12</button>
+                            }
+                        </div>
+                        <div id="alphabtn">
+                            <button class="buttonAlpha">3</button>
+                        </div>
+                        <div id="borderbtn">
+                            <button class="buttonBorder">4</button>
+                        </div>
+                        <div id="borderradiusbtn">
+                            <button class="buttonRadius">5</button>
+                        </div>
+                        <div id="animatiebtn">
+                            <button class="buttonAnimatie">5</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="lettertypegrid">
+                    <div class="gridceptionlettertype">
+                        <div id="fontkiezen">
+                            <label for="font">Fonts</label>
+                            <select name="font" id="fontkiezen">
+                                <option value="font1">Font1</option>
+                                <option value="font2">Font2</option>
+                                <option value="font3">Font3</option>
+                                <option value="font4">Font4</option>
+                                <option value="font5">Font5</option>
+                                <option value="font6">Font6</option>
+                                <option value="font7">Font7</option>
+                                <option value="font8">Font8</option>
+                                <option value="font9">Font9</option>
+                                <option value="font10">Font10</option>
+                            </select>
+                        </div>
+                        <div id="fontgroote">
+                            <div class="slideFontgroote">
+                                <p>Font groote</p>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                            </div>
+                        </div>
+                        <div id="fontweight">
+                            <div class="slideFontweight">
+                                <p>Font weight</p>
+                                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                            </div>
+                        </div>
+                        <div id="boldbtn">
+                            <button class="buttonBold" @onclick="async() => { CurrentTextElement.Bold = !CurrentTextElement.Bold; await AddToDB(ChangeModel.Type.Bold, CurrentTextElement.Bold.ToString()); }">1</button>
+                        </div>
+                        <div id="italicbtn">
+                            <button class="buttonItalic" @onclick="async() => { CurrentTextElement.Italic = !CurrentTextElement.Italic; await AddToDB(ChangeModel.Type.Italic, CurrentTextElement.Italic.ToString()); }">2</button>
+                        </div>
+                        <div id="streeponderbtn">
+                            <button class="buttonStreepOnder" @onclick="async() => { CurrentTextElement.Underlined = !CurrentTextElement.Underlined; await AddToDB(ChangeModel.Type.Underlined, CurrentTextElement.Underlined.ToString()); }">3</button>
+                        </div>
+                        <div id="streepbovenbtn">
+                            <button class="buttonStreepBoven" @onclick="async() => { CurrentTextElement.StrikedThrough = !CurrentTextElement.StrikedThrough; await AddToDB(ChangeModel.Type.Strikedthrough, CurrentTextElement.StrikedThrough.ToString()); }">4</button>
+                        </div>
+                        <div id="textshadowbtn">
+                            <button class="buttonTextShadow">6</button>
+                        </div>
+                        <div id="alinglinksbtn">
+                            <button class="buttonAlingLinks" @onclick="async() => { CurrentTextElement.TextAllignment = DesignModel.Allignment.Left; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">7</button>
+                        </div>
+                        <div id="alingmiddenbtn">
+                            <button class="buttonAlingMidden" @onclick="async() => { CurrentTextElement.TextAllignment = DesignModel.Allignment.Center; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">8</button>
+                        </div>
+                        <div id="alingrechtsbtn">
+                            <button class="buttonAlingRechts" @onclick="async() => { CurrentTextElement.TextAllignment = DesignModel.Allignment.Right; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">9</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="kleurgrid">
+                    <div class="gridceptionkleur">
+                        <div id="textkleurkiezen">
+                            <label for="textkleurkiezen"> Kleur font</label>
+                            <input name="Color Picker" type="color" @oninput="(e) => { CurrentTextElement.TextColor = e.Value.ToString(); }" @onchange="async(e) => { CurrentTextElement.TextColor = e.Value.ToString(); await AddToDB(ChangeModel.Type.TextColor, e.Value.ToString()); e.Value = CurrentTextElement.TextColor; }"/>
+                        </div>
+                        <div id="backgroundtext">
+                            <label for="backgroundtext"> Kleur achtergrond</label>
+                            <input name="Color Picker" type="color" @oninput="(e) => { CurrentTextElement.BackgroundColor = e.Value.ToString(); }" @onchange="async(e) => { CurrentTextElement.BackgroundColor = e.Value.ToString(); await AddToDB(ChangeModel.Type.BackgroundColor, e.Value.ToString()); e.Value = CurrentTextElement.BackgroundColor; }"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content1grid">
+            <div id="contenttext1" @onclick="() => { Selection(Werkervaring); }">
+                <h1>Werkervaring</h1>
+                <DesignComponent CurrentDesignElement="Werkervaring"/>
+            </div>
+        </div>
+        <div class="content2grid">
+            <div id="contenttext2" @onclick="() => { Selection(Schoolervaring); }">
+                <h2>Schoolervaring</h2>
+                <DesignComponent CurrentDesignElement="Schoolervaring" />
+            </div>
+        </div>
+        <div class="content3grid">
+            <div id="contenttext3" @onclick="() => { Selection(Skillset); }">
+                <h3>Skillset</h3>
+                <DesignComponent CurrentDesignElement="Skillset" />
+            </div>
+        </div>
+        <div class="interesses">
+            <div id="interessesgrid" @onclick="() => { Selection(Interesses); }">
+                <h4>Interesses</h4>
+                <DesignComponent CurrentDesignElement="Interesses" />
+            </div>
+        </div>
+        <div class="motivatie">
+            <div id="motivatiegrid" @onclick="() => { Selection(Motivatie); }">
+                <h5>Motivatie</h5>
+                <DesignComponent CurrentDesignElement="Motivatie" />
+            </div>
+        </div>
+    </div>
+</body>
