@@ -16,7 +16,7 @@ namespace BramrSite.Pages
 
         public bool Disabled { get; set; }
 
-        public async Task OnClick()
+        public async Task OnSubmit()
         {
             Disabled = true;
 
@@ -27,7 +27,7 @@ namespace BramrSite.Pages
                 var response = await processor.SignIn(Model);
 
                 // Debug
-                Message = response.Message;
+                Message = response.ToString();
             }
 
             Disabled = false;
