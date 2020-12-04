@@ -8,13 +8,13 @@ namespace BramrSite.Models
     {
         public ApiResponse() { }
 
-        public bool Success { get; private set; } = false;
+        public bool Success { get; set; } = false;
 
-        public string Message { get; private set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
 
-        public object RequestedData { get; private set; } = string.Empty;
+        public object RequestedData { get; set; } = string.Empty;
 
-        public ICollection<string> Errors { get; private set; } = new List<string>();
+        public ICollection<string> Errors { get; set; } = new List<string>();
 
         public static ApiResponse Oke(string message = "", object data = null)
         {
@@ -25,7 +25,6 @@ namespace BramrSite.Models
         {
             return new ApiResponse { Success = false, Message = message, RequestedData = data, Errors = errors };
         }
-
         public override string ToString()
         {
             var builder = new StringBuilder();
@@ -34,12 +33,16 @@ namespace BramrSite.Models
             builder.AppendLine($"Message: {Message}");
             builder.AppendLine("\n[Errors]");
 
-            foreach (var error in Errors)
+            if (Errors != null)
             {
-                builder.AppendLine($"{error}");
+                foreach (var error in Errors)
+                {
+                    builder.AppendLine($"{error}");
+                }
             }
 
-            return $"{Success} {Message} {RequestedData}";
+            return builder.ToString();
         }
+
     }
 }
