@@ -1,6 +1,6 @@
 ﻿@page "/login"
 
-<EditForm Model="Model" OnValidSubmit="@(async () => await OnClick())">
+<EditForm Model="Model" OnValidSubmit="@(async () => await OnSubmit())">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
