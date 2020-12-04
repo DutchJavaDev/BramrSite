@@ -19,12 +19,16 @@ namespace BramrSite.Classes
 #else
             string url = "https://bramr.tech/api/signin/account";
 #endif
-                using (HttpResponseMessage response = await ApiHelper.client.PostAsync(url, content))
-                {
+                using HttpResponseMessage response = await ApiHelper.client.PostAsync(url, content);
+                var data = await response.Content.ReadAsStringAsync();
 
-                    ApiResponse apiresponse = JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
-                    return apiresponse;
-                }
+                Console.WriteLine(data);
+
+                ApiResponse apiresponse = JsonConvert.DeserializeObject<ApiResponse>(data);
+
+                Console.WriteLine(apiresponse);
+
+                return apiresponse;
             }
             catch (Exception e)
             {
