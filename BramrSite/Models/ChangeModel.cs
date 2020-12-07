@@ -34,7 +34,19 @@ namespace BramrSite.Models
             Underlined,
             Strikedthrough,
             TextAllignment,
-            FontSize
+            FontSize,
+            // Art Aanpassing
+            Width,
+            Height,
+            Src,
+            Alt,
+            Border,
+            FloatSet,
+            Opacity,
+            ObjectFitSet,
+            Margin,
+            Padding
+                
         }
     }
 }
