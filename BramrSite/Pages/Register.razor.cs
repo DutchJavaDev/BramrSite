@@ -11,21 +11,30 @@ namespace BramrSite.Pages
 {
     public partial class Register : ComponentBase
     {
-        string response;
-        string Email { get; set; }
-        string Password { get; set; }
-        bool Disabled { get; set; }
-        private async Task btnPost_Click()
+        public readonly SignupModel Model = new SignupModel();
+
+        [Inject] public NavigationManager Navigation { get; set; }
+        [Inject] public ApiService Api { get; set; }
+
+        public string Message { get; set; }
+
+        public bool Disabled { get; set; }
+
+        public async Task OnSubmit()
         {
             Disabled = true;
-            RegisterModel register = new RegisterModel() { Email = Email, Password = Password };
-            string someJson = JsonConvert.SerializeObject(register);
-            RegisterProcessor p = new RegisterProcessor();
-            var ruben = await p.CreateUser(someJson);
-            response = ruben.Message;
+
+            if (Model.IsValid())
+            {
+                var response = await Api.SignUp(Model);
+
+                // Debug
+                Message = response.ToString();
+
+                if (response.Success)
+                    Navigation.NavigateTo("login", true);
+            }
             Disabled = false;
-
         }
-
     }
 }

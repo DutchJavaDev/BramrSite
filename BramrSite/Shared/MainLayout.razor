@@ -1,11 +1,44 @@
 ﻿@inherits LayoutComponentBase
+@inject BramrSite.Auth.ITokenHandler tokenhandler
+@inject NavigationManager navigation
 
-@*<div class="sidebar">
-    <NavMenu />
-</div>*@
+<div class="container-fluid">
+    <AuthorizeView>
+        <Authorized>
+            @*<div class="topnav">
+                <NavLink href="/home" Match="NavLinkMatch.All">Home</NavLink>
+                @if (context.User.IsInRole("Admin"))
+                {
+                    <NavLink href="/MaakApp">Maak app</NavLink>
+                }
 
-<div class="main">
-    @*<div class="content px-4">*@
-    @Body
-    @*</div>*@
+                @if (context.User.IsInRole("AppOwner"))
+                {
+                    <NavLink href="/beheer/gebruikers">Gebruiker toevoegen</NavLink>
+                    <NavLink href="/beheer/afbeeldingen">Beheer Afbeeldingen</NavLink>
+                    <NavLink href="/beheer/widgets">Beheer Widgets</NavLink>
+                }
+
+                <NavLink class="float-right" href="#" @onclick="Logout">
+                    <span>Uitloggen</span>
+                </NavLink>
+            </div>*@
+            <div class="mt-3">
+                @Body
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="mt-3">
+                @Body
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
 </div>
+
+@code{
+    private async void Logout()
+    {
+        await tokenhandler.UpdateAutenticationState(string.Empty);
+        navigation.NavigateTo("/", false);
+    }
+}
