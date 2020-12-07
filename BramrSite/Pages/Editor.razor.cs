@@ -47,7 +47,7 @@ namespace BramrSite.Pages
 
         protected override async void OnInitialized()
         {
-            await API.DeleteAllFromDB();
+            //////////////await API.DeleteAllFromDB();
 
             AllTextElements.Add(Naam);
             AllTextElements.Add(Adres);
