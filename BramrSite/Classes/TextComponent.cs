@@ -4,9 +4,9 @@ using BramrSite.Models;
 
 namespace BramrSite.Classes
 {
-    public class DesignComponent : ComponentBase
+    public class TextComponent : ComponentBase
     {
-        [Parameter] public TextModel CurrentDesignElement { get; set; } = new TextModel();
+        [Parameter] public TextModel CurrentDesignElement { get; set; } = new TextModel();        
 
         private int ElementIndex { get; set; }
 

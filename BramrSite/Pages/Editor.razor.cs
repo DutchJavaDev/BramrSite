@@ -14,6 +14,7 @@ namespace BramrSite.Pages
         [Inject] IApiDesignConnection API { get; set; }
 
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
+        public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
 
         public TextModel Naam { get; private set; } = new TextModel() { ID = 0 };
         public TextModel Adres { get; private set; } = new TextModel() { ID = 1 };
@@ -30,6 +31,10 @@ namespace BramrSite.Pages
         public TextModel Skillset { get; private set; } = new TextModel() { ID = 12 };
         public TextModel Interesses { get; private set; } = new TextModel() { ID = 13 };
         public TextModel Motivatie { get; private set; } = new TextModel() { ID = 14 };
+        //Art Aanpassing 
+        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto"};
+        
+
 
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
@@ -64,6 +69,10 @@ namespace BramrSite.Pages
             AllTextElements.Add(Skillset);
             AllTextElements.Add(Interesses);
             AllTextElements.Add(Motivatie);
+            //Art Aanpassing 
+            AllImageElements.Add(ProfielFoto);
+            //Art Aanpassing einde
+
         }
 
         private void Selection(TextModel NewTextElement)
@@ -127,6 +136,7 @@ namespace BramrSite.Pages
         private async Task UseChange(ChangeModel CurrentChange, bool GoingBack)
         {
             TextModel CurrentTextElement = new TextModel();
+            ImageModel CurrentImageElement = new ImageModel();
 
             object result;
 
@@ -135,48 +145,88 @@ namespace BramrSite.Pages
                 if (Element.ID == CurrentChange.DesignElement)
                 {
                     CurrentTextElement = Element;
+
                     break;
                 }
             }
+            // Art aanpassing
+            foreach (var Element in AllImageElements)
+            {
+                if (Element.ID == CurrentChange.DesignElement)
+                {
+                    CurrentImageElement = Element;
 
+                    break;
+                }
+            }
+            //Art Aanpassing einde
+
+            result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
             switch (CurrentChange.EditType)
             {
+
                 case ChangeModel.Type.Text:
-                    result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
                     CurrentTextElement.Text = result.ToString();
                     break;
                 case ChangeModel.Type.TextColor:
-                    result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
                     CurrentTextElement.TextColor = result.ToString();
                     break;
                 case ChangeModel.Type.BackgroundColor:
-                    result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
                     CurrentTextElement.BackgroundColor = result.ToString();
                     break;
                 case ChangeModel.Type.Bold:
-                    result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
                     CurrentTextElement.Bold = bool.Parse(result.ToString());
                     break;
                 case ChangeModel.Type.Italic:
-                    result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
                     CurrentTextElement.Italic = bool.Parse(result.ToString());
                     break;
-                case ChangeModel.Type.Underlined:
-                    result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
+                case ChangeModel.Type.Underlined:                   
                     CurrentTextElement.Underlined = bool.Parse(result.ToString());
                     break;
-                case ChangeModel.Type.Strikedthrough:
-                    result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
+                case ChangeModel.Type.Strikedthrough:                    
                     CurrentTextElement.StrikedThrough = bool.Parse(result.ToString());
                     break;
-                case ChangeModel.Type.TextAllignment:
-                    result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
+                case ChangeModel.Type.TextAllignment:                    
                     CurrentTextElement.TextAllignment = (TextModel.Allignment)Enum.Parse(typeof(TextModel.Allignment), result.ToString());
                     break;
-                case ChangeModel.Type.FontSize:
-                    result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
+                case ChangeModel.Type.FontSize:                    
                     CurrentTextElement.FontSize = int.Parse(result.ToString());
                     break;
+                    //Art aanpassing
+                case ChangeModel.Type.Width:
+                    CurrentImageElement.Width = int.Parse(result.ToString());
+                    break;
+                case ChangeModel.Type.Height:
+                    CurrentImageElement.Height = int.Parse(result.ToString());
+                    break;
+                case ChangeModel.Type.Src:
+                    CurrentImageElement.Src = result.ToString();
+                    break;
+                case ChangeModel.Type.Alt:
+                    CurrentImageElement.Alt = result.ToString();
+                    break;
+                case ChangeModel.Type.Border:
+                    CurrentImageElement.Border = int.Parse(result.ToString());
+                    break;
+                case ChangeModel.Type.FloatSet:
+                    CurrentImageElement.FloatSet = (ImageModel.Float)Enum.Parse(typeof(ImageModel.Float), result.ToString());
+                    break;
+                case ChangeModel.Type.Opacity:
+                    CurrentImageElement.Opacity = int.Parse(result.ToString());
+                    break;
+                case ChangeModel.Type.ObjectFitSet:
+                    CurrentImageElement.ObjectFitSet = (ImageModel.ObjectFit)Enum.Parse(typeof(ImageModel.ObjectFit), result.ToString());
+                    break;
+                case ChangeModel.Type.Margin:
+                    CurrentImageElement.Margin = int.Parse(result.ToString());
+                    break;
+                case ChangeModel.Type.Padding:
+                    CurrentImageElement.Padding = int.Parse(result.ToString());
+                    break;
+
+                    //Art Aanpassing einde
+
+
             }
         }
 
@@ -225,11 +275,28 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Text:
                 case ChangeModel.Type.TextColor:
                 case ChangeModel.Type.BackgroundColor:
+                    //Art Aanpassing
+                case ChangeModel.Type.Src:
+                case ChangeModel.Type.Alt:
+                
                     return string.Empty;
                 case ChangeModel.Type.FontSize:
                     return 10;
+                case ChangeModel.Type.Height:
+                case ChangeModel.Type.Width:
+                    return 100;
+                case ChangeModel.Type.Padding:
+                case ChangeModel.Type.Margin:
+                    return 0;
+                case ChangeModel.Type.Opacity:
+                    return 1;
+                case ChangeModel.Type.FloatSet:
+                    return ImageModel.Float.none;
+                case ChangeModel.Type.ObjectFitSet:
+                    return ImageModel.ObjectFit.cover;
                 default:
                     return TextModel.Allignment.Left;
+                    //Art Aanpassing einde
             }
         }
     }

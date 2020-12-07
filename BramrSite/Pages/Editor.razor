@@ -1,7 +1,7 @@
 ﻿@page "/editor"
 @using BramrSite.Classes
 @using BramrSite.Models
-@attribute [Authorize]
+@*@attribute [Authorize]*@
 
 <head>
     <meta charset="utf-8" />
@@ -60,7 +60,7 @@
         </div>
         <div class="fotogrid">
             <div class='nestedfoto'>
-                <img src="" alt="" class="afbeelding" />
+                <ImageComponent CurrentDesignElement="ProfielFoto" />
             </div>
         </div>
         <div class="maingrid">
@@ -89,19 +89,19 @@
                 </div>
                 <div id="textinput1">
                     <div id="naaminput" @onclick="() => { Selection(Naam); }">
-                        <DesignComponent CurrentDesignElement="Naam"/>
+                        <TextComponent CurrentDesignElement="Naam"/>
                     </div>
                     <div id="adresinput" @onclick="() => { Selection(Adres); }">
-                        <DesignComponent CurrentDesignElement="Adres" />
+                        <TextComponent CurrentDesignElement="Adres" />
                     </div>
                     <div id="postcodeinput" @onclick="() => { Selection(Postcode); }">
-                        <DesignComponent CurrentDesignElement="Postcode" />
+                        <TextComponent CurrentDesignElement="Postcode" />
                     </div>
                     <div id="woonplaatsinput" @onclick="() => { Selection(Woonplaats); }">
-                        <DesignComponent CurrentDesignElement="Woonplaats" />
+                        <TextComponent CurrentDesignElement="Woonplaats" />
                     </div>
                     <div id="telefooninput" @onclick="() => { Selection(Telefoon); }">
-                        <DesignComponent CurrentDesignElement="Telefoon" />
+                        <TextComponent CurrentDesignElement="Telefoon" />
                     </div>
                 </div>
                 <div id="pgegevens2">
@@ -128,19 +128,19 @@
                 </div>
                 <div id="textinput2">
                     <div id="emailinput" @onclick="() => { Selection(Email); }">
-                        <DesignComponent CurrentDesignElement="Email" />
+                        <TextComponent CurrentDesignElement="Email" />
                     </div>
                     <div id="geboortedatuminput" @onclick="() => { Selection(Geboortedatum); }">
-                        <DesignComponent CurrentDesignElement="Geboortedatum" />
+                        <TextComponent CurrentDesignElement="Geboortedatum" />
                     </div>
                     <div id="nationaliteitinput" @onclick="() => { Selection(Nationaliteit); }">
-                        <DesignComponent CurrentDesignElement="Nationaliteit" />
+                        <TextComponent CurrentDesignElement="Nationaliteit" />
                     </div>
                     <div id="rijbewijsinput" @onclick="() => { Selection(Rijbewijs); }">
-                        <DesignComponent CurrentDesignElement="Rijbewijs" />
+                        <TextComponent CurrentDesignElement="Rijbewijs" />
                     </div>
                     <div id="linkedIninput" @onclick="() => { Selection(LinkedIn); }">
-                        <DesignComponent CurrentDesignElement="LinkedIn" />
+                        <TextComponent CurrentDesignElement="LinkedIn" />
                     </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@
                             <label for="afbeeldingkiezen">Kies een foto:</label>
                             <input type="file"
                                    id="fileselector" name="fileselector"
-                                   accept="image/png, image/jpeg">
+                                   accept="image/png, image/jpeg" @bind="ProfielFoto.Src">
                         </div>
                         <div id="hyperlinktext">
                             <input type="text" placeholder="Type some text..." @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString()); }" @bind-value="CurrentTextElement.Text" />
@@ -267,31 +267,31 @@
         <div class="content1grid">
             <div id="contenttext1" @onclick="() => { Selection(Werkervaring); }">
                 <h1>Werkervaring</h1>
-                <DesignComponent CurrentDesignElement="Werkervaring"/>
+                <TextComponent CurrentDesignElement="Werkervaring"/>
             </div>
         </div>
         <div class="content2grid">
             <div id="contenttext2" @onclick="() => { Selection(Schoolervaring); }">
                 <h2>Schoolervaring</h2>
-                <DesignComponent CurrentDesignElement="Schoolervaring" />
+                <TextComponent CurrentDesignElement="Schoolervaring" />
             </div>
         </div>
         <div class="content3grid">
             <div id="contenttext3" @onclick="() => { Selection(Skillset); }">
                 <h3>Skillset</h3>
-                <DesignComponent CurrentDesignElement="Skillset" />
+                <TextComponent CurrentDesignElement="Skillset" />
             </div>
         </div>
         <div class="interesses">
             <div id="interessesgrid" @onclick="() => { Selection(Interesses); }">
                 <h4>Interesses</h4>
-                <DesignComponent CurrentDesignElement="Interesses" />
+                <TextComponent CurrentDesignElement="Interesses" />
             </div>
         </div>
         <div class="motivatie">
             <div id="motivatiegrid" @onclick="() => { Selection(Motivatie); }">
                 <h5>Motivatie</h5>
-                <DesignComponent CurrentDesignElement="Motivatie" />
+                <TextComponent CurrentDesignElement="Motivatie" />
             </div>
         </div>
     </div>
