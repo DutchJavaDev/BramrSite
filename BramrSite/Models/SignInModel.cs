@@ -2,7 +2,7 @@
 
 namespace BramrSite.Models
 {
-    public class SignInModel
+    public class SigninModel
     {
         [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
