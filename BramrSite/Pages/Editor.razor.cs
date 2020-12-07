@@ -33,9 +33,7 @@ namespace BramrSite.Pages
         public TextModel Motivatie { get; private set; } = new TextModel() { ID = 14 };
         //Art Aanpassing 
         public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto"};
-        
-
-
+        //Art Aanpassing einde
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
 
@@ -50,9 +48,9 @@ namespace BramrSite.Pages
         private bool UndoButton { get; set; }
         private bool RedoButton { get; set; }
 
-        protected override async void OnInitialized()
+        protected override /*async*/ void OnInitialized()
         {
-            //////////////await API.DeleteAllFromDB();
+            //await API.DeleteAllFromDB();
 
             AllTextElements.Add(Naam);
             AllTextElements.Add(Adres);
@@ -223,10 +221,7 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Padding:
                     CurrentImageElement.Padding = int.Parse(result.ToString());
                     break;
-
                     //Art Aanpassing einde
-
-
             }
         }
 
@@ -272,16 +267,15 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Underlined:
                 case ChangeModel.Type.Strikedthrough:
                     return false;
+                case ChangeModel.Type.FontSize:
+                    return 10;
                 case ChangeModel.Type.Text:
                 case ChangeModel.Type.TextColor:
                 case ChangeModel.Type.BackgroundColor:
                     //Art Aanpassing
                 case ChangeModel.Type.Src:
                 case ChangeModel.Type.Alt:
-                
                     return string.Empty;
-                case ChangeModel.Type.FontSize:
-                    return 10;
                 case ChangeModel.Type.Height:
                 case ChangeModel.Type.Width:
                     return 100;
@@ -298,6 +292,11 @@ namespace BramrSite.Pages
                     return TextModel.Allignment.Left;
                     //Art Aanpassing einde
             }
+        }
+
+        private async Task UploadFile(ChangeEventArgs e)
+        {
+            Console.WriteLine(e.Value);
         }
     }
 }

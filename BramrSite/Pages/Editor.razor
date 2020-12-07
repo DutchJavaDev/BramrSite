@@ -6,17 +6,17 @@
 <head>
     <meta charset="utf-8" />
     <title>BRAMR - CV</title>
-    <link rel="Stylesheet" href="css/StylesheetCV.css">
-    <link rel="Stylesheet" href="css/menu.css">
-    <link rel="Stylesheet" href="css/all.min.css">
-    <link rel="Stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/StylesheetCV.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="css/grid.css">
 </head>
 <body>
     <div class="PopUp">
         <div class="Icon">
             <b>!</b>
         </div>
-        <div class="Titel">1
+        <div class="Titel">
             Duidelijk?
         </div>
         <div class="Uitleg">
@@ -68,7 +68,7 @@
                 <div id="pgegevens1">
                     <div id="naam">
                         <p>Naam</p>
-                        <i class="fa fa-user fa-lg-fw" aria-hidden="true"></i>
+                        <i class="fa fa-user fa-lg-fw"></i>
                     </div>
                     <div id="adres">
                         <p>Adres</p>
@@ -76,7 +76,7 @@
                     </div>
                     <div id="postcode">
                         <p>Postcode</p>
-                        <i class="fa fa-envelope fa-lg-fw" aria-hidden="true"></i>
+                        <i class="fa fa-envelope fa-lg-fw"></i>
                     </div>
                     <div id="woonplaats">
                         <p>Woonplaats</p>
@@ -84,7 +84,7 @@
                     </div>
                     <div id="telefoon">
                         <p>Telefoon</p>
-                        <i class="fa fa-phone fa-lg-fw" aria-hidden="true"></i>
+                        <i class="fa fa-phone fa-lg-fw"></i>
                     </div>
                 </div>
                 <div id="textinput1">
@@ -104,29 +104,39 @@
                         <TextComponent CurrentDesignElement="Telefoon" />
                     </div>
                 </div>
-                <div id="pgegevens2">
+                <div id="pgegevens2"><br>
                     <div id="email">
-                        <p>Email</p>
-                        <i class="fas fa-at"></i>
+                        <p>
+                            <i class="fas fa-at"></i>
+                            Email
+                        </p>
                     </div>
                     <div id="geboortedatum">
-                        <p>Geboortedatum</p>
-                        <i class="fas fa-birthday-cake"></i>
+                        <p>
+                            <i class="fas fa-birthday-cake"></i>
+                            Geboortedatum
+                        </p>
                     </div>
                     <div id="nationaliteit">
-                        <p>Nationaliteit</p>
-                        <i class="fas fa-globe-europe"></i>
+                        <p>
+                            <i class="fas fa-globe-europe"></i>
+                            Nationaliteit
+                        </p>
                     </div>
                     <div id="rijbewijs">
-                        <p>Rijbewijs</p>
-                        <i class="fas fa-car"></i>
+                        <p>
+                            <i class="fas fa-car"></i>
+                            Rijbewijs
+                        </p>
                     </div>
                     <div id="linkedIn">
-                        <p>LinkedIn</p>
-                        <i class="fab fa-linkedin"></i>
+                        <p>
+                            <i class="fab fa-linkedin"></i>
+                            LinkedIn
+                        </p>
                     </div>
                 </div>
-                <div id="textinput2">
+                <div id="textinput2"><br>
                     <div id="emailinput" @onclick="() => { Selection(Email); }">
                         <TextComponent CurrentDesignElement="Email" />
                     </div>
@@ -151,9 +161,7 @@
                     <div class="gridceptionafbeelding">
                         <div id="afbeeldingkiezen">
                             <label for="afbeeldingkiezen">Kies een foto:</label>
-                            <input type="file"
-                                   id="fileselector" name="fileselector"
-                                   accept="image/png, image/jpeg" @bind="ProfielFoto.Src">
+                            <input type="file" id="fileselector" name="fileselector" accept="image/png, image/jpeg" @onchange="async(e) => { await UploadFile(e); }">
                         </div>
                         <div id="hyperlinktext">
                             <input type="text" placeholder="Type some text..." @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString()); }" @bind-value="CurrentTextElement.Text" />

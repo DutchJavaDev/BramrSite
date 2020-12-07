@@ -68,8 +68,8 @@
     display: grid;
     width: 100%;
     height: 100%;
-    grid-template-columns: 1 fr;
-    grid-row: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
 }
 
 #afbeelding{
@@ -84,7 +84,7 @@
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-row: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
 }
 
 #pgegevens1{
@@ -114,7 +114,7 @@
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr;
-    grid-row: 1fr;
+    grid-template-rows: 1fr;
 }
 
 #contenttext1{
@@ -122,12 +122,12 @@
     grid-row: 1 / 1;
 }
 
-.content2grid{
+.content2grid {
     display: grid;
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr;
-    grid-row: 1fr;
+    grid-template-rows: 1fr;
 }
 
 #contenttext2{
@@ -135,12 +135,12 @@
     grid-row: 1 / 1;
 }
 
-.content3grid{
+.content3grid {
     display: grid;
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr;
-    grid-row: 1fr;
+    grid-template-rows: 1fr;
 }
 
 #contenttext3{
@@ -150,12 +150,12 @@
 
 /* Intersesses grid */
 
-.interesses{
+.interesses {
     display: grid;
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr;
-    grid-row: 1fr;
+    grid-template-rows: 1fr;
     grid-gap: 10px;
 }
 
@@ -166,12 +166,12 @@
 
 /* MOTIVATIE */
 
-.motivatie{
+.motivatie {
     display: grid;
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr;
-    grid-row: 1fr;
+    grid-template-rows: 1fr;
     grid-gap: 10px;
 }
 
@@ -181,12 +181,12 @@
 }
 
 /* ZIJBALK GRID */
-.nestedgridzijbalk{
+.nestedgridzijbalk {
     display: grid;
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr;
-    grid-row: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 /* AFBEELDING GEDEELTE */
@@ -198,12 +198,12 @@
     border: 1px solid rgb(0, 21, 206);
 }
 
-.gridceptionafbeelding{
+.gridceptionafbeelding {
     display: grid;
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-row: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 #afbeeldingkiezen{
@@ -269,12 +269,12 @@
     border: 1px solid rgb(0, 21, 206);
 }
 
-.gridceptionlettertype{
+.gridceptionlettertype {
     display: grid;
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-row: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 #fontkiezen{
@@ -352,12 +352,12 @@
     border: 1px solid rgb(0, 21, 206);
 }
 
-.gridceptionkleur{
+.gridceptionkleur {
     display: grid;
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-row: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
 #textkleurkiezen{
