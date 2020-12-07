@@ -6,7 +6,7 @@ namespace BramrSite.Classes
 {
     public class DesignComponent : ComponentBase
     {
-        [Parameter] public DesignModel CurrentDesignElement { get; set; } = new DesignModel();
+        [Parameter] public TextModel CurrentDesignElement { get; set; } = new TextModel();
 
         private int ElementIndex { get; set; }
 

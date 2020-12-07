@@ -239,13 +239,13 @@
                             <button class="buttonTextShadow">6</button>
                         </div>
                         <div id="alinglinksbtn">
-                            <button class="buttonAlingLinks" @onclick="async() => { CurrentTextElement.TextAllignment = DesignModel.Allignment.Left; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">7</button>
+                            <button class="buttonAlingLinks" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Left; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">7</button>
                         </div>
                         <div id="alingmiddenbtn">
-                            <button class="buttonAlingMidden" @onclick="async() => { CurrentTextElement.TextAllignment = DesignModel.Allignment.Center; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">8</button>
+                            <button class="buttonAlingMidden" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Center; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">8</button>
                         </div>
                         <div id="alingrechtsbtn">
-                            <button class="buttonAlingRechts" @onclick="async() => { CurrentTextElement.TextAllignment = DesignModel.Allignment.Right; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">9</button>
+                            <button class="buttonAlingRechts" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Right; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">9</button>
                         </div>
                     </div>
                 </div>

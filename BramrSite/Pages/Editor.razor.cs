@@ -13,26 +13,26 @@ namespace BramrSite.Pages
     {
         [Inject] IApiDesignConnection API { get; set; }
 
-        public List<DesignModel> AllDesignElements { get; private set; } = new List<DesignModel>();
+        public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
 
-        public DesignModel Naam { get; private set; } = new DesignModel() { ID = 0 };
-        public DesignModel Adres { get; private set; } = new DesignModel() { ID = 1 };
-        public DesignModel Postcode { get; private set; } = new DesignModel() { ID = 2 };
-        public DesignModel Woonplaats { get; private set; } = new DesignModel() { ID = 3 };
-        public DesignModel Telefoon { get; private set; } = new DesignModel() { ID = 4 };
-        public DesignModel Email { get; private set; } = new DesignModel() { ID = 5 };
-        public DesignModel Geboortedatum { get; private set; } = new DesignModel() { ID = 6 };
-        public DesignModel Nationaliteit { get; private set; } = new DesignModel() { ID = 7 };
-        public DesignModel Rijbewijs { get; private set; } = new DesignModel() { ID = 8 };
-        public DesignModel LinkedIn { get; private set; } = new DesignModel() { ID = 9 };
-        public DesignModel Werkervaring { get; private set; } = new DesignModel() { ID = 10 };
-        public DesignModel Schoolervaring { get; private set; } = new DesignModel() { ID = 11 };
-        public DesignModel Skillset { get; private set; } = new DesignModel() { ID = 12 };
-        public DesignModel Interesses { get; private set; } = new DesignModel() { ID = 13 };
-        public DesignModel Motivatie { get; private set; } = new DesignModel() { ID = 14 };
+        public TextModel Naam { get; private set; } = new TextModel() { ID = 0 };
+        public TextModel Adres { get; private set; } = new TextModel() { ID = 1 };
+        public TextModel Postcode { get; private set; } = new TextModel() { ID = 2 };
+        public TextModel Woonplaats { get; private set; } = new TextModel() { ID = 3 };
+        public TextModel Telefoon { get; private set; } = new TextModel() { ID = 4 };
+        public TextModel Email { get; private set; } = new TextModel() { ID = 5 };
+        public TextModel Geboortedatum { get; private set; } = new TextModel() { ID = 6 };
+        public TextModel Nationaliteit { get; private set; } = new TextModel() { ID = 7 };
+        public TextModel Rijbewijs { get; private set; } = new TextModel() { ID = 8 };
+        public TextModel LinkedIn { get; private set; } = new TextModel() { ID = 9 };
+        public TextModel Werkervaring { get; private set; } = new TextModel() { ID = 10 };
+        public TextModel Schoolervaring { get; private set; } = new TextModel() { ID = 11 };
+        public TextModel Skillset { get; private set; } = new TextModel() { ID = 12 };
+        public TextModel Interesses { get; private set; } = new TextModel() { ID = 13 };
+        public TextModel Motivatie { get; private set; } = new TextModel() { ID = 14 };
 
 
-        private DesignModel CurrentTextElement { get; set; } = new DesignModel();
+        private TextModel CurrentTextElement { get; set; } = new TextModel();
 
         private List<int> AllFontSizes { get; set; } = new List<int>()
         {
@@ -49,24 +49,24 @@ namespace BramrSite.Pages
         {
             await API.DeleteAllFromDB();
 
-            AllDesignElements.Add(Naam);
-            AllDesignElements.Add(Adres);
-            AllDesignElements.Add(Postcode);
-            AllDesignElements.Add(Woonplaats);
-            AllDesignElements.Add(Telefoon);
-            AllDesignElements.Add(Email);
-            AllDesignElements.Add(Geboortedatum);
-            AllDesignElements.Add(Nationaliteit);
-            AllDesignElements.Add(Rijbewijs);
-            AllDesignElements.Add(LinkedIn);
-            AllDesignElements.Add(Werkervaring);
-            AllDesignElements.Add(Schoolervaring);
-            AllDesignElements.Add(Skillset);
-            AllDesignElements.Add(Interesses);
-            AllDesignElements.Add(Motivatie);
+            AllTextElements.Add(Naam);
+            AllTextElements.Add(Adres);
+            AllTextElements.Add(Postcode);
+            AllTextElements.Add(Woonplaats);
+            AllTextElements.Add(Telefoon);
+            AllTextElements.Add(Email);
+            AllTextElements.Add(Geboortedatum);
+            AllTextElements.Add(Nationaliteit);
+            AllTextElements.Add(Rijbewijs);
+            AllTextElements.Add(LinkedIn);
+            AllTextElements.Add(Werkervaring);
+            AllTextElements.Add(Schoolervaring);
+            AllTextElements.Add(Skillset);
+            AllTextElements.Add(Interesses);
+            AllTextElements.Add(Motivatie);
         }
 
-        private void Selection(DesignModel NewTextElement)
+        private void Selection(TextModel NewTextElement)
         {
             CurrentTextElement.Selected = false;
             CurrentTextElement = NewTextElement;
@@ -126,14 +126,15 @@ namespace BramrSite.Pages
 
         private async Task UseChange(ChangeModel CurrentChange, bool GoingBack)
         {
-            DesignModel CurrentElement = new DesignModel();
+            TextModel CurrentTextElement = new TextModel();
+
             object result;
 
-            foreach (var Element in AllDesignElements)
+            foreach (var Element in AllTextElements)
             {
                 if (Element.ID == CurrentChange.DesignElement)
                 {
-                    CurrentElement = Element;
+                    CurrentTextElement = Element;
                     break;
                 }
             }
@@ -142,39 +143,39 @@ namespace BramrSite.Pages
             {
                 case ChangeModel.Type.Text:
                     result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
-                    CurrentElement.Text = result.ToString();
+                    CurrentTextElement.Text = result.ToString();
                     break;
                 case ChangeModel.Type.TextColor:
                     result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
-                    CurrentElement.TextColor = result.ToString();
+                    CurrentTextElement.TextColor = result.ToString();
                     break;
                 case ChangeModel.Type.BackgroundColor:
                     result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
-                    CurrentElement.BackgroundColor = result.ToString();
+                    CurrentTextElement.BackgroundColor = result.ToString();
                     break;
                 case ChangeModel.Type.Bold:
                     result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
-                    CurrentElement.Bold = bool.Parse(result.ToString());
+                    CurrentTextElement.Bold = bool.Parse(result.ToString());
                     break;
                 case ChangeModel.Type.Italic:
                     result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
-                    CurrentElement.Italic = bool.Parse(result.ToString());
+                    CurrentTextElement.Italic = bool.Parse(result.ToString());
                     break;
                 case ChangeModel.Type.Underlined:
                     result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
-                    CurrentElement.Underlined = bool.Parse(result.ToString());
+                    CurrentTextElement.Underlined = bool.Parse(result.ToString());
                     break;
                 case ChangeModel.Type.Strikedthrough:
                     result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
-                    CurrentElement.StrikedThrough = bool.Parse(result.ToString());
+                    CurrentTextElement.StrikedThrough = bool.Parse(result.ToString());
                     break;
                 case ChangeModel.Type.TextAllignment:
                     result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
-                    CurrentElement.TextAllignment = (DesignModel.Allignment)Enum.Parse(typeof(DesignModel.Allignment), result.ToString());
+                    CurrentTextElement.TextAllignment = (TextModel.Allignment)Enum.Parse(typeof(TextModel.Allignment), result.ToString());
                     break;
                 case ChangeModel.Type.FontSize:
                     result = await DetermineChange(CurrentChange.EditType, CurrentChange, GoingBack);
-                    CurrentElement.FontSize = int.Parse(result.ToString());
+                    CurrentTextElement.FontSize = int.Parse(result.ToString());
                     break;
             }
         }
@@ -228,7 +229,7 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.FontSize:
                     return 10;
                 default:
-                    return DesignModel.Allignment.Left;
+                    return TextModel.Allignment.Left;
             }
         }
     }
