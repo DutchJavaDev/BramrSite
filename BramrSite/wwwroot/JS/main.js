@@ -1,12 +1,22 @@
 /* POP UP MELDING */
 
-document.getElementById("Open-PopUp-btn").addEventListener("click", function(){
-    document.getElementsByClassName("PopUp")[0].classList.add("active");
-});
+var openPopup = document.getElementById("Open-PopUp-btn");
 
-document.getElementById("SluitAf-PopUp-btn").addEventListener("click", function(){
-    document.getElementsByClassName("PopUp")[0].classList.remove("active");
-});
+if (openPopup)
+{
+    openPopup.addEventListener("click", function () {
+        document.getElementsByClassName("PopUp")[0].classList.add("active");
+    });
+}
+
+var sluitPopup = document.getElementById("SluitAf-PopUp-btn");
+
+if (sluitPopup)
+{
+    sluitPopup.addEventListener("click", function () {
+        document.getElementsByClassName("PopUp")[0].classList.remove("active");
+    });
+}
 
 /*  INLOGSYSTEEM */
 
