@@ -1,0 +1,2 @@
+﻿<input type="file" id="fileselector" name="fileselector" accept="image/png, image/jpeg, image/jpg" @ref="FileReference" @onchange="async () => await OpenImage()" />
+<button disabled="@IsDisabled" @onclick="async () => await UploadImage()">Uploaden</button>

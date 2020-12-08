@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using BramrSite.Classes.Interfaces;
 using BramrSite.Models;
 using BramrSite.Classes;
+using Tewr.Blazor.FileReader;
 
 namespace BramrSite.Pages
 {
     public partial class Editor : ComponentBase
     {
         [Inject] IApiDesignConnection API { get; set; }
+        [Inject] IFileReaderService FileReader { get; set; }
 
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
         public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
@@ -32,7 +34,7 @@ namespace BramrSite.Pages
         public TextModel Interesses { get; private set; } = new TextModel() { ID = 13 };
         public TextModel Motivatie { get; private set; } = new TextModel() { ID = 14 };
         //Art Aanpassing 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto"};
+        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto", Src = "https://localhost:44372/api/image/download"};
         //Art Aanpassing einde
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
@@ -45,8 +47,12 @@ namespace BramrSite.Pages
         public int EditAmount { get; set; }
         public int HistoryLocation { get; set; }
 
-        private bool UndoButton { get; set; }
-        private bool RedoButton { get; set; }
+        private bool UndoButton { get; set; } = true;
+        private bool RedoButton { get; set; } = true;
+
+        ElementReference FileReference { get; set; }
+
+        public string ImageSrc { get; set; }
 
         protected override /*async*/ void OnInitialized()
         {
@@ -84,13 +90,13 @@ namespace BramrSite.Pages
         {
             ChangeModel CurrentChange;
 
-            RedoButton = true;
+            RedoButton = false;
             CurrentChange = await API.GetOneFromDB(HistoryLocation);
             Console.WriteLine(HistoryLocation);
             HistoryLocation--;
             if (HistoryLocation == 0)
             {
-                UndoButton = false;
+                UndoButton = true;
             }
 
             await UseChange(CurrentChange, true);
@@ -100,13 +106,13 @@ namespace BramrSite.Pages
         {
             ChangeModel CurrentChange;
 
-            UndoButton = true;
+            UndoButton = false;
             HistoryLocation++;
             CurrentChange = await API.GetOneFromDB(HistoryLocation);
             Console.WriteLine(HistoryLocation);
             if (HistoryLocation == EditAmount)
             {
-                RedoButton = false;
+                RedoButton = true;
 
             }
 
@@ -118,8 +124,8 @@ namespace BramrSite.Pages
         {
             ChangeModel CurrentChange = new ChangeModel(CurrentTextElement.ID, EditType, Edit);
 
-            UndoButton = true;
-            RedoButton = false;
+            UndoButton = false;
+            RedoButton = true;
             EditAmount++;
             HistoryLocation++;
             if (HistoryLocation != EditAmount)
@@ -294,9 +300,9 @@ namespace BramrSite.Pages
             }
         }
 
-        private async Task UploadFile(ChangeEventArgs e)
+        private async Task UploadFile()
         {
-            Console.WriteLine(e.Value);
+            var file = (await FileReader.CreateReference(FileReference).EnumerateFilesAsync()).FirstOrDefault();
         }
     }
 }
