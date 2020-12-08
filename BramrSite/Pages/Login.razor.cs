@@ -24,7 +24,15 @@ namespace BramrSite.Pages
 
         public string Message { get; set; }
 
+        private bool ReturnToIndex { get; set; }
+
         public bool Disabled { get; set; }
+
+        protected override void OnInitialized()
+        {
+            if (ReturnUrl == "index" || ReturnUrl == "/")
+                ReturnToIndex = true;
+        }
 
         public async Task OnSubmit()
         {
@@ -42,7 +50,11 @@ namespace BramrSite.Pages
                     // Set JWt token
                     await Auth.UpdateAutenticationState(response.RequestedData.ToString());
 
-                    if (!string.IsNullOrEmpty(ReturnUrl))
+                    if (ReturnToIndex)
+                    {
+                        Navigation.NavigateTo("/", true);
+                    }
+                    else if (!string.IsNullOrEmpty(ReturnUrl))
                     {
                         Navigation.NavigateTo(ReturnUrl, true);
                     }
