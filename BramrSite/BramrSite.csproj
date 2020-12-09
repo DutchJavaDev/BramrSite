@@ -42,7 +42,7 @@
     <Content Update="wwwroot\index.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\JS\main.js">
+    <Content Update="wwwroot\Js\main.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\manifest.json">
