@@ -5,6 +5,12 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
+    <div>
+        <h1>Component1 - h1</h1>
+
+    </div>
+    <h1>Component2 - h1</h1>
+
     <div class="container">
 
         <div class="w-75 h-75 mt-5 rounded border">
@@ -20,11 +26,11 @@
 
                 @if (Disabled)
                 {
-                <button class="btn btn-lg btn-block btn-primary m-auto" disabled="@Disabled" type="submit">
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </button>  
+                    <button class="btn btn-lg btn-block btn-primary m-auto" disabled="@Disabled" type="submit">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </button>
                 }
                 else
                 {
