@@ -38,9 +38,9 @@ namespace BramrSite.Pages.Components
             IsDisabled = true;
 
             await Api.UploadImage(FileStream, CurrentImage.FileType.ToString());
-            var FileUri = await Api.GetFileInfo(CurrentImage.FileType.ToString());
-
-            CurrentImage.Src = $"https://localhost:44372/api/image/download{FileUri}";
+            CurrentImage.FileUri = await Api.GetFileInfo(CurrentImage.FileType.ToString());
+            CurrentImage.Src = $"https://localhost:44372/api/image/download/{CurrentImage.FileUri}";
+            StateHasChanged();
         }
     }
 }
