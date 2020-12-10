@@ -13,11 +13,11 @@ namespace BramrSite.Models
         public int Height { get; set; } = 100;
         public string Src { get; set; }
         public string Alt { get; set; }
-        public int Border { get; set; }
+        public int Border { get; set; } 
         public Float FloatSet { get; set; }
-        public int Opacity { get; set; } = 1;
+        public double Opacity { get; set; } = 1;
         public ObjectFit ObjectFitSet{ get; set; } 
-        public int Margin { get; set; }
+        //public int Margin { get; set; }
         public int Padding { get; set; }
 
         public enum Float
@@ -29,10 +29,11 @@ namespace BramrSite.Models
         }
         public enum ObjectFit
         {
-            cover,
+            cover,                      
             fill,
-            contain,           
-            none          
+            contain,
+            none
+                    
         }
         
        

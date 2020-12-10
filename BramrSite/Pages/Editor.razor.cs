@@ -222,7 +222,7 @@ namespace BramrSite.Pages
                     CurrentImageElement.ObjectFitSet = (ImageModel.ObjectFit)Enum.Parse(typeof(ImageModel.ObjectFit), result.ToString());
                     break;
                 case ChangeModel.Type.Margin:
-                    CurrentImageElement.Margin = int.Parse(result.ToString());
+                   //CurrentImageElement.Margin = int.Parse(result.ToString());
                     break;
                 case ChangeModel.Type.Padding:
                     CurrentImageElement.Padding = int.Parse(result.ToString());
