@@ -1,4 +1,5 @@
 ﻿using BramrSite.Classes;
+using BramrSite.Models;
 using Microsoft.AspNetCore.Components;
 using System.IO;
 using System.Linq;
@@ -11,11 +12,10 @@ namespace BramrSite.Pages.Components
     {
         [Inject] IFileReaderService FileReader { get; set; }
         [Inject] ApiService Api { get; set; }
-        [Parameter] public string ImageSrc { get; set; }
+        [Parameter] public ImageModel CurrentImage { get; set; }
 
         ElementReference FileReference { get; set; }
         Stream FileStream { get; set; }
-        string FileName { get; set; }
         private bool IsDisabled { get; set; } = true;
 
         private async Task OpenImage()
@@ -29,7 +29,6 @@ namespace BramrSite.Pages.Components
             IsDisabled = false;
 
             var fileInfo = await file.ReadFileInfoAsync();
-            FileName = fileInfo.Name;
             using var memoryStream = await file.CreateMemoryStreamAsync((int)fileInfo.Size);
             FileStream = new MemoryStream(memoryStream.ToArray());
         }
@@ -38,9 +37,10 @@ namespace BramrSite.Pages.Components
         {
             IsDisabled = true;
 
-            await Api.UploadImage(FileStream, FileName);
+            await Api.UploadImage(FileStream, CurrentImage.FileType.ToString());
+            var FileUri = await Api.GetFileInfo(CurrentImage.FileType.ToString());
 
-            ImageSrc = "https://localhost:44372/api/image/download";
+            CurrentImage.Src = $"https://localhost:44372/api/image/download{FileUri}";
         }
     }
 }
