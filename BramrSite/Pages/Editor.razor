@@ -1,7 +1,8 @@
 ﻿@page "/editor"
 @using BramrSite.Classes
 @using BramrSite.Models
-@*@attribute [Authorize]*@
+@using BramrSite.Pages.Components
+@attribute [Authorize]
 
 <head>
     <meta charset="utf-8" />
@@ -161,7 +162,7 @@
                     <div class="gridceptionafbeelding">
                         <div id="afbeeldingkiezen">
                             <label for="afbeeldingkiezen">Kies een foto:</label>
-                            <input type="file" id="fileselector" name="fileselector" accept="image/png, image/jpeg" @onchange="async(e) => { await UploadFile(e); }">
+                            <ImageUpload ImageSrc="@ProfielFoto.Src"/>
                         </div>
                         <div id="hyperlinktext">
                             <input type="text" placeholder="Type some text..." @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString()); }" @bind-value="CurrentTextElement.Text" />
@@ -170,24 +171,10 @@
 
                         </div>
                         <div id="grootebtn">
-                            @if (UndoButton)
-                            {
-                                <button class="buttonGroote" @onclick="async() => { await Undo(); }">1</button>
-                            }
-                            else
-                            {
-                                <button class="buttonGroote" disabled>1</button>
-                            }
+                            <button class="buttonGroote" disabled="@UndoButton" @onclick="async() => { await Undo(); }">1</button>
                         </div>
                         <div id="opvullingbtn">
-                            @if (RedoButton)
-                            {
-                                <button class="buttonOpvulling" @onclick="async() => { await Redo(); }">3</button>
-                            }
-                            else
-                            {
-                                <button class="buttonOpvulling" disabled>12</button>
-                            }
+                            <button class="buttonOpvulling" disabled="@RedoButton" @onclick="async() => { await Redo(); }">2</button>
                         </div>
                         <div id="alphabtn">
                             <button class="buttonAlpha">3</button>

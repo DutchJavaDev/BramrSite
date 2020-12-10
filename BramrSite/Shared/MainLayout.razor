@@ -2,7 +2,7 @@
 @inject BramrSite.Auth.ITokenHandler tokenhandler
 @inject NavigationManager navigation
 
-<div class="container-fluid">
+
     <AuthorizeView>
         <Authorized>
             @*<div class="topnav">
@@ -23,17 +23,15 @@
                     <span>Uitloggen</span>
                 </NavLink>
             </div>*@
-            <div class="mt-3">
-                @Body
-            </div>
+            @Body
         </Authorized>
         <NotAuthorized>
-            <div class="mt-3">
+         
                 @Body
-            </div>
+           
         </NotAuthorized>
     </AuthorizeView>
-</div>
+
 
 @code{
     private async void Logout()

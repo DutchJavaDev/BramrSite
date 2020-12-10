@@ -1,13 +1,17 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using BramrSite.Classes.Interfaces;
-using BramrSite.Classes;
-using BramrSite.Auth;
-using Microsoft.AspNetCore.Components.Authorization;
 using Blazored.LocalStorage;
+using BramrSite.Auth;
+using BramrSite.Classes;
+using BramrSite.Classes.Interfaces;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Tewr.Blazor.FileReader;
 
 namespace BramrSite
@@ -17,6 +21,7 @@ namespace BramrSite
         public static async Task Main(string[] args)
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddOptions();

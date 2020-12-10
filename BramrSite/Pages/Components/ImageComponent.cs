@@ -29,15 +29,9 @@ namespace BramrSite.Classes
             else
             {
                 Imagebuilder.OpenElement(ElementIndex, "img"); ElementIndex++;
-                Imagebuilder.AddAttribute(ElementIndex, "src", $"{CurrentDesignElement.Src}");
-                Imagebuilder.AddAttribute(ElementIndex, "alt", $"{CurrentDesignElement.Alt}");                
+                Imagebuilder.AddAttribute(ElementIndex, "src", $"{CurrentDesignElement.Src}");                
                 Imagebuilder.CloseElement();
             }
         }
-
-
-       //OpenElement = <b> <p> <i>
-       // AddAtribute = <p "src="/""
-       // AddContent = <b>...</b>
     }
 }

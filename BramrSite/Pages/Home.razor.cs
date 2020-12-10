@@ -7,7 +7,7 @@ using BramrSite.Auth;
 
 namespace BramrSite.Pages
 {
-    public partial class Login : ComponentBase
+    public partial class Home : ComponentBase
     {
         public readonly SigninModel Model = new SigninModel()
 #if DEBUG
