@@ -29,7 +29,16 @@ namespace BramrSite.Classes
             else
             {
                 Imagebuilder.OpenElement(ElementIndex, "img"); ElementIndex++;
-                Imagebuilder.AddAttribute(ElementIndex, "src", $"{CurrentDesignElement.Src}");                
+                Imagebuilder.AddAttribute(ElementIndex, "src", $"{CurrentDesignElement.Src}");  ElementIndex++;
+                Imagebuilder.AddAttribute(ElementIndex, "width", $"{CurrentDesignElement.Width}px"); ElementIndex++;
+                Imagebuilder.AddAttribute(ElementIndex, "height", $"{CurrentDesignElement.Height}px"); ElementIndex++;
+                Imagebuilder.AddAttribute(ElementIndex, "border", $"{CurrentDesignElement.Border}"); ElementIndex++;
+                Imagebuilder.AddAttribute(ElementIndex, "float", $"{CurrentDesignElement.FloatSet}"); ElementIndex++;
+                Imagebuilder.AddAttribute(ElementIndex, "opacity", $"{CurrentDesignElement.Opacity}"); ElementIndex++;
+                Imagebuilder.AddAttribute(ElementIndex, "object-fit", $"{CurrentDesignElement.ObjectFitSet}"); ElementIndex++;
+                Imagebuilder.AddAttribute(ElementIndex, "margin", $"{CurrentDesignElement.Margin}px"); ElementIndex++;
+                Imagebuilder.AddAttribute(ElementIndex, "padding", $"{CurrentDesignElement.Padding}px");
+
                 Imagebuilder.CloseElement();
             }
         }

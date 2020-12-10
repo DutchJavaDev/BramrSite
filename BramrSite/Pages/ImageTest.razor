@@ -1,0 +1,13 @@
+﻿@page "/image"
+@using BramrSite.Classes
+@using BramrSite.Models
+@using BramrSite.Pages.Components
+@attribute [AllowAnonymous]
+<h3>ImageTest</h3>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Width = 200 ;}">width</button>
+
+<br />
+<ImageComponent CurrentDesignElement="ProfielFoto" />
+
+
+
