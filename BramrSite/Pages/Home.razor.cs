@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Components;
 using BramrSite.Auth;
+using Microsoft.JSInterop;
 
 namespace BramrSite.Pages
 {
@@ -20,6 +21,7 @@ namespace BramrSite.Pages
         [Inject] public JWTAuthentication Auth { get; set; }
         [Inject] public NavigationManager Navigation { get; set; }
         [Inject] public ApiService Api { get; set; }
+        [Inject] public IJSRuntime  runtime { get; set; }
         [Parameter] public string ReturnUrl { get; set; }
 
         public string Message { get; set; }
@@ -28,8 +30,11 @@ namespace BramrSite.Pages
 
         public bool Disabled { get; set; }
 
-        protected override void OnInitialized()
+        protected async override void OnInitialized()
         {
+            await Task.Delay(100);
+            await runtime.InvokeVoidAsync("updateContainer");
+
             if (ReturnUrl == "index" || ReturnUrl == "/")
                 ReturnToIndex = true;
         }

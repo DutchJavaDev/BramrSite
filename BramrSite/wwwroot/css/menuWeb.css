@@ -16,20 +16,21 @@
     opacity: 0;
 }
 
-.menu-wrap .hamburger{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 25px;
-    height: 25px;
-    padding: 1rem;
-    background:  #071053;
-    border: 1px solid rgb(255, 255, 255);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .menu-wrap .hamburger {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 25px;
+        height: 25px;
+        padding: 1rem;
+        background: #071053;
+        border: 1px solid rgb(255, 255, 255);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: initial;
+    }
 
 .menu-wrap .hamburger > div {
     position: relative;
