@@ -329,6 +329,7 @@ button.ghost{
     transition: transform 80ms ease-in;
     cursor: pointer;
     text-align: center;
+    box-sizing: initial;
 }
 
 .close-btn{

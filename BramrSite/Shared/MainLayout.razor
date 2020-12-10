@@ -2,39 +2,32 @@
 @inject BramrSite.Auth.ITokenHandler tokenhandler
 @inject NavigationManager navigation
 
-<div class="container-fluid">
     <AuthorizeView>
         <Authorized>
             @*<div class="topnav">
-                    <NavLink href="/home" Match="NavLinkMatch.All">Home</NavLink>
-                    @if (context.User.IsInRole("Admin"))
-                    {
-                        <NavLink href="/MaakApp">Maak app</NavLink>
-                    }
+            <NavLink href="/home" Match="NavLinkMatch.All">Home</NavLink>
+            @if (context.User.IsInRole("Admin"))
+            {
+                <NavLink href="/MaakApp">Maak app</NavLink>
+            }
 
-                    @if (context.User.IsInRole("AppOwner"))
-                    {
-                        <NavLink href="/beheer/gebruikers">Gebruiker toevoegen</NavLink>
-                        <NavLink href="/beheer/afbeeldingen">Beheer Afbeeldingen</NavLink>
-                        <NavLink href="/beheer/widgets">Beheer Widgets</NavLink>
-                    }
+            @if (context.User.IsInRole("AppOwner"))
+            {
+                <NavLink href="/beheer/gebruikers">Gebruiker toevoegen</NavLink>
+                <NavLink href="/beheer/afbeeldingen">Beheer Afbeeldingen</NavLink>
+                <NavLink href="/beheer/widgets">Beheer Widgets</NavLink>
+            }
 
-                    <NavLink class="float-right" href="#" @onclick="Logout">
-                        <span>Uitloggen</span>
-                    </NavLink>
-                </div>*@
-            <div class="mt-3">
-                @Body
-            </div>
+            <NavLink class="float-right" href="#" @onclick="Logout">
+                <span>Uitloggen</span>
+            </NavLink>
+        </div>*@
+            @Body
         </Authorized>
         <NotAuthorized>
-            <div class="mt-3">
-                @Body
-            </div>
+            @Body
         </NotAuthorized>
     </AuthorizeView>
-</div>
-
 @code{
     private async void Logout()
     {

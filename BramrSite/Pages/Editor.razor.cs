@@ -34,7 +34,7 @@ namespace BramrSite.Pages
         public TextModel Interesses { get; private set; } = new TextModel() { ID = 13 };
         public TextModel Motivatie { get; private set; } = new TextModel() { ID = 14 };
         //Art Aanpassing 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto", Src = "https://localhost:44372/api/image/download"};
+        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto};
         //Art Aanpassing einde
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();

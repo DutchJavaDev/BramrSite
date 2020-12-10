@@ -12,9 +12,6 @@ signInButton.addEventListener('click', () => {
 	container.classList.remove("right-panel-active");
 });
 
-
-/* POP UP MELDING */
-
 document.getElementById("Open-PopUp-btn").addEventListener("click", function(){
     document.getElementsByClassName("PopUp")[0].classList.add("active");
 });

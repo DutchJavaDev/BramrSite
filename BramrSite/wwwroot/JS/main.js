@@ -1,36 +1,19 @@
-/* POP UP MELDING */
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
 
-var openPopup = document.getElementById("Open-PopUp-btn");
+signUpButton.addEventListener('click', () => {
+    container.classList.add("right-panel-active");
+});
 
-if (openPopup)
-{
-    openPopup.addEventListener("click", function () {
-        document.getElementsByClassName("PopUp")[0].classList.add("active");
-    });
-}
+signInButton.addEventListener('click', () => {
+    container.classList.remove("right-panel-active");
+});
 
-var sluitPopup = document.getElementById("SluitAf-PopUp-btn");
+document.getElementById("Open-PopUp-btn").addEventListener("click", function () {
+    document.getElementsByClassName("PopUp")[0].classList.add("active");
+});
 
-if (sluitPopup)
-{
-    sluitPopup.addEventListener("click", function () {
-        document.getElementsByClassName("PopUp")[0].classList.remove("active");
-    });
-}
-
-/*  INLOGSYSTEEM */
-
-var x = document.getElementById("inloggen");
-var y = document.getElementById("registreren");
-var z = document.getElementById("btndesign");
-
-function registreren(){
-    x.style.left = "-400px";
-    y.style.left = "50px";
-    z.style.left = "110px";
-}
-function inloggen(){
-    x.style.left = "50px";
-    y.style.left = "450px";
-    z.style.left = "0px";
-}
+document.getElementById("SluitAf-PopUp-btn").addEventListener("click", function () {
+    document.getElementsByClassName("PopUp")[0].classList.remove("active");
+});

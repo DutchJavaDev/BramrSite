@@ -90,6 +90,21 @@ namespace BramrSite.Classes
             }
         }
 
+        public async Task<string> GetFileInfo(string FileName)
+        {
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.GetAsync($"image/info/{FileName}");
+                var result =  JsonConvert.DeserializeObject<string>(await response.Content.ReadAsStringAsync());
+                return result;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         public async Task<string> DonwloadImage()
         {
             try
