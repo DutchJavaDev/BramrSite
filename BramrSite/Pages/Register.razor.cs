@@ -26,13 +26,13 @@ namespace BramrSite.Pages
 
             if (Model.IsValid())
             {
-                var response = await Api.SignUp(Model);
+                //var response = await Api.SignUp(Model);
 
-                // Debug
-                Message = response.ToString();
+                //// Debug
+                //Message = response.ToString();
 
-                if (response.Success)
-                    Navigation.NavigateTo("login", true);
+                //if (response.Success)
+                //    Navigation.NavigateTo("login", true);
             }
             Disabled = false;
         }

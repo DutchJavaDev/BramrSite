@@ -40,29 +40,29 @@ namespace BramrSite.Pages
 
             if (Model.IsValid())
             {
-                var response = await Api.SignIn(Model);
+                //var response = await Api.SignIn(Model);
 
-                // Debug
-                Message = response.ToString();
+                //// Debug
+                //Message = response.ToString();
 
-                if (response.Success)
-                {
-                    // Set JWt token
-                    await Auth.UpdateAutenticationState(response.RequestedData.ToString());
+                //if (response.Success)
+                //{
+                //    // Set JWt token
+                //    await Auth.UpdateAutenticationState(response.RequestedData.ToString());
 
-                    if (ReturnToIndex)
-                    {
-                        Navigation.NavigateTo("/", true);
-                    }
-                    else if (!string.IsNullOrEmpty(ReturnUrl))
-                    {
-                        Navigation.NavigateTo(ReturnUrl, true);
-                    }
-                    else
-                    {
-                        Navigation.NavigateTo("/", true);
-                    }
-                }
+                //    if (ReturnToIndex)
+                //    {
+                //        Navigation.NavigateTo("/", true);
+                //    }
+                //    else if (!string.IsNullOrEmpty(ReturnUrl))
+                //    {
+                //        Navigation.NavigateTo(ReturnUrl, true);
+                //    }
+                //    else
+                //    {
+                //        Navigation.NavigateTo("/", true);
+                //    }
+                //}
             }
 
             Disabled = false;

@@ -6,7 +6,6 @@ using System.Text;
 using System;
 using System.Threading.Tasks;
 using System.IO;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BramrSite.Classes
 {
@@ -24,9 +23,9 @@ namespace BramrSite.Classes
             JWT = token;
         }
 
-        public async Task<ApiResponse> SignUp(SignupModel model)
+        public async Task<ApiResponse> SignUp(User model)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonConvert.SerializeObject(new { model.Email, model.UserName }), Encoding.UTF8, "application/json");
 
             try
             {
@@ -44,9 +43,9 @@ namespace BramrSite.Classes
             }
         }
 
-        public async Task<ApiResponse> SignIn(SigninModel model)
+        public async Task<ApiResponse> SignIn(User model)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonConvert.SerializeObject(new { model.Email, model.Password}), Encoding.UTF8, "application/json");
 
             try
             {

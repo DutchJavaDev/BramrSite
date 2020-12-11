@@ -10,7 +10,7 @@ namespace BramrSite.Pages
 {
     public partial class Home : ComponentBase
     {
-        public readonly SigninModel Model = new SigninModel()
+        public readonly User Model = new User()
 #if DEBUG
         {
             Email = "admin@bramr.tech",
@@ -21,10 +21,11 @@ namespace BramrSite.Pages
         [Inject] public JWTAuthentication Auth { get; set; }
         [Inject] public NavigationManager Navigation { get; set; }
         [Inject] public ApiService Api { get; set; }
-        [Inject] public IJSRuntime  runtime { get; set; }
+        [Inject] public IJSRuntime  Runtime { get; set; }
         [Parameter] public string ReturnUrl { get; set; }
 
-        public string Message { get; set; }
+        public string SignInMessage { get; set; }
+        public string SignUpMessage { get; set; }
 
         private bool ReturnToIndex { get; set; }
 
@@ -33,22 +34,56 @@ namespace BramrSite.Pages
         protected async override void OnInitialized()
         {
             await Task.Delay(100);
-            await runtime.InvokeVoidAsync("updateContainer");
+            await Runtime.InvokeVoidAsync("updateContainer");
 
             if (ReturnUrl == "index" || ReturnUrl == "/")
                 ReturnToIndex = true;
         }
 
-        public async Task OnSubmit()
+        public async Task SignUpSubmit()
         {
             Disabled = true;
 
-            if (Model.IsValid())
+            if (Model.IsValidSignUp())
             {
                 var response = await Api.SignIn(Model);
 
                 // Debug
-                Message = response.ToString();
+                SignUpMessage = response.ToString();
+
+                if (response.Success)
+                {
+                    // Set JWt token
+                    await Auth.UpdateAutenticationState(response.RequestedData.ToString());
+
+                    if (ReturnToIndex)
+                    {
+                        Navigation.NavigateTo("/", true);
+                    }
+                    else if (!string.IsNullOrEmpty(ReturnUrl))
+                    {
+                        Navigation.NavigateTo(ReturnUrl, true);
+                    }
+                    else
+                    {
+                        Navigation.NavigateTo("/", true);
+                    }
+                }
+            }
+
+            Disabled = false;
+        }
+
+        public async Task SignInSubmit()
+        {
+            Disabled = true;
+
+            if (Model.IsValidSignIn())
+            {
+                var response = await Api.SignIn(Model);
+
+                // Debug
+                SignInMessage = response.ToString();
 
                 if (response.Success)
                 {
