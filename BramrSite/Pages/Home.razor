@@ -1,6 +1,5 @@
 ﻿@page "/home"
 
-
 <div class="mastergrids">
     <div class="BRAMR-animatiegrid">
         <input type="checkbox" id="show">
@@ -26,7 +25,18 @@
                     <section>
                         <p>Wij generen een wachtwoord voor u :-)</p>
                     </section>
-                    <button id="signUp-panel" type="submit">Sign up!</button>
+                    @if (Disabled)
+                    {
+                        <button id="signUp-panel" class="btn btn-lg btn-block btn-primary m-auto" disabled="@Disabled" type="submit">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </button>
+                    }
+                    else
+                    {
+                        <button id="signUp-panel" type="submit">Sign up!</button>
+                    }
                 </EditForm>
             </div>
             <div class="form-container sign-in-container">
@@ -40,13 +50,24 @@
                         <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                     <span>of gebruik je eigen BRAMR-account</span>
-                    <input type="email"@bind-value="Model.Email" placeholder="Emailadres" />
+                    <input type="email" @bind-value="Model.Email" placeholder="Emailadres" />
                     <input type="password" @bind-value="Model.Password" placeholder="Wachtwoord" />
                     <section>
                         <p>@SignInMessage</p>
                     </section>
                     <a href="#">Wachtwoord vergeten?</a>
-                    <button id="signIn-panel" type="submit">Log in!</button>
+                    @if (Disabled)
+                    {
+                        <button id="signIn-panel" class="btn btn-lg btn-block btn-primary m-auto" disabled="@Disabled" type="submit">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </button>
+                    }
+                    else
+                    {
+                        <button id="signIn-panel" type="submit">Log in!</button>
+                    }
                 </EditForm>
             </div>
             <div class="overlay-container">

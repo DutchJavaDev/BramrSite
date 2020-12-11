@@ -1,7 +1,6 @@
 ﻿using BramrSite.Classes;
 using BramrSite.Models;
 using System.Threading.Tasks;
-using System;
 using Microsoft.AspNetCore.Components;
 using BramrSite.Auth;
 using Microsoft.JSInterop;
@@ -37,7 +36,10 @@ namespace BramrSite.Pages
             await Runtime.InvokeVoidAsync("updateContainer");
 
             if (ReturnUrl == "index" || ReturnUrl == "/")
+            {
                 ReturnToIndex = true;
+                ReturnUrl = string.Empty;
+            }
         }
 
         public async Task SignUpSubmit()
@@ -46,28 +48,35 @@ namespace BramrSite.Pages
 
             if (Model.IsValidSignUp())
             {
-                var response = await Api.SignIn(Model);
+                var apiResult = await Api.UserNameExist(Model.UserName);
 
-                // Debug
-                SignUpMessage = response.ToString();
-
-                if (response.Success)
+                if (!apiResult.Success)
                 {
-                    // Set JWt token
-                    await Auth.UpdateAutenticationState(response.RequestedData.ToString());
+                    SignUpMessage = apiResult.Message;
+                    return;
+                }
 
-                    if (ReturnToIndex)
-                    {
-                        Navigation.NavigateTo("/", true);
-                    }
-                    else if (!string.IsNullOrEmpty(ReturnUrl))
-                    {
-                        Navigation.NavigateTo(ReturnUrl, true);
-                    }
-                    else
-                    {
-                        Navigation.NavigateTo("/", true);
-                    }
+                bool.TryParse(apiResult.RequestedData.ToString(), out var nameExists);
+
+                if (nameExists)
+                {
+                    SignUpMessage = "This username is not available";
+                    return;
+                }
+                else
+                {
+                    SignUpMessage = "This username is available";
+                }
+
+                apiResult = await Api.SignUp(Model);
+
+                if (apiResult.Success)
+                {
+                    Navigation.NavigateTo("/");
+                }
+                else
+                {
+                    SignUpMessage = apiResult.Message;
                 }
             }
 
@@ -80,19 +89,18 @@ namespace BramrSite.Pages
 
             if (Model.IsValidSignIn())
             {
-                var response = await Api.SignIn(Model);
+                var apiResult = await Api.SignIn(Model);
 
-                // Debug
-                SignInMessage = response.ToString();
+                SignInMessage = apiResult.Message;
 
-                if (response.Success)
+                if (apiResult.Success)
                 {
                     // Set JWt token
-                    await Auth.UpdateAutenticationState(response.RequestedData.ToString());
+                    await Auth.UpdateAutenticationState(apiResult.RequestedData.ToString());
 
                     if (ReturnToIndex)
                     {
-                        Navigation.NavigateTo("/", true);
+                        Navigation.NavigateTo("/");
                     }
                     else if (!string.IsNullOrEmpty(ReturnUrl))
                     {
@@ -100,7 +108,7 @@ namespace BramrSite.Pages
                     }
                     else
                     {
-                        Navigation.NavigateTo("/", true);
+                        Navigation.NavigateTo("/");
                     }
                 }
             }

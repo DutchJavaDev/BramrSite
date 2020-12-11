@@ -1,9 +1,0 @@
-﻿@page "/"
-@page "/index"
-@attribute [Authorize]
-
-<div class="w-50 m-auto bg-info">
-    <p>Congratzzz you have acces to this page!</p>
-    <p>Now fuck off</p>
-</div>
-

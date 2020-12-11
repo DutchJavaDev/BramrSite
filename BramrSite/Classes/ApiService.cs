@@ -23,6 +23,24 @@ namespace BramrSite.Classes
             JWT = token;
         }
 
+        public async Task<ApiResponse> UserNameExist(string name)
+        {
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.GetAsync($"signup/username/exists/{name}");
+
+                if (response.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
+                else
+                    return new ApiResponse { Message = response.ReasonPhrase };
+            }
+            catch (Exception e)
+            {
+                return ApiResponse.Error(message: e.Message);
+            }
+        }
+
         public async Task<ApiResponse> SignUp(User model)
         {
             var content = new StringContent(JsonConvert.SerializeObject(new { model.Email, model.UserName }), Encoding.UTF8, "application/json");
