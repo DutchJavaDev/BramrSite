@@ -4,10 +4,34 @@
 @using BramrSite.Pages.Components
 @attribute [AllowAnonymous]
 <h3>ImageTest</h3>
-<button class="buttonWidth" @onclick="() => { ProfielFoto.Width = 200 ;}">width</button>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Width = 90 ;}">width</button>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Width = 100 ;}">resetwidth</button>
+
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Height = 200 ;}">height</button>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Height = 700 ;}">resetheight</button>
+
+
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Border = 2 ; StateHasChanged(); }">border</button>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Border = 0 ; StateHasChanged(); }">resetborder</button>
+
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Opacity = 0.5 ; StateHasChanged();}">opacity</button>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Opacity = 1 ; StateHasChanged();}">resetopacity</button>
+
+<button class="buttonWidth" @onclick="() => { ProfielFoto.FloatSet = ImageModel.Float.right; StateHasChanged();}">Float right</button>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.FloatSet = ImageModel.Float.left; StateHasChanged();}">Float left</button>
+
+<button class="buttonWidth" @onclick="() => { ProfielFoto.ObjectFitSet = ImageModel.ObjectFit.cover; StateHasChanged();}">cover</button>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.ObjectFitSet = ImageModel.ObjectFit.fill; StateHasChanged();}">fill</button>
+
+@*<button class="buttonWidth" @onclick="() => { ProfielFoto.Margin = 40 ; StateHasChanged();}">margin</button>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Margin = 0 ; StateHasChanged();}">resetmargin</button>*@
+
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Padding = 100 ; StateHasChanged();}">padding</button>
+<button class="buttonWidth" @onclick="() => { ProfielFoto.Padding = 0 ; StateHasChanged();}">resetpadding</button>
 
 <br />
-<ImageComponent CurrentDesignElement="ProfielFoto" />
 
+<ImageComponent CurrentDesignElement="ProfielFoto" />
+   
 
 
