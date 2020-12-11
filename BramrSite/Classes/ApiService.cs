@@ -61,6 +61,21 @@ namespace BramrSite.Classes
             }
         }
 
+        public async Task<bool> IsValidToken()
+        {
+            try
+            {
+                using var client = CreateClient();
+                var result = await client.GetAsync("signin/verify/jwt");
+
+                return bool.Parse(await result.Content.ReadAsStringAsync());
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public async Task<ApiResponse> SignIn(User model)
         {
             var content = new StringContent(JsonConvert.SerializeObject(new { model.Email, model.Password}), Encoding.UTF8, "application/json");
@@ -116,9 +131,9 @@ namespace BramrSite.Classes
                 var result =  JsonConvert.DeserializeObject<string>(await response.Content.ReadAsStringAsync());
                 return result;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return null;
+                return string.Empty;
             }
         }
 

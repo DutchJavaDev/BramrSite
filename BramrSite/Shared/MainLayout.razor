@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject BramrSite.Auth.ITokenHandler tokenhandler
+@inject ApiService api
 @inject NavigationManager navigation
 
     <AuthorizeView>
@@ -29,9 +30,9 @@
         </NotAuthorized>
     </AuthorizeView>
 @code{
-    private async void Logout()
-    {
-        await tokenhandler.UpdateAutenticationState(string.Empty);
-        navigation.NavigateTo("/", false);
-    }
+    //private async void Logout()
+    //{
+    //    await tokenhandler.UpdateAutenticationState(string.Empty);
+    //    navigation.NavigateTo("/", false);
+    //}
 }

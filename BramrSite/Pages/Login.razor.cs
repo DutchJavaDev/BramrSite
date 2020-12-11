@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.AspNetCore.Components;
 using BramrSite.Auth;
+using Microsoft.JSInterop;
 
 namespace BramrSite.Pages
 {
     public partial class Login : ComponentBase
     {
-        public readonly SigninModel Model = new SigninModel()
+        public readonly User Model = new User()
 #if DEBUG
         {
             Email = "admin@bramr.tech",
@@ -22,7 +23,8 @@ namespace BramrSite.Pages
         [Inject] public ApiService Api { get; set; }
         [Parameter] public string ReturnUrl { get; set; }
 
-        public string Message { get; set; }
+        public string SignInMessage { get; set; }
+        public string SignUpMessage { get; set; }
 
         private bool ReturnToIndex { get; set; }
 
@@ -31,38 +33,40 @@ namespace BramrSite.Pages
         protected override void OnInitialized()
         {
             if (ReturnUrl == "index" || ReturnUrl == "/")
+            {
                 ReturnToIndex = true;
+                ReturnUrl = string.Empty;
+            }
         }
 
-        public async Task OnSubmit()
+        public async Task SignInSubmit()
         {
             Disabled = true;
 
-            if (Model.IsValid())
+            if (Model.IsValidSignIn())
             {
-                //var response = await Api.SignIn(Model);
+                var apiResult = await Api.SignIn(Model);
 
-                //// Debug
-                //Message = response.ToString();
+                SignInMessage = apiResult.Message;
 
-                //if (response.Success)
-                //{
-                //    // Set JWt token
-                //    await Auth.UpdateAutenticationState(response.RequestedData.ToString());
+                if (apiResult.Success)
+                {
+                    //Set JWt token
+                    await Auth.UpdateAutenticationState(apiResult.GetData<string>("jwt_token"));
 
-                //    if (ReturnToIndex)
-                //    {
-                //        Navigation.NavigateTo("/", true);
-                //    }
-                //    else if (!string.IsNullOrEmpty(ReturnUrl))
-                //    {
-                //        Navigation.NavigateTo(ReturnUrl, true);
-                //    }
-                //    else
-                //    {
-                //        Navigation.NavigateTo("/", true);
-                //    }
-                //}
+                    if (ReturnToIndex)
+                    {
+                        Navigation.NavigateTo("/");
+                    }
+                    else if (!string.IsNullOrEmpty(ReturnUrl))
+                    {
+                        Navigation.NavigateTo(ReturnUrl, true);
+                    }
+                    else
+                    {
+                        Navigation.NavigateTo("/");
+                    }
+                }
             }
 
             Disabled = false;

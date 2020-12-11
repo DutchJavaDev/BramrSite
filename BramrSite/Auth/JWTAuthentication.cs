@@ -30,9 +30,10 @@ namespace BramrSite.Auth
 
             if (string.IsNullOrEmpty(token))
             {
+                await UpdateAutenticationState(string.Empty);
                 return Anonymous;
             }
-
+            
             return BuildAuthenticationState(token);
         }
 

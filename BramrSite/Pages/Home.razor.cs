@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using BramrSite.Auth;
 using Microsoft.JSInterop;
+using System;
 
 namespace BramrSite.Pages
 {
@@ -56,7 +57,7 @@ namespace BramrSite.Pages
                     return;
                 }
 
-                bool.TryParse(apiResult.RequestedData.ToString(), out var nameExists);
+                bool.TryParse(apiResult.GetData<string>("user_exists"), out var nameExists);
 
                 if (nameExists)
                 {
@@ -95,8 +96,8 @@ namespace BramrSite.Pages
 
                 if (apiResult.Success)
                 {
-                    // Set JWt token
-                    await Auth.UpdateAutenticationState(apiResult.RequestedData.ToString());
+                   //Set JWt token
+                   await Auth.UpdateAutenticationState(apiResult.GetData<string>("jwt_token"));
 
                     if (ReturnToIndex)
                     {
