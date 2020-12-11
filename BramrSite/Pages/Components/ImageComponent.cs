@@ -16,12 +16,14 @@ namespace BramrSite.Classes
 
         protected override void BuildRenderTree(RenderTreeBuilder Imagebuilder)
         {
+            Console.WriteLine(Imagebuilder);
             ElementIndex = 0;
             base.BuildRenderTree(Imagebuilder);
 
             if (string.IsNullOrWhiteSpace(CurrentDesignElement.Src))
             {
                 Imagebuilder.OpenElement(ElementIndex, "img"); ElementIndex++;
+                Imagebuilder.AddAttribute(ElementIndex, "src", $"{CurrentDesignElement.Src}"); ElementIndex++;
                 Imagebuilder.AddAttribute(ElementIndex, "alt", $"{CurrentDesignElement.Alt}");
                 Imagebuilder.CloseElement();
                 

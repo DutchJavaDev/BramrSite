@@ -34,7 +34,7 @@ namespace BramrSite.Pages
         public TextModel Interesses { get; private set; } = new TextModel() { ID = 13 };
         public TextModel Motivatie { get; private set; } = new TextModel() { ID = 14 };
         //Art Aanpassing 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto};
+        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto };
         //Art Aanpassing einde
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
@@ -52,7 +52,9 @@ namespace BramrSite.Pages
 
         ElementReference FileReference { get; set; }
 
-        public string ImageSrc { get; set; }
+        public delegate void Del(string uri, string src);
+
+        Del method;
 
         protected override /*async*/ void OnInitialized()
         {
@@ -77,6 +79,7 @@ namespace BramrSite.Pages
             AllImageElements.Add(ProfielFoto);
             //Art Aanpassing einde
 
+            method = DelegateMethod;
         }
 
         private void Selection(TextModel NewTextElement)
@@ -300,9 +303,11 @@ namespace BramrSite.Pages
             }
         }
 
-        private async Task UploadFile()
+        public void DelegateMethod(string uri, string src)
         {
-            var file = (await FileReader.CreateReference(FileReference).EnumerateFilesAsync()).FirstOrDefault();
+            ProfielFoto.FileUri = uri;
+            ProfielFoto.Src = src;
+            StateHasChanged();
         }
     }
 }
