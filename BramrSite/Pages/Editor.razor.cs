@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BramrSite.Classes.Interfaces;
+using BramrSite.Models;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using BramrSite.Classes.Interfaces;
-using BramrSite.Models;
-using BramrSite.Classes;
 using Tewr.Blazor.FileReader;
 
 namespace BramrSite.Pages
@@ -50,11 +48,9 @@ namespace BramrSite.Pages
         private bool UndoButton { get; set; } = true;
         private bool RedoButton { get; set; } = true;
 
-        ElementReference FileReference { get; set; }
-
         public delegate void Del(string uri, string src);
 
-        Del method;
+        Del CallBackMethod;
 
         protected override /*async*/ void OnInitialized()
         {
@@ -79,7 +75,7 @@ namespace BramrSite.Pages
             AllImageElements.Add(ProfielFoto);
             //Art Aanpassing einde
 
-            method = DelegateMethod;
+            CallBackMethod = ApplySource;
         }
 
         private void Selection(TextModel NewTextElement)
@@ -303,10 +299,10 @@ namespace BramrSite.Pages
             }
         }
 
-        public void DelegateMethod(string uri, string src)
+        public void ApplySource(string Uri, string Src)
         {
-            ProfielFoto.FileUri = uri;
-            ProfielFoto.Src = src;
+            ProfielFoto.FileUri = Uri;
+            ProfielFoto.Src = Src;
             StateHasChanged();
         }
     }

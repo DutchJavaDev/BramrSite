@@ -14,7 +14,7 @@ namespace BramrSite.Pages.Components
         [Inject] IFileReaderService FileReader { get; set; }
         [Inject] ApiService Api { get; set; }
         [Parameter] public ImageModel CurrentImage { get; set; }
-        [Parameter] public Del method { get; set; }
+        [Parameter] public Del CallBack { get; set; }
         ElementReference FileReference { get; set; }
         Stream FileStream { get; set; }
         private bool IsDisabled { get; set; } = true;
@@ -42,13 +42,12 @@ namespace BramrSite.Pages.Components
             await Api.UploadImage(FileStream, CurrentImage.FileType.ToString());
             CurrentImage.FileUri = await Api.GetFileInfo(CurrentImage.FileType.ToString());
             CurrentImage.Src = $"https://localhost:44372/api/image/download/{CurrentImage.FileUri}";
-            CallBackMethod(CurrentImage.FileUri, CurrentImage.Src, method);
-            StateHasChanged();
+            CallBackMethod(CallBack);
         }
 
-        public void CallBackMethod(string uri, string src, Del callback)
+        public void CallBackMethod(Del CallBackMethod)
         {
-            callback.Invoke(uri, src);
+            CallBackMethod.Invoke(CurrentImage.FileUri, CurrentImage.Src);
         }
     }
 }
