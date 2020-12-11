@@ -1,20 +1,9 @@
 ﻿@page "/hand"
     
-@inject IJSRuntime  runtime
+
 
     <h3>HandTracking</h3>
 
 
-    <div>
-        <button @onclick="@(async () => {
-                                await runtime.InvokeVoidAsync("toggleVideo");
-                            })" id="trackbutton" type="button" disabled>
-            Toggle Video
-        </button>
-
-
-        <div> loading model ..</div>
-    </div>
-    <video style=" border: solid black 2px" class="videobox canvasbox" autoplay="autoplay" id="myvideo"></video>
-    <canvas id="canvas" class="border canvasbox"></canvas>
+   
 
