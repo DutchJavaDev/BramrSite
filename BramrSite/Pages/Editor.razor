@@ -162,7 +162,8 @@
                     <div class="gridceptionafbeelding">
                         <div id="afbeeldingkiezen">
                             <label for="afbeeldingkiezen">Kies een foto:</label>
-                            <ImageUpload CurrentImage="@ProfielFoto" CallBack="@CallBackMethod"/>
+                            <ImageUpload CurrentImage="@ProfielFoto" CallBack="@CallBackMethod" CallBackError="@CallBackError"/>
+                            @ErrorMessage
                         </div>
                         <div id="hyperlinktext">
                             <input type="text" placeholder="Type some text..." @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString()); }" @bind-value="CurrentTextElement.Text" />

@@ -1,6 +1,7 @@
 ﻿using BramrSite.Classes;
 using BramrSite.Models;
 using Microsoft.AspNetCore.Components;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace BramrSite.Pages.Components
         [Inject] ApiService Api { get; set; }
         [Parameter] public ImageModel CurrentImage { get; set; }
         [Parameter] public Del CallBack { get; set; }
+        [Parameter] public DelError CallBackError { get; set; }
         ElementReference FileReference { get; set; }
         Stream FileStream { get; set; }
         private bool IsDisabled { get; set; } = true;
@@ -28,11 +30,19 @@ namespace BramrSite.Pages.Components
             {
                 return;
             }
-            IsDisabled = false;
 
             var fileInfo = await file.ReadFileInfoAsync();
-            using var memoryStream = await file.CreateMemoryStreamAsync((int)fileInfo.Size);
-            FileStream = new MemoryStream(memoryStream.ToArray());
+            if(fileInfo.Type == "image/png" || fileInfo.Type == "image/jpeg" || fileInfo.Type == "image/jpg")
+            {
+                using var memoryStream = await file.CreateMemoryStreamAsync((int)fileInfo.Size);
+                FileStream = new MemoryStream(memoryStream.ToArray());
+                IsDisabled = false;
+            }
+            else
+            {
+                Console.WriteLine("error");
+                CallBackErrorMethod("Only accept files fo type: png, jpg, jpeg", CallBackError);
+            }
         }
 
         private async Task UploadImage()
@@ -43,11 +53,17 @@ namespace BramrSite.Pages.Components
             CurrentImage.FileUri = await Api.GetFileInfo(CurrentImage.FileType.ToString());
             CurrentImage.Src = $"https://localhost:44372/api/image/download/{CurrentImage.FileUri}";
             CallBackMethod(CallBack);
+            CallBackErrorMethod("Succesfully uploaded", CallBackError);
         }
 
         public void CallBackMethod(Del CallBackMethod)
         {
             CallBackMethod.Invoke(CurrentImage.FileUri, CurrentImage.Src);
+        }
+
+        public void CallBackErrorMethod(string Error, DelError CallBackMethod)
+        {
+            CallBackMethod.Invoke(Error);
         }
     }
 }

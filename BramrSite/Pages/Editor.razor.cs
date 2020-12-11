@@ -11,7 +11,6 @@ namespace BramrSite.Pages
     public partial class Editor : ComponentBase
     {
         [Inject] IApiDesignConnection API { get; set; }
-        [Inject] IFileReaderService FileReader { get; set; }
 
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
         public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
@@ -48,9 +47,13 @@ namespace BramrSite.Pages
         private bool UndoButton { get; set; } = true;
         private bool RedoButton { get; set; } = true;
 
+        private string ErrorMessage { get; set; }
+
         public delegate void Del(string uri, string src);
+        public delegate void DelError(string error);
 
         Del CallBackMethod;
+        DelError CallBackError;
 
         protected override /*async*/ void OnInitialized()
         {
@@ -76,6 +79,7 @@ namespace BramrSite.Pages
             //Art Aanpassing einde
 
             CallBackMethod = ApplySource;
+            CallBackError = SetError;
         }
 
         private void Selection(TextModel NewTextElement)
@@ -303,6 +307,12 @@ namespace BramrSite.Pages
         {
             ProfielFoto.FileUri = Uri;
             ProfielFoto.Src = Src;
+            StateHasChanged();
+        }
+
+        public void SetError(string error)
+        {
+            ErrorMessage = error;
             StateHasChanged();
         }
     }
