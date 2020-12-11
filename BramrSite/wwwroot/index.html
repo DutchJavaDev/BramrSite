@@ -6,11 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>BramrSite</title>
     <base href="/" />
-    <script src="https://kit.fontawesome.com/8993f9dff3.js" crossorigin="anonymous"></script>
-
-    <script src="https://unpkg.com/carbon-components@latest/scripts/carbon-components.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/handtrackjs@latest/dist/handtrack.min.js"></script>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="Stylesheet" href="css/StylesheetIndex.css">
     <link rel="Stylesheet" href="css/menuWeb.css">
     <link href="css/app.css" rel="stylesheet" />
@@ -27,6 +23,10 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+    <script src="https://kit.fontawesome.com/8993f9dff3.js" crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/carbon-components@latest/scripts/carbon-components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handtrackjs@latest/dist/handtrack.min.js"></script>
     <script type="text/javascript">
         function updateContainer() {
             const signUpButton = document.getElementById('signUp');
@@ -59,10 +59,10 @@
         //video.height = 400
 
         const modelParams = {
-            flipHorizontal: true,  
-            maxNumBoxes: 20,        
-            iouThreshold: 0.5,      
-            scoreThreshold: 0.6,    
+            flipHorizontal: true,
+            maxNumBoxes: 20,
+            iouThreshold: 0.5,
+            scoreThreshold: 0.6,
         }
 
         function startVideo() {
@@ -89,7 +89,7 @@
                 updateNote.innerText = "Video stopped"
             }
         }
-        trackButton.addEventListener("click", function(){
+        trackButton.addEventListener("click", function () {
             toggleVideo();
         });
         function runDetection() {
@@ -112,7 +112,7 @@
     </script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
-    
+
     <!--<script src="JS/app.js"></script>-->
 </body>
 
