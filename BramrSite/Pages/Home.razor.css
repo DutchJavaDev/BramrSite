@@ -1,13 +1,149 @@
+﻿.menu-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+    .menu-wrap .toggler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        opacity: 0;
+    }
+
+    .menu-wrap .hamburger {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 25px;
+        height: 25px;
+        padding: 1rem;
+        background: #071053;
+        border: 1px solid rgb(255, 255, 255);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .menu-wrap .hamburger > div {
+            position: relative;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+        }
+
+            .menu-wrap .hamburger > div:before,
+            .menu-wrap .hamburger > div:after {
+                content: '';
+                position: absolute;
+                z-index: 1;
+                top: -8px;
+                width: 100%;
+                height: 2px;
+                background-color: #fff;
+            }
+
+            .menu-wrap .hamburger > div:after {
+                top: 8px;
+            }
+
+    .menu-wrap .toggler:checked + .hamburger > div {
+        transform: rotate(135deg);
+    }
+
+        .menu-wrap .toggler:checked + .hamburger > div:before,
+        .menu-wrap .toggler:checked + .hamburger > div:after {
+            top: 0;
+            transform: rotate(90deg);
+        }
+
+    .menu-wrap .toggler:checked:hover + .hamburger > div {
+        transform: rotate(255deg);
+    }
+
+    .menu-wrap .menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .menu-wrap .menu > div {
+            background: rgb(17, 17, 22);
+            opacity: 75%;
+            border-radius: 50%;
+            width: 200vw;
+            height: 200vw;
+            display: flex;
+            flex: none;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0);
+            transition: all 0.4s ease;
+        }
+
+            .menu-wrap .menu > div > div {
+                text-align: center;
+                max-width: 90vw;
+                max-height: 100vh;
+                opacity: 0;
+                transition: opacity 0.4s ease;
+            }
+
+                .menu-wrap .menu > div > div > ul > li {
+                    list-style: none;
+                    color: #fff;
+                    font-size: 2rem;
+                    padding: 1.5rem;
+                }
+
+                    .menu-wrap .menu > div > div > ul > li > a {
+                        color: inherit;
+                        text-decoration: none;
+                        transition: color 0.4 ease;
+                    }
+
+    .menu-wrap .toggler:checked ~ .menu {
+        visibility: visible;
+    }
+
+        .menu-wrap .toggler:checked ~ .menu > div {
+            transform: scale(1);
+            transition-duration: 0.75s;
+        }
+
+            .menu-wrap .toggler:checked ~ .menu > div > div {
+                opacity: 1;
+                transition: opacity 0.4s ease;
+            }
+
+
 /* MASTER STYLES */
-body{
+body {
     margin: 0px;
     padding: 0px;
-    font-family:'Prompt', sans-serif;
+    font-family: 'Prompt', sans-serif;
 }
 
 /* MASTER GRIDS */
 
-.mastergrids{
+.mastergrids {
     display: grid;
     height: 300vh;
     width: 100%;
@@ -15,37 +151,37 @@ body{
     grid-template-rows: 3fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.BRAMR-animatiegrid{
+.BRAMR-animatiegrid {
     grid-column: 1 / 1;
     grid-row: 1 / 1;
 }
 
-.overBramr{
+.overBramr {
     grid-column: 1 / 2;
     grid-row: 2 / 2;
 }
 
-.meetMathijs{
+.meetMathijs {
     grid-column: 1 / 2;
     grid-row: 3 / 3;
 }
 
-.meetRuben{
+.meetRuben {
     grid-column: 1 / 2;
     grid-row: 4 / 4;
 }
 
-.meetArt{
+.meetArt {
     grid-column: 1 / 2;
     grid-row: 5 / 5;
 }
 
-.meetBoris{
+.meetBoris {
     grid-column: 1 / 2;
     grid-row: 6 / 6;
 }
 
-.meetRobbie{
+.meetRobbie {
     grid-column: 1 / 2;
     grid-row: 7 / 7;
 }
@@ -54,7 +190,7 @@ body{
 
 /* LAPTOP 1024px en lager*/
 @media screen and (max-width: 1024px) {
-    .mastergrids{
+    .mastergrids {
         display: grid;
         height: 300vh;
         width: 100%;
@@ -62,52 +198,51 @@ body{
         grid-template-rows: 2.5fr 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
     }
 
-    .BRAMR-animatiegrid{
+    .BRAMR-animatiegrid {
         grid-column: 1 / 1;
         grid-row: 1 / 1;
     }
 
-    .overBramr{
+    .overBramr {
         grid-column: 1 / 1;
         grid-row: 2 / 2;
     }
 
-    .meetMathijs{
+    .meetMathijs {
         grid-column: 1 / 1;
         grid-row: 3 / 3;
     }
 
-    .meetRuben{
+    .meetRuben {
         grid-column: 1 / 1;
         grid-row: 4 / 4;
     }
 
-    .meetArt{
+    .meetArt {
         grid-column: 1 / 1;
         grid-row: 5 / 5;
     }
 
-    .meetBoris{
+    .meetBoris {
         grid-column: 1 / 1;
         grid-row: 6 / 6;
     }
 
-    .meetRobbie{
+    .meetRobbie {
         grid-column: 1 / 1;
         grid-row: 7 / 7;
     }
-    
 }
 
 /* INLOGSYSTEEM */
 
-h1{
+h1 {
     font-weight: bold;
     margin: 0;
     color: rgb(255, 255, 255);
 }
 
-p{
+p {
     font-size: 14px;
     color: rgb(255, 255, 255);
     font-weight: 100;
@@ -116,13 +251,13 @@ p{
     margin: 20px 0 30px;
 }
 
-span{
+span {
     font-size: 12px;
     color: rgb(255, 255, 255);
     font-weight: bold;
 }
 
-a{
+a {
     color: rgb(255, 255, 255);
     font-size: 14px;
     text-decoration: none;
@@ -130,7 +265,7 @@ a{
     margin: 15px 0;
 }
 
-.container{
+.container {
     background: rgb(40, 40, 40);
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
@@ -146,7 +281,7 @@ a{
     display: none;
 }
 
-.form-container form{
+.form-container form {
     background: rgb(40, 40, 40);
     display: flex;
     flex-direction: column;
@@ -161,18 +296,18 @@ a{
     margin: 20px 0;
 }
 
-.social-container a{
-    border: 1px solid rgb(120, 217, 255);
-    border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 5px;
-    height: 40px;
-    width: 40px;
-}
+    .social-container a {
+        border: 1px solid rgb(120, 217, 255);
+        border-radius: 50%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
+        height: 40px;
+        width: 40px;
+    }
 
-.form-container input{
+.form-container input {
     background: rgb(137, 137, 137);
     color: rgb(255, 255, 255);
     border: none;
@@ -181,7 +316,7 @@ a{
     width: 100%;
 }
 
-#signIn-panel, #signUp-panel{
+#signIn-panel, #signUp-panel {
     border-radius: 20px;
     border: 1px solid rgb(255, 255, 255);
     background: 1px linear-gradient(to right, rgb(6, 255, 248), rgb(0, 207, 255));
@@ -193,7 +328,7 @@ a{
     transition: transform 80ms ease-in;
 }
 
-#signIn, #signUp{
+#signIn, #signUp {
     border-radius: 20px;
     border: 1px solid rgb(255, 255, 255);
     background: rgb(0, 207, 255);
@@ -205,40 +340,40 @@ a{
     transition: transform 80ms ease-in;
 }
 
-button:active{
+button:active {
     transform: scale(0.95);
 }
 
-button:focus{
+button:focus {
     outline: none;
 }
 
-button.ghost{
+button.ghost {
     background: transparent;
     border-color: rgb(255, 255, 255);
 }
 
-.form-container{
+.form-container {
     position: absolute;
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
 }
 
-.sign-in-container{
+.sign-in-container {
     left: 0;
     width: 50%;
     z-index: 2;
 }
 
-.sign-up-container{
+.sign-up-container {
     left: 0;
     width: 50%;
     opacity: 0;
     z-index: 1;
 }
 
-.overlay-container{
+.overlay-container {
     position: absolute;
     top: 0;
     left: 50%;
@@ -250,7 +385,7 @@ button.ghost{
     background: rgb(0, 207, 255);
 }
 
-.overlay{
+.overlay {
     background: rgb(0, 207, 255);
     color: rgb(255, 255, 255);
     border-color: rgb(255, 255, 255);
@@ -262,7 +397,7 @@ button.ghost{
     transition: transform 0.6s ease-in-out;
 }
 
-.overlay-panel{
+.overlay-panel {
     position: absolute;
     top: 0;
     display: flex;
@@ -276,46 +411,46 @@ button.ghost{
     transition: transform 0.6s ease-in-out;
 }
 
-.overlay-right{
+.overlay-right {
     right: 0;
     transform: translateX(0);
 }
 
-.overlay-left{
+.overlay-left {
     transform: translateX(-20%);
 }
 
 /* INLOGSYSTEEM ANIMATIE */
 
-.container.right-panel-active .sign-in-container{
+.container.right-panel-active .sign-in-container {
     transform: translateX(100%);
 }
 
-.container.right-panel-active .overlay-container{
+.container.right-panel-active .overlay-container {
     transform: translateX(-100%);
 }
 
-.container.right-panel-active .sign-up-container{
+.container.right-panel-active .sign-up-container {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
 }
 
-.container.right-panel-active .overlay{
+.container.right-panel-active .overlay {
     transform: translateX(50%);
 }
 
-.container.right-panel-active .overlay-left{
+.container.right-panel-active .overlay-left {
     transform: translateX(0);
 }
 
-.container.right-panel-active .overlay-right{
+.container.right-panel-active .overlay-right {
     transform: translateX(20%);
 }
 
 /* POPUP INLOGSYSTEEM */
 
-.popUp-btn-inlog{
+.popUp-btn-inlog {
     position: fixed;
     left: 65px;
     padding: 1rem;
@@ -330,10 +465,9 @@ button.ghost{
     transition: transform 80ms ease-in;
     cursor: pointer;
     text-align: center;
-    box-sizing: initial;
 }
 
-.close-btn{
+.close-btn {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -344,14 +478,14 @@ button.ghost{
     cursor: pointer;
 }
 
-.close-btn:hover{
-    color: rgb(5, 23, 144);
-}
+    .close-btn:hover {
+        color: rgb(5, 23, 144);
+    }
 
-#show:checked ~ .container{
+#show:checked ~ .container {
     display: block;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
     display: none;
 }
