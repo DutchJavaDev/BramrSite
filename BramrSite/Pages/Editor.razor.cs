@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BramrSite.Classes.Interfaces;
+using BramrSite.Models;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using BramrSite.Classes.Interfaces;
-using BramrSite.Models;
-using BramrSite.Classes;
 using Tewr.Blazor.FileReader;
 
 namespace BramrSite.Pages
@@ -34,7 +32,7 @@ namespace BramrSite.Pages
         public TextModel Interesses { get; private set; } = new TextModel() { ID = 13 };
         public TextModel Motivatie { get; private set; } = new TextModel() { ID = 14 };
         //Art Aanpassing 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto};
+        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto };
         //Art Aanpassing einde
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
@@ -50,9 +48,9 @@ namespace BramrSite.Pages
         private bool UndoButton { get; set; } = true;
         private bool RedoButton { get; set; } = true;
 
-        ElementReference FileReference { get; set; }
+        public delegate void Del(string uri, string src);
 
-        public string ImageSrc { get; set; }
+        Del CallBackMethod;
 
         protected override /*async*/ void OnInitialized()
         {
@@ -77,6 +75,7 @@ namespace BramrSite.Pages
             AllImageElements.Add(ProfielFoto);
             //Art Aanpassing einde
 
+            CallBackMethod = ApplySource;
         }
 
         private void Selection(TextModel NewTextElement)
@@ -300,9 +299,11 @@ namespace BramrSite.Pages
             }
         }
 
-        private async Task UploadFile()
+        public void ApplySource(string Uri, string Src)
         {
-            var file = (await FileReader.CreateReference(FileReference).EnumerateFilesAsync()).FirstOrDefault();
+            ProfielFoto.FileUri = Uri;
+            ProfielFoto.Src = Src;
+            StateHasChanged();
         }
     }
 }
