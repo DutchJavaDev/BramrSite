@@ -20,22 +20,19 @@ namespace BramrSite.Pages.Components
         Stream FileStream { get; set; }
         private bool IsDisabled { get; set; } = true;
         private string ErrorMessage { get; set; }
-        private string FileName { get; set; }
+
 
         private async Task OpenImage()
         {
             var file = (await FileReader.CreateReference(FileReference).EnumerateFilesAsync()).FirstOrDefault();
             var fileInfo = await file.ReadFileInfoAsync();
             
-            var foo = fileInfo.Name.Length;
-            FileName = fileInfo.Name.Substring(0, 10);
-            Console.WriteLine(FileName);
             if (file == null)
             {
-                
+                ErrorMessage = "Geen bestand geselecteerd.";
+                return;
             }
 
-            Console.WriteLine(fileInfo.Size);
             if (fileInfo.Size > 314572)
             {
                 ErrorMessage = "Bestand mag niet groter zijn dan 3 mb.";
@@ -52,7 +49,7 @@ namespace BramrSite.Pages.Components
 
             else
             {
-              ErrorMessage = "Only accept files fo type: png, jpg, jpeg";
+              ErrorMessage = "Alleen bestands types: png, jpg, jpeg toegestaan.";
             }
         }
 
@@ -66,7 +63,7 @@ namespace BramrSite.Pages.Components
             CallBackMethod(CallBack);
             if(apiResponse.Success == true)
             {
-                ErrorMessage = "Succesfully uploaded";
+                ErrorMessage = "Succesvol geüpload.";
             }
             else
             {
