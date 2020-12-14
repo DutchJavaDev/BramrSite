@@ -137,23 +137,6 @@ namespace BramrSite.Classes
             }
         }
 
-        public async Task<string> DonwloadImage()
-        {
-            try
-            {
-                using var client = CreateClient();
-                var response = await client.GetAsync("image/download");
-
-                var result = await response.Content.ReadAsStringAsync();
-
-                return result;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
 
         private HttpClient CreateClient()
         {
@@ -167,7 +150,6 @@ namespace BramrSite.Classes
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/png"));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/jpg"));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/jpeg"));
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("multipart/form-data"));
 
             if (!string.IsNullOrEmpty(JWT))
             {

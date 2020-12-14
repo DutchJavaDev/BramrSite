@@ -16,10 +16,10 @@ namespace BramrSite.Pages.Components
         [Inject] ApiService Api { get; set; }
         [Parameter] public ImageModel CurrentImage { get; set; }
         [Parameter] public Del CallBack { get; set; }
-        [Parameter] public DelError CallBackError { get; set; }
         ElementReference FileReference { get; set; }
         Stream FileStream { get; set; }
         private bool IsDisabled { get; set; } = true;
+        private string ErrorMessage { get; set; }
 
 
         private async Task OpenImage()
@@ -40,8 +40,7 @@ namespace BramrSite.Pages.Components
             }
             else
             {
-                Console.WriteLine("error");
-                CallBackErrorMethod("Only accept files fo type: png, jpg, jpeg", CallBackError);
+                ErrorMessage = "Only accept files fo type: png, jpg, jpeg";
             }
         }
 
@@ -53,17 +52,12 @@ namespace BramrSite.Pages.Components
             CurrentImage.FileUri = await Api.GetFileInfo(CurrentImage.FileType.ToString());
             CurrentImage.Src = $"https://localhost:44372/api/image/download/{CurrentImage.FileUri}";
             CallBackMethod(CallBack);
-            CallBackErrorMethod("Succesfully uploaded", CallBackError);
+            ErrorMessage = "Succesfully uploaded";
         }
 
         public void CallBackMethod(Del CallBackMethod)
         {
             CallBackMethod.Invoke(CurrentImage.FileUri, CurrentImage.Src);
-        }
-
-        public void CallBackErrorMethod(string Error, DelError CallBackMethod)
-        {
-            CallBackMethod.Invoke(Error);
         }
     }
 }
