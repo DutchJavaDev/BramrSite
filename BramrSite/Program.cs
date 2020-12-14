@@ -1,7 +1,6 @@
 using Blazored.LocalStorage;
 using BramrSite.Auth;
 using BramrSite.Classes;
-using BramrSite.Classes.Interfaces;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -40,7 +39,6 @@ namespace BramrSite
                 option.UseWasmSharedBuffer = true;
             });
 
-            builder.Services.AddSingleton<IApiDesignConnection, ApiDesignConnection>();
             builder.Services.AddSingleton<ApiService>();
 
             await builder.Build().RunAsync();

@@ -137,6 +137,80 @@ namespace BramrSite.Classes
             }
         }
 
+        public async Task<ChangeModel> GetOneFromHistory(int Location)
+        {
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.GetAsync($"edithistory/get/{Location}");
+                var result = JsonConvert.DeserializeObject<ChangeModel>(await response.Content.ReadAsStringAsync());
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return new ChangeModel();
+            }
+        }
+
+        public async Task<ApiResponse> AddToHistory(int Location, ChangeModel CurrentChange)
+        {
+            HistoryModel edit = new HistoryModel() { Location = Location, DesignElement = CurrentChange.DesignElement, EditType = CurrentChange.EditType.ToString(), Edit = CurrentChange.Edit };
+
+            var content = new StringContent(JsonConvert.SerializeObject(edit), Encoding.UTF8, "application/json");
+
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.PostAsync("edithistory/post", content);
+
+                if (response.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
+                else
+                    return new ApiResponse { Message = response.ReasonPhrase };
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse { Success = false, Message = e.Message };
+            }
+        }
+
+        public async Task<ApiResponse> DeleteAllFromHistory()
+        {
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.DeleteAsync("edithistory/delete");
+
+                if (response.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
+                else
+                    return new ApiResponse { Message = response.ReasonPhrase };
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse { Success = false, Message = e.Message };
+            }
+        }
+
+        public async Task<ApiResponse> DeleteAmountFromHistory(int Location)
+        {
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.DeleteAsync($"edithistory/deletefrom/{Location}");
+
+                if (response.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
+                else
+                    return new ApiResponse { Message = response.ReasonPhrase };
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse { Success = false, Message = e.Message };
+            }
+        }
+
 
         private HttpClient CreateClient()
         {

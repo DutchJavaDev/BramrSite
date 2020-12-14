@@ -10,19 +10,14 @@ namespace BramrSite.Models
         public string Edit { get; set; }
 
         [JsonConstructor]
-        public ChangeModel(int id, string designElement, string editType, string edit)
-        {
-            DesignElement = int.Parse(designElement);
-            EditType = (Type)Enum.Parse(typeof(Type), editType);
-            Edit = edit;
-        }
-
-        public ChangeModel(int DesignElement, Type EditType, string Edit)
+        public ChangeModel(int DesignElement, string EditType, string Edit)
         {
             this.DesignElement = DesignElement;
-            this.EditType = EditType;
+            this.EditType = (Type)Enum.Parse(typeof(Type), EditType);
             this.Edit = Edit;
         }
+
+        public ChangeModel() { }
 
         public enum Type
         {

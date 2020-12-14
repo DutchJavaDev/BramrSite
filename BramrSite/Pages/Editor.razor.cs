@@ -1,6 +1,7 @@
-﻿using BramrSite.Classes.Interfaces;
+﻿using BramrSite.Classes;
 using BramrSite.Models;
 using Microsoft.AspNetCore.Components;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace BramrSite.Pages
 {
     public partial class Editor : ComponentBase
     {
-        [Inject] IApiDesignConnection API { get; set; }
+        [Inject] ApiService API { get; set; }
 
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
         public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
@@ -51,9 +52,10 @@ namespace BramrSite.Pages
 
         Del CallBackMethod;
 
-        protected override /*async*/ void OnInitialized()
+        protected override async void OnInitialized()
         {
-            //await API.DeleteAllFromDB();
+            CallBackMethod = ApplySource;
+            await API.DeleteAllFromHistory();
 
             AllTextElements.Add(Naam);
             AllTextElements.Add(Adres);
@@ -73,8 +75,6 @@ namespace BramrSite.Pages
             //Art Aanpassing 
             AllImageElements.Add(ProfielFoto);
             //Art Aanpassing einde
-
-            CallBackMethod = ApplySource;
         }
 
         private void Selection(TextModel NewTextElement)
@@ -89,7 +89,7 @@ namespace BramrSite.Pages
             ChangeModel CurrentChange;
 
             RedoButton = false;
-            CurrentChange = await API.GetOneFromDB(HistoryLocation);
+            CurrentChange = await API.GetOneFromHistory(HistoryLocation);
             Console.WriteLine(HistoryLocation);
             HistoryLocation--;
             if (HistoryLocation == 0)
@@ -106,7 +106,7 @@ namespace BramrSite.Pages
 
             UndoButton = false;
             HistoryLocation++;
-            CurrentChange = await API.GetOneFromDB(HistoryLocation);
+            CurrentChange = await API.GetOneFromHistory(HistoryLocation);
             Console.WriteLine(HistoryLocation);
             if (HistoryLocation == EditAmount)
             {
@@ -120,7 +120,7 @@ namespace BramrSite.Pages
 
         private async Task AddToDB(ChangeModel.Type EditType, string Edit)
         {
-            ChangeModel CurrentChange = new ChangeModel(CurrentTextElement.ID, EditType, Edit);
+            ChangeModel CurrentChange = new ChangeModel() { DesignElement = CurrentTextElement.ID, EditType = EditType, Edit = Edit };
 
             UndoButton = false;
             RedoButton = true;
@@ -128,11 +128,11 @@ namespace BramrSite.Pages
             HistoryLocation++;
             if (HistoryLocation != EditAmount)
             {
-                await API.DeleteAmountFromDB(HistoryLocation - 1);
+                await API.DeleteAmountFromHistory(HistoryLocation - 1);
                 EditAmount = HistoryLocation;
             }
 
-            await API.AddToDB(HistoryLocation, CurrentChange);
+            await API.AddToHistory(HistoryLocation, CurrentChange);
         }
 
         private async Task UseChange(ChangeModel CurrentChange, bool GoingBack)
@@ -239,7 +239,7 @@ namespace BramrSite.Pages
             {
                 while (Value > 0)
                 {
-                    CurrentChange = await API.GetOneFromDB(Value);
+                    CurrentChange = await API.GetOneFromHistory(Value);
                     Value--;
                     if (CurrentChange.EditType == Type && Current.DesignElement == CurrentChange.DesignElement)
                     {
@@ -252,7 +252,7 @@ namespace BramrSite.Pages
             {
                 while (Value < EditAmount)
                 {
-                    CurrentChange = await API.GetOneFromDB(Value);
+                    CurrentChange = await API.GetOneFromHistory(Value);
                     Value++;
                     if (CurrentChange.EditType == Type && Current.DesignElement == CurrentChange.DesignElement)
                     {
@@ -260,7 +260,7 @@ namespace BramrSite.Pages
                         return Edit;
                     }
                 }
-                CurrentChange = await API.GetOneFromDB(HistoryLocation);
+                CurrentChange = await API.GetOneFromHistory(HistoryLocation);
                 return CurrentChange.Edit;
             }
 
@@ -292,9 +292,9 @@ namespace BramrSite.Pages
                     return ImageModel.Float.none;
                 case ChangeModel.Type.ObjectFitSet:
                     return ImageModel.ObjectFit.cover;
-                default:
-                    return TextModel.Allignment.Left;
                     //Art Aanpassing einde
+                default:
+                    return TextModel.Allignment.Left; 
             }
         }
 
