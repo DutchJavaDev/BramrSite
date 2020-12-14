@@ -1,0 +1,8 @@
+﻿@page "/test"
+@attribute [Authorize]
+
+<h1>UploadTest</h1>
+<br />
+<TextComponent CurrentDesignElement="Test" />
+<br />
+<button @onclick="() => { Save(); }">Save</button>

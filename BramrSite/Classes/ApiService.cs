@@ -211,6 +211,26 @@ namespace BramrSite.Classes
             }
         }
 
+        public async Task<ApiResponse> UploadJson(string List)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(List), Encoding.UTF8, "application/json");
+
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.PostAsync("website/upload", content);
+
+                if (response.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
+                else
+                    return new ApiResponse { Message = response.ReasonPhrase };
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse { Success = false, Message = e.Message };
+            }
+        }
+
 
         private HttpClient CreateClient()
         {
