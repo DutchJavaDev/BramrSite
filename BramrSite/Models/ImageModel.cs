@@ -8,7 +8,7 @@ namespace BramrSite.Models
 {
     public class ImageModel
     {
-        public int ID { get; set; }
+        public int Index { get; set; }
 
         public int Width { get; set; } = 100;
         public int Height { get; set; } = 100;

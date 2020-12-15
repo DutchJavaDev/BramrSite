@@ -16,23 +16,23 @@ namespace BramrSite.Pages
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
         public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
 
-        public TextModel Naam { get; private set; } = new TextModel() { ID = 0 };
-        public TextModel Adres { get; private set; } = new TextModel() { ID = 1 };
-        public TextModel Postcode { get; private set; } = new TextModel() { ID = 2 };
-        public TextModel Woonplaats { get; private set; } = new TextModel() { ID = 3 };
-        public TextModel Telefoon { get; private set; } = new TextModel() { ID = 4 };
-        public TextModel Email { get; private set; } = new TextModel() { ID = 5 };
-        public TextModel Geboortedatum { get; private set; } = new TextModel() { ID = 6 };
-        public TextModel Nationaliteit { get; private set; } = new TextModel() { ID = 7 };
-        public TextModel Rijbewijs { get; private set; } = new TextModel() { ID = 8 };
-        public TextModel LinkedIn { get; private set; } = new TextModel() { ID = 9 };
-        public TextModel Werkervaring { get; private set; } = new TextModel() { ID = 10 };
-        public TextModel Schoolervaring { get; private set; } = new TextModel() { ID = 11 };
-        public TextModel Skillset { get; private set; } = new TextModel() { ID = 12 };
-        public TextModel Interesses { get; private set; } = new TextModel() { ID = 13 };
-        public TextModel Motivatie { get; private set; } = new TextModel() { ID = 14 };
+        public TextModel Naam { get; private set; } = new TextModel() { Index = 0 };
+        public TextModel Adres { get; private set; } = new TextModel() { Index = 1 };
+        public TextModel Postcode { get; private set; } = new TextModel() { Index = 2 };
+        public TextModel Woonplaats { get; private set; } = new TextModel() { Index = 3 };
+        public TextModel Telefoon { get; private set; } = new TextModel() { Index = 4 };
+        public TextModel Email { get; private set; } = new TextModel() { Index = 5 };
+        public TextModel Geboortedatum { get; private set; } = new TextModel() { Index = 6 };
+        public TextModel Nationaliteit { get; private set; } = new TextModel() { Index = 7 };
+        public TextModel Rijbewijs { get; private set; } = new TextModel() { Index = 8 };
+        public TextModel LinkedIn { get; private set; } = new TextModel() { Index = 9 };
+        public TextModel Werkervaring { get; private set; } = new TextModel() { Index = 10 };
+        public TextModel Schoolervaring { get; private set; } = new TextModel() { Index = 11 };
+        public TextModel Skillset { get; private set; } = new TextModel() { Index = 12 };
+        public TextModel Interesses { get; private set; } = new TextModel() { Index = 13 };
+        public TextModel Motivatie { get; private set; } = new TextModel() { Index = 14 };
         //Art Aanpassing 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { ID = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto };
+        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Index = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto };
         //Art Aanpassing einde
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
@@ -120,7 +120,7 @@ namespace BramrSite.Pages
 
         private async Task AddToDB(ChangeModel.Type EditType, string Edit)
         {
-            ChangeModel CurrentChange = new ChangeModel() { DesignElement = CurrentTextElement.ID, EditType = EditType, Edit = Edit };
+            ChangeModel CurrentChange = new ChangeModel() { DesignElement = CurrentTextElement.Index, EditType = EditType, Edit = Edit };
 
             UndoButton = false;
             RedoButton = true;
@@ -144,7 +144,7 @@ namespace BramrSite.Pages
 
             foreach (var Element in AllTextElements)
             {
-                if (Element.ID == CurrentChange.DesignElement)
+                if (Element.Index == CurrentChange.DesignElement)
                 {
                     CurrentTextElement = Element;
 
@@ -154,7 +154,7 @@ namespace BramrSite.Pages
             // Art aanpassing
             foreach (var Element in AllImageElements)
             {
-                if (Element.ID == CurrentChange.DesignElement)
+                if (Element.Index == CurrentChange.DesignElement)
                 {
                     CurrentImageElement = Element;
 
