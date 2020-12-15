@@ -1,9 +1,80 @@
 ﻿@page "/hand"
-    
+@inject IJSRuntime JSRuntime;
+
+@using System.IO;
+
+<!DOCTYPE html>
+<html>
+
+<head>
 
 
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+</head>
+<body>
+
+
+
+
+
+    @code {
+
+        async Task StartVideo()
+        {
+
+            await JSRuntime.InvokeVoidAsync("preload");
+            await JSRuntime.InvokeVoidAsync("setup");
+            await JSRuntime.InvokeVoidAsync("classifyVideo");
+            await JSRuntime.InvokeVoidAsync("draw");
+            await JSRuntime.InvokeVoidAsync("gotResult");
+
+        }
+
+    }
     <h3>HandTracking</h3>
+    <p id="accesLabel" style="color: black">...</p>
+    <h3 id="count">0</h3>
+    <h3 id="count2">0</h3>
+    <h3 id="granted">false</h3>
+ 
+    <EditForm Model="Model" OnValidSubmit="SignInSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary Model="Model" />
+        <h1>Log in via:</h1>
+        <div>
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>of gebruik je eigen BRAMR-account</span>
+        <input type="email" @bind-value="Model.Email" placeholder="Emailadres" />
+        <input type="password" @bind-value="Model.Password" placeholder="Wachtwoord" />
+        <section>
+            <p>@SignInMessage</p>
+        </section>
+        <a href="#">Wachtwoord vergeten?</a>
+
+        <div>
+            @if (Disabled)
+            {
+                <button id="signIn-panel" disabled="@Disabled" type="submit">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
+            }
+            else
+            {
+                <button id="signIn-panel" type="submit">Log in!</button>
+            }
+        </div>
+    </EditForm>
+</body>
+
+</html>
 
 
-   
+
 
