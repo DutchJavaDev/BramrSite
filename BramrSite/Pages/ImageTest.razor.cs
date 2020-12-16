@@ -10,7 +10,7 @@ namespace BramrSite.Pages
     {
         
 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Index = 15, Alt = "ProfielFoto", Src = "IMG_1604.JPG" };
+        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Location = 15, Alt = "ProfielFoto", Src = "IMG_1604.JPG" };
 
        
     }

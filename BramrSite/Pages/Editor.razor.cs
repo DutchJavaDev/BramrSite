@@ -11,28 +11,29 @@ namespace BramrSite.Pages
 {
     public partial class Editor : ComponentBase
     {
-        [Inject] ApiService API { get; set; }
+        [Inject] ApiService Api { get; set; }
 
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
         public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
+        public List<object> AllDesignElements { get; private set; } = new List<object>();
 
-        public TextModel Naam { get; private set; } = new TextModel() { Index = 0 };
-        public TextModel Adres { get; private set; } = new TextModel() { Index = 1 };
-        public TextModel Postcode { get; private set; } = new TextModel() { Index = 2 };
-        public TextModel Woonplaats { get; private set; } = new TextModel() { Index = 3 };
-        public TextModel Telefoon { get; private set; } = new TextModel() { Index = 4 };
-        public TextModel Email { get; private set; } = new TextModel() { Index = 5 };
-        public TextModel Geboortedatum { get; private set; } = new TextModel() { Index = 6 };
-        public TextModel Nationaliteit { get; private set; } = new TextModel() { Index = 7 };
-        public TextModel Rijbewijs { get; private set; } = new TextModel() { Index = 8 };
-        public TextModel LinkedIn { get; private set; } = new TextModel() { Index = 9 };
-        public TextModel Werkervaring { get; private set; } = new TextModel() { Index = 10 };
-        public TextModel Schoolervaring { get; private set; } = new TextModel() { Index = 11 };
-        public TextModel Skillset { get; private set; } = new TextModel() { Index = 12 };
-        public TextModel Interesses { get; private set; } = new TextModel() { Index = 13 };
-        public TextModel Motivatie { get; private set; } = new TextModel() { Index = 14 };
+        public TextModel Naam { get; private set; } = new TextModel() { Location = 0 };
+        public TextModel Adres { get; private set; } = new TextModel() { Location = 1 };
+        public TextModel Postcode { get; private set; } = new TextModel() { Location = 2 };
+        public TextModel Woonplaats { get; private set; } = new TextModel() { Location = 3 };
+        public TextModel Telefoon { get; private set; } = new TextModel() { Location = 4 };
+        public TextModel Email { get; private set; } = new TextModel() { Location = 5 };
+        public TextModel Geboortedatum { get; private set; } = new TextModel() { Location = 6 };
+        public TextModel Nationaliteit { get; private set; } = new TextModel() { Location = 7 };
+        public TextModel Rijbewijs { get; private set; } = new TextModel() { Location = 8 };
+        public TextModel LinkedIn { get; private set; } = new TextModel() { Location = 9 };
+        public TextModel Werkervaring { get; private set; } = new TextModel() { Location = 10 };
+        public TextModel Schoolervaring { get; private set; } = new TextModel() { Location = 11 };
+        public TextModel Skillset { get; private set; } = new TextModel() { Location = 12 };
+        public TextModel Interesses { get; private set; } = new TextModel() { Location = 13 };
+        public TextModel Motivatie { get; private set; } = new TextModel() { Location = 14 };
         //Art Aanpassing 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Index = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto };
+        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Location = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto };
         //Art Aanpassing einde
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
@@ -55,8 +56,8 @@ namespace BramrSite.Pages
         protected override async void OnInitialized()
         {
             CallBackMethod = ApplySource;
-            await API.DeleteAllFromHistory();
-
+            await Api.DeleteAllFromHistory();
+            
             AllTextElements.Add(Naam);
             AllTextElements.Add(Adres);
             AllTextElements.Add(Postcode);
@@ -75,6 +76,17 @@ namespace BramrSite.Pages
             //Art Aanpassing 
             AllImageElements.Add(ProfielFoto);
             //Art Aanpassing einde
+
+            foreach (var item in AllTextElements)
+            {
+                AllDesignElements.Add(item);
+            }
+            foreach (var item in AllImageElements)
+            {
+                AllDesignElements.Add(item);
+            }
+
+            LoadSite();
         }
 
         private void Selection(TextModel NewTextElement)
@@ -84,12 +96,48 @@ namespace BramrSite.Pages
             CurrentTextElement.Selected = true;
         }
 
+        private async void Save()
+        {
+            string json = JsonConvert.SerializeObject(AllDesignElements, Formatting.Indented);
+
+            await Api.UploadCV(json);
+            await Api.DeleteAllFromHistory();
+        }
+
+        private async void LoadSite()
+        {
+            List<object> AllDesignElements = await Api.GetDesignElements();
+
+            if(AllDesignElements.Count != 0)
+            {
+                Naam = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[0].ToString());
+                Adres = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[1].ToString());
+                Postcode = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[2].ToString());
+                Woonplaats = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[3].ToString());
+                Telefoon = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[4].ToString());
+                Email = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[5].ToString());
+                Geboortedatum = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[6].ToString());
+                Nationaliteit = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[7].ToString());
+                Rijbewijs = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[8].ToString());
+                LinkedIn = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[9].ToString());
+                Werkervaring = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[10].ToString());
+                Schoolervaring = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[11].ToString());
+                Skillset = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[12].ToString());
+                Interesses = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[13].ToString());
+                Motivatie = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[14].ToString());
+                ProfielFoto = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[15].ToString());
+                ProfielFoto.Src = $"https://localhost:44372/api/image/download/{ProfielFoto.FileUri}";
+            }
+
+            StateHasChanged();
+        }
+
         private async Task Undo()
         {
             ChangeModel CurrentChange;
 
             RedoButton = false;
-            CurrentChange = await API.GetOneFromHistory(HistoryLocation);
+            CurrentChange = await Api.GetOneFromHistory(HistoryLocation);
             Console.WriteLine(HistoryLocation);
             HistoryLocation--;
             if (HistoryLocation == 0)
@@ -106,7 +154,7 @@ namespace BramrSite.Pages
 
             UndoButton = false;
             HistoryLocation++;
-            CurrentChange = await API.GetOneFromHistory(HistoryLocation);
+            CurrentChange = await Api.GetOneFromHistory(HistoryLocation);
             Console.WriteLine(HistoryLocation);
             if (HistoryLocation == EditAmount)
             {
@@ -120,7 +168,7 @@ namespace BramrSite.Pages
 
         private async Task AddToDB(ChangeModel.Type EditType, string Edit)
         {
-            ChangeModel CurrentChange = new ChangeModel() { DesignElement = CurrentTextElement.Index, EditType = EditType, Edit = Edit };
+            ChangeModel CurrentChange = new ChangeModel() { DesignElement = CurrentTextElement.Location, EditType = EditType, Edit = Edit };
 
             UndoButton = false;
             RedoButton = true;
@@ -128,11 +176,11 @@ namespace BramrSite.Pages
             HistoryLocation++;
             if (HistoryLocation != EditAmount)
             {
-                await API.DeleteAmountFromHistory(HistoryLocation - 1);
+                await Api.DeleteAmountFromHistory(HistoryLocation - 1);
                 EditAmount = HistoryLocation;
             }
 
-            await API.AddToHistory(HistoryLocation, CurrentChange);
+            await Api.AddToHistory(HistoryLocation, CurrentChange);
         }
 
         private async Task UseChange(ChangeModel CurrentChange, bool GoingBack)
@@ -144,7 +192,7 @@ namespace BramrSite.Pages
 
             foreach (var Element in AllTextElements)
             {
-                if (Element.Index == CurrentChange.DesignElement)
+                if (Element.Location == CurrentChange.DesignElement)
                 {
                     CurrentTextElement = Element;
 
@@ -154,7 +202,7 @@ namespace BramrSite.Pages
             // Art aanpassing
             foreach (var Element in AllImageElements)
             {
-                if (Element.Index == CurrentChange.DesignElement)
+                if (Element.Location == CurrentChange.DesignElement)
                 {
                     CurrentImageElement = Element;
 
@@ -239,7 +287,7 @@ namespace BramrSite.Pages
             {
                 while (Value > 0)
                 {
-                    CurrentChange = await API.GetOneFromHistory(Value);
+                    CurrentChange = await Api.GetOneFromHistory(Value);
                     Value--;
                     if (CurrentChange.EditType == Type && Current.DesignElement == CurrentChange.DesignElement)
                     {
@@ -252,7 +300,7 @@ namespace BramrSite.Pages
             {
                 while (Value < EditAmount)
                 {
-                    CurrentChange = await API.GetOneFromHistory(Value);
+                    CurrentChange = await Api.GetOneFromHistory(Value);
                     Value++;
                     if (CurrentChange.EditType == Type && Current.DesignElement == CurrentChange.DesignElement)
                     {
@@ -260,7 +308,7 @@ namespace BramrSite.Pages
                         return Edit;
                     }
                 }
-                CurrentChange = await API.GetOneFromHistory(HistoryLocation);
+                CurrentChange = await Api.GetOneFromHistory(HistoryLocation);
                 return CurrentChange.Edit;
             }
 

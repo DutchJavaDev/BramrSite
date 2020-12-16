@@ -19,9 +19,9 @@ namespace BramrSite.Pages
 
         public List<object> List { get; set; } = new List<object>();
 
-        public TextModel Test { get; set; } = new TextModel() { Index = 0, Text = "ewa boris", TextColor = "black", Bold = true, Italic = true, Underlined = false, FontSize = 20 };
-        public TextModel Test2 { get; set; } = new TextModel() { Index = 1, Text = "ewa mathijs", TextColor = "red", BackgroundColor = "blue", Bold = false, Italic = true, Underlined = true, FontSize = 50 };
-        public ImageModel Test3 { get; set; } = new ImageModel() { Index = 2, Src = @"C:\Users\ruben\OneDrive\Bureaublad\temp\websites\Ruben\html\images\ProfielFoto.png", FileUri = "ca0c40c0c305473e9c4b90d8d530a2fc" };
+        public TextModel Test { get; set; } = new TextModel() { Location = 0, Text = "ewa boris", TextColor = "black", Bold = true, Italic = true, Underlined = false, FontSize = 20 };
+        public TextModel Test2 { get; set; } = new TextModel() { Location = 1, Text = "ewa mathijs", TextColor = "red", BackgroundColor = "blue", Bold = false, Italic = true, Underlined = true, FontSize = 50 };
+        public ImageModel Test3 { get; set; } = new ImageModel() { Location = 2, Src = @"C:\Users\ruben\OneDrive\Bureaublad\temp\websites\Ruben\html\images\ProfielFoto.png", FileUri = "ca0c40c0c305473e9c4b90d8d530a2fc" };
 
         protected override void OnInitialized()
         {
@@ -34,7 +34,7 @@ namespace BramrSite.Pages
         {
             string json = JsonConvert.SerializeObject(List, Formatting.Indented);
 
-            await Api.UploadJson(json);
+            await Api.UploadCV(json);
         }
     }
 }

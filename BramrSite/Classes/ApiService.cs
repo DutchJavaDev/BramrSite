@@ -6,6 +6,7 @@ using System.Text;
 using System;
 using System.Threading.Tasks;
 using System.IO;
+using System.Collections.Generic;
 
 namespace BramrSite.Classes
 {
@@ -211,14 +212,70 @@ namespace BramrSite.Classes
             }
         }
 
-        public async Task<ApiResponse> UploadJson(string List)
+        public async Task<ApiResponse> UploadCV(string List)
         {
             var content = new StringContent(JsonConvert.SerializeObject(List), Encoding.UTF8, "application/json");
 
             try
             {
                 using var client = CreateClient();
-                var response = await client.PostAsync("website/upload", content);
+                var response = await client.PostAsync("website/uploadcv", content);
+
+                if (response.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
+                else
+                    return new ApiResponse { Message = response.ReasonPhrase };
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse { Success = false, Message = e.Message };
+            }
+        }
+
+        public async Task<ApiResponse> UploadPortfolio(string List)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(List), Encoding.UTF8, "application/json");
+
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.PostAsync("website/uploadportfolio", content);
+
+                if (response.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
+                else
+                    return new ApiResponse { Message = response.ReasonPhrase };
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse { Success = false, Message = e.Message };
+            }
+        }
+
+        public async Task<List<object>> GetDesignElements()
+        {
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.GetAsync($"website/get");
+                var result = JsonConvert.DeserializeObject<List<object>>(await response.Content.ReadAsStringAsync());
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return new List<object>();
+            }
+        }
+
+        public async Task<ApiResponse> ChangePassword(string List)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(List), Encoding.UTF8, "application/json");
+
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.PostAsync("password/change", content);
 
                 if (response.IsSuccessStatusCode)
                     return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());

@@ -2,7 +2,7 @@
 {
     public class TextModel
     {
-        public int Index { get; set; }
+        public int Location { get; set; }
         public string Text { get; set; }
         public string TextColor { get; set; }
         public string BackgroundColor { get; set; }
