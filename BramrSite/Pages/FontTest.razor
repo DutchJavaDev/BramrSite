@@ -1,6 +1,7 @@
 ﻿@page "/font"
 @attribute [Authorize]
 <h3>FontTest</h3>
+<br />
 <select @onchange="SelectGet">
     <option value="Montserrat">Montserrat</option>
     <option value="Open Sans Condensed">Open Sans Condensed</option>
@@ -14,6 +15,6 @@
     <option value="Marvel">Marvel</option>
 
 </select>
-
+<br />
 <p class="FontTest" style="font-family:'@FontType' , @FontName;">Hallo</p>
 <p></p>
