@@ -27,8 +27,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
-
+    
     <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    <script src="_content/BlazorML5/WebCam.js"></script>
+    <script src="_content/BlazorML5/ml5ImageClassifier.js"></script>
+    <script src="_content/BlazorML5/ml5NeuralNetwork.js"></script>
+    <script src="_content/BlazorML5/ml5SoundClassifier.js"></script>
+    <script src="_content/BlazorML5/ml5ObjectDetector.js"></script>
+    <script src="_content/BlazorML5/ml5PoseNet.js"></script>
 
     <script type="text/javascript">
         function updateContainer() {
@@ -44,120 +51,100 @@
                 container.classList.remove("right-panel-active");
             });
         };
-        //const video = document.getElementById("myvideo");
-        //const canvas = document.getElementById("canvas");
+        //function videoStart() {
 
 
-        let label = "waiting...";
-        let confidence = "score...";
+        //    var video = document.getElementById('video');
+        //    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        //        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+        //            video.srcObject = stream;
+        //            video.play();
+        //        });
+        //    }
+        //    var canvas = document.getElementById('canvas');
+        //    var context = canvas.getContext('2d');
+        //    var video = document.getElementById('video');
+        //    document.getElementById("snap").addEventListener("click", function () {
+        //        context.drawImage(video, 0, 0, 640, 480);
+        //    });
+        //}
+        //let video = null;
+        //let canvas = null;
+        //let context = null;
+        //let streaming = false;
 
-        let classifier;
-        let modelURL = 'https://teachablemachine.withgoogle.com/models/S4O5iAMtu/';
+        //let width = 100;    // We will scale the photo width to this.
+        //let height = 0;     // This will be computed based on the input stream
+        //let filter = 'sepia(1)';
 
-        var accessGranted = false;
-        var ProvideInfo = false;
-        function preload() {
-            classifier = ml5.imageClassifier(modelURL + 'model.json');
-        }
+        //function onStart(options) {
+        //    video = document.getElementById(options.videoID);
+        //    canvas = document.getElementById(options.canvasID);
+        //    context = canvas.getContext('2d');
+        //    width = options.width;
+        //    filter = options.filter;
 
+        //    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+        //        .then(function (stream) {
+        //            video.srcObject = stream;
+        //            video.play();
+        //        })
+        //        .catch(function (err) {
+        //            console.log("An error occurred: " + err);
+        //        });
 
+        //    video.addEventListener('canplay', function () {
+        //        if (!streaming) {
+        //            height = video.videoHeight / (video.videoWidth / width);
 
-        function setup() {
-            createCanvas(640, 520);
+        //            if (isNaN(height)) {
+        //                height = width / (4 / 3);
+        //            }
 
-            video = createCapture(VIDEO);
-            video.hide();
+        //            video.setAttribute('width', width);
+        //            video.setAttribute('height', height);
+        //            canvas.setAttribute('width', width);
+        //            canvas.setAttribute('height', height);
+        //            streaming = true;
+        //        }
+        //    }, false);
 
-            classifyVideo();
-        }
+        //    video.addEventListener("play", function () {
+        //        console.log('play');
+        //        timercallback();
+        //    }, false);
+        //}
 
+        //function timercallback() {
+        //    if (video.paused || video.ended) {
+        //        return;
+        //    }
+        //    computeFrame();
+        //    setTimeout(function () {
+        //        timercallback();
+        //    }, 0);
+        //}
 
-        function classifyVideo() {
-            classifier.classify(video, gotResults);
-        }
+        //function computeFrame() {
+        //    context.drawImage(video, 0, 0, width, height);
+        //    context.filter = filter;
+        //}
 
-        function draw() {
-            let accesLabel = document.getElementById("accesLabel");
-            let countNummer = document.getElementById("count");
-            let count2Nummer = document.getElementById("count2");
-            let grantedText = document.getElementById("granted");
-
-            let count;
-            let count2;
-            
-            
-
-            background(0);
-
-            // Draw the video
-            image(video, 0, 0);
-
-            // STEP 4: Draw the label
-            textSize(32);
-            textAlign(CENTER, CENTER);
-            fill(255);
-            text(label, width / 2, height - 16);
-
-
-            let emoji = "access denied";
-            if (label == "ring") {
-                emoji = "Ring Approved";
-                
-                count = 1;
-                countNummer.innerText = count;
-                
-                
-            } 
-            else if (label == "Blank") {
-                emoji = "access denied";
-            }else if (label == "Art") {
-
-                emoji = "access granted";
-                ProvideInfo = true;
-            }else if (label == "Wrong ring") {
-                emoji = "access denied";
-            }
-            if (label == "watch") {
-                count2 = 1;
-                count2Nummer.innerText = count2;
-                if (count2 == 1 & count == 1)  {
-                    accessGranted = true;
-
-                    grantedText.innerText = "true";
-                }
-            }
-           
-           
-            if (ProvideInfo == true) {
-                accesLabel.innerText = "Art pls provide Proof";
-            }
-            if (accessGranted == true) {
-                accesLabel.innerText = "Page unlocked";
-                grantedText.innerText = "true";
-            }
-
-            textSize(20);
-            text(emoji, width / 2, height / 2);
-        }
-
-
-        function gotResults(error, results) {
-
-            if (error) {
-                console.error(error);
-                return;
-            }
-
-            label = results[0].label;
-            confidence = results[0].confidence;
-            classifyVideo();
-        }
+        //window.WebCamFunctions = {
+        //    start: (options) => { onStart(options); }
+        //};
     </script>
-
-    <script src="JS/Handtracking.js"></script>
+    <!--<!--<script src="js/handtracking.js"></script>-->-->
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
-
+    <script type="module" src="JS/JavaScript.js"></script>
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    <script src="_content/BlazorML5/WebCam.js"></script>
+    <script src="_content/BlazorML5/ml5ImageClassifier.js"></script>
+    <script src="_content/BlazorML5/ml5NeuralNetwork.js"></script>
+    <script src="_content/BlazorML5/ml5SoundClassifier.js"></script>
+    <script src="_content/BlazorML5/ml5ObjectDetector.js"></script>
+    <script src="_content/BlazorML5/ml5PoseNet.js"></script>
 
     <!--<script src="JS/app.js"></script>-->
 </body>

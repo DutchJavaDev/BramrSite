@@ -1,19 +1,18 @@
-﻿@page "/hand"
+﻿@*@page "/hand"
 @inject IJSRuntime JSRuntime;
 
 @using System.IO;
 
-<!DOCTYPE html>
-<html>
 
-<head>
+
+
 
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8" />
 
-</head>
-<body>
+
+
 
 
 
@@ -38,7 +37,7 @@
     <h3 id="count">0</h3>
     <h3 id="count2">0</h3>
     <h3 id="granted">false</h3>
- 
+    <video id="video" width="640" height="480" autoplay></video>
     <EditForm Model="Model" OnValidSubmit="SignInSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary Model="Model" />
@@ -70,10 +69,10 @@
                 <button id="signIn-panel" type="submit">Log in!</button>
             }
         </div>
-    </EditForm>
-</body>
+    </EditForm>*@
 
-</html>
+
+
 
 
 

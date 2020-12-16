@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.LocalStorage" Version="3.0.0" />
+    <PackageReference Include="BlazorML5" Version="1.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.10" />
