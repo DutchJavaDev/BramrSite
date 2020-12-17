@@ -1,17 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BramrSite.Models
+﻿namespace BramrSite.Models
 {
     public class ImageModel
     {
         public int Location { get; set; }
 
         public int Width { get; set; } = 100;
-        public int Height { get; set; } = 100;
+        public int Height { get; set; } = 1000;
         public string Src { get; set; }
         public string Alt { get; set; }
         public int Border { get; set; } 
