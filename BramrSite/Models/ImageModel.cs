@@ -18,6 +18,8 @@
         public string FileUri { get; set; }
         public FileTypes FileType { get; set; }
 
+        public bool Selected { get; set; }
+
         public enum Float
         {
             none,
