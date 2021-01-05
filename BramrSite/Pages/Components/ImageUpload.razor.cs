@@ -59,7 +59,11 @@ namespace BramrSite.Pages.Components
 
             var apiResponse = await Api.UploadImage(FileStream, CurrentImage.Location.ToString());
             CurrentImage.FileUri = await Api.GetFileInfo(CurrentImage.Location.ToString());
+#if DEBUG
             CurrentImage.Src = $"https://localhost:44372/api/image/download/{CurrentImage.FileUri}";
+#else
+            CurrentImage.Src = $"https://bramr.tech/api/image/download/{CurrentImage.FileUri}";
+#endif
             CallBackMethod(CallBack);
             if(apiResponse.Success == true)
             {

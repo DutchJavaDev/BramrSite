@@ -126,7 +126,11 @@ namespace BramrSite.Pages
                 Interesses = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[13].ToString());
                 Motivatie = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[14].ToString());
                 ProfielFoto = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[15].ToString());
+#if DEBUG
                 ProfielFoto.Src = $"https://localhost:44372/api/image/download/{ProfielFoto.FileUri}";
+#else
+                ProfielFoto.Src = $"https://bramr.tech/api/image/download/{ProfielFoto.FileUri}";
+#endif
             }
 
             StateHasChanged();
