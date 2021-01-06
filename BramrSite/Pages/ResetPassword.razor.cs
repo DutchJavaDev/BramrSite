@@ -86,16 +86,19 @@ namespace BramrSite.Pages
                     if (respondse.Success)
                     {
                     ErrorMessage = "U heeft uw wachtwoord succesvol kunnen veranderen.";
+                    StateHasChanged();
                     }
                     else 
                     {
                     ErrorMessage = "Er is iets misgegaan probeer het opnieuw";
+                    StateHasChanged();
                     Disabled = false;
                     }
                 }
                 else
                 {
                 ErrorMessage = "De ingevoerde wachtwoorden komen niet overeen.";
+                StateHasChanged();
                 Disabled = false;
                 }  
         }
