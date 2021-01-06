@@ -3,8 +3,122 @@
 <head>
           <meta charset = "utf-8"/>
           <title>BRAMR - Templates</title>
-          <link rel="Stylesheet" href="css/Stylesheet.css">
+          <link rel="Stylesheet" href="css/StylesheetTemplate.css">
+          <link rel="Stylesheet" href="css/all.min.css">
+          <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class = "container">
+        <div class = "profile-header">
+            <div class = profile-img>
+                <img src ="./Images/kaas-large.jpg" width="200" alt="">
+            </div>
+            <div class = "profile-nav-info">
+                <h3 class = "user-name">insert name</h3>
+                <div class = "address">
+                    <p class = "city">insert city,</p>
+                    <span class = "country">insert country</span>
+                </div>
+            </div>
+            <div class = "profile-option">
+                <div class = "notification">
+                    <i class = "fa fa-bell"></i>
+                    <span class = "alert-message">1</span>
+                </div>
+            </div>
+        </div>
+        <div class = "main-body">
+            <div class = "left-side">
+                <div class = "profile-side">
+                    <p class = "user-phone">
+                        <i class = "fa fa-phone">insert phone number</i>
+                    </p>
+                    <p class = "user-mail">
+                        <i class = "fa fa-envelope">insert mail address</i>
+                    </p>
+                    <div class = "user-bio">
+                        <h3>Bio</h3>
+                        <p class = "bio">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora modi eligendi magni? Cupiditate atque mollitia reiciendis eaque quia placeat voluptas?
+                        </p>
+                    </div>
+                    <div class = "profile-btn">
+                        <button class = "questionbtn">
+                            <i class = "fa fa-comment"></i> Question
+                        </button>
+                        <button class = "createbtn">
+                            <i class = "fa fa-plus"></i> Create
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class = "right-side">
+                <div class = "nav">
+                    <ul>
+                        <li onclick = "tabs(0)" class = "user-CV active">CV-templates</li>
+                        <li onclick = "tabs(1)" class = "user-Portfolio">Portfolio-templates</li>
+                        <li onclick = "tabs(2)" class = "user-Notepad">Notepad</li>
+                    </ul>
+                </div>
+                <div class = "profile-body">
+                    <div class = "profile-CV tab">
+                        <h1>Your CV-projects</h1>
+                        <h6>Here you can start with editing your very own CV. <br>
+                            Don't forget to wacht the instruction video to learn how to use the editor.</h6>
+                    </div>
+                    <div class = "profile-Portfolio tab">
+                        <h1>Your Portfolio-projects</h1>
+                        <h6>Here you can start with editing your very own Portfolio. <br>
+                            Don't forget to wacht the instruction video to learn how to use the editor.</h6>
+                    </div>
+                    <div class = "profile-Notepad tab">
+                        <h1>Notepad</h1>
+                        <h6>Here you can write down your to-do list</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src='http://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+
+<script>
+    $('.nav ul li').click(function() {
+        $(this).addClass("active").siblings().removeClass('active');
+    })
+</script>
+    
+<script>
+    const tabBtn = document.querySelectorAll('.nav ul li');
+    const tab = document.querySelectorAll('.tab');
+
+    function tabs(panelIndex) {
+        tab.forEach(function(node) {
+            node.style.display = 'none';
+        });
+        tab[panelIndex].style.display = 'block';
+    }
+    tabs(0);
+</script>
+
+<script>
+    let bio = document.querySelector('.bio');
+
+    function bioText() {
+        bio.oldText = bio.innerText;
+        bio.innerText = bio.innerText.substring(0, 100) + "..."; 
+        bio.innertHTML += "&nbsp;" + 
+        `<span onclick='addLength()' id='see-more-bio'> See More </span>`; 
+    }     
+    bioText();
+</script>
+
+<script>
+    function addLength(){
+        bio.innerHTML = bio.oldText;
+        bio.innertHTML += "&nbsp;" + 
+        `<span onclick='bioText()' id='see-less-bio'> See Less </span>`; 
+    }
+</script>
 
 </body>

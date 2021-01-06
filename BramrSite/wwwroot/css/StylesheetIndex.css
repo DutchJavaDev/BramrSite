@@ -1,102 +1,72 @@
-/* MASTER STYLES */
-body{
-    margin: 0px;
-    padding: 0px;
-    font-family:'Prompt', sans-serif;
+/* NAVBAR SCROLLING */
+
+*{
+    margin: 0;
+    padding: 0;
 }
 
-/* MASTER GRIDS */
-
-.mastergrids{
-    display: grid;
-    height: 300vh;
+.container-home{
     width: 100%;
-    grid-template-columns: 1fr;
-    grid-template-rows: 3fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+
 }
 
-.BRAMR-animatiegrid{
-    grid-column: 1 / 1;
-    grid-row: 1 / 1;
+.navbar-home{
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.7);
 }
 
-.overBramr{
-    grid-column: 1 / 2;
-    grid-row: 2 / 2;
+.navbar-home ul{
+    display: flex;
+    list-style: none;
+    width: 100%;
+    justify-content: center;
 }
 
-.meetMathijs{
-    grid-column: 1 / 2;
-    grid-row: 3 / 3;
+.navbar-home ul li{
+    margin: 0 1rem;
+    padding: 1rem;
 }
 
-.meetRuben{
-    grid-column: 1 / 2;
-    grid-row: 4 / 4;
+.navbar-home ul li a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #f4f4f4;
 }
 
-.meetArt{
-    grid-column: 1 / 2;
-    grid-row: 5 / 5;
+.navbar-home ul li a:hover{
+    color: skyblue;
+
 }
 
-.meetBoris{
-    grid-column: 1 / 2;
-    grid-row: 6 / 6;
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100vh;
 }
 
-.meetRobbie{
-    grid-column: 1 / 2;
-    grid-row: 7 / 7;
+section#home{
+    background-color: lightblue
 }
 
+section#about{
+    background-color: blue;
+}
 
-
-/* LAPTOP 1024px en lager*/
-@media screen and (max-width: 1024px) {
-    .mastergrids{
-        display: grid;
-        height: 300vh;
-        width: 100%;
-        grid-template-columns: 1fr;
-        grid-template-rows: 2.5fr 0.5fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    }
-
-    .BRAMR-animatiegrid{
-        grid-column: 1 / 1;
-        grid-row: 1 / 1;
-    }
-
-    .overBramr{
-        grid-column: 1 / 1;
-        grid-row: 2 / 2;
-    }
-
-    .meetMathijs{
-        grid-column: 1 / 1;
-        grid-row: 3 / 3;
-    }
-
-    .meetRuben{
-        grid-column: 1 / 1;
-        grid-row: 4 / 4;
-    }
-
-    .meetArt{
-        grid-column: 1 / 1;
-        grid-row: 5 / 5;
-    }
-
-    .meetBoris{
-        grid-column: 1 / 1;
-        grid-row: 6 / 6;
-    }
-
-    .meetRobbie{
-        grid-column: 1 / 1;
-        grid-row: 7 / 7;
-    }
-    
+section#meetTheTeam{
+    background-color: darkblue;
 }
 
 /* INLOGSYSTEEM */
@@ -379,6 +349,3 @@ button.ghost{
     display: block;
 }
 
-input[type="checkbox"]{
-    display: none;
-}

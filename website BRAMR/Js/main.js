@@ -20,3 +20,4 @@ document.getElementById("SluitAf-PopUp-btn").addEventListener("click", function(
     document.getElementsByClassName("PopUp")[0].classList.remove("active");
 });
 
+

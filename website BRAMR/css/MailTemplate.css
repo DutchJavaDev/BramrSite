@@ -1,0 +1,32 @@
+/* MASTERSTYLES */
+
+body{
+    margin: 0;
+    padding: 0;
+    background: 1px linear-gradient(90deg, rgb(26, 26 , 26), rgb(54, 54, 54));
+}
+
+table{
+    border-spacing: 0;
+}
+
+.wrapper{
+    width: 100%;
+    table-layout: fixed;
+    background: 1px linear-gradient(90deg, rgb(26, 26 , 26), rgb(54, 54, 54));
+    padding-bottom: 40px;
+}
+
+.webkit{
+    max-width: 600px;
+    background: rgb(26, 26 , 26);
+}
+
+.outer{
+    margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+    border-spacing: 0;
+    font-family: 'Teko', sans-serif;
+    color: rgba(255, 255, 255, 0.3);
+}

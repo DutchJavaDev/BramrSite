@@ -6,16 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>BramrSite</title>
     <base href="/" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/8993f9dff3.js" crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/carbon-components@latest/scripts/carbon-components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handtrackjs@latest/dist/handtrack.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
     <link rel="Stylesheet" href="css/StylesheetIndex.css">
     <link rel="Stylesheet" href="css/menuWeb.css">
     <link href="css/app.css" rel="stylesheet" />
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
 
+    <link rel="stylesheet" href="css/StylesheetCV.css">
+    <link rel="stylesheet" href="css/menu-CV.css">
+    <link rel="stylesheet" href="css/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="css/grid.css">
+
 </head>
 
 <body>
+
+    <style>
+
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: 'Prompt', sans-serif;
+            background: #333;
+            color: #fff;
+            line-height: 1.6;
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
     <app>Loading...</app>
 
     <div id="blazor-error-ui">
@@ -23,22 +47,7 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="https://kit.fontawesome.com/8993f9dff3.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
-    
-    <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
-    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
-    <script src="_content/BlazorML5/WebCam.js"></script>
-    <script src="_content/BlazorML5/ml5ImageClassifier.js"></script>
-    <script src="_content/BlazorML5/ml5NeuralNetwork.js"></script>
-    <script src="_content/BlazorML5/ml5SoundClassifier.js"></script>
-    <script src="_content/BlazorML5/ml5ObjectDetector.js"></script>
-    <script src="_content/BlazorML5/ml5PoseNet.js"></script>
-
-    <script type="text/javascript">
-        function updateContainer() {
+    <script type="text/javascript">function updateContainer() {
             const signUpButton = document.getElementById('signUp');
             const signInButton = document.getElementById('signIn');
             const container = document.getElementById('container');
@@ -50,101 +59,77 @@
             signInButton.addEventListener('click', () => {
                 container.classList.remove("right-panel-active");
             });
-        };
-        //function videoStart() {
+        };</script>
+    <script type="text/javascript">const video = document.getElementById("myvideo");
+        const handimg = document.getElementById("handimage");
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        let trackButton = document.getElementById("trackbutton");
+        let nextImageButton = document.getElementById("nextimagebutton");
+        let updateNote = document.getElementById("updatenote");
 
+        let imgindex = 1
+        let isVideo = false;
+        let model = null;
 
-        //    var video = document.getElementById('video');
-        //    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        //        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-        //            video.srcObject = stream;
-        //            video.play();
-        //        });
-        //    }
-        //    var canvas = document.getElementById('canvas');
-        //    var context = canvas.getContext('2d');
-        //    var video = document.getElementById('video');
-        //    document.getElementById("snap").addEventListener("click", function () {
-        //        context.drawImage(video, 0, 0, 640, 480);
-        //    });
-        //}
-        //let video = null;
-        //let canvas = null;
-        //let context = null;
-        //let streaming = false;
+        //video.width = 500
+        //video.height = 400
 
-        //let width = 100;    // We will scale the photo width to this.
-        //let height = 0;     // This will be computed based on the input stream
-        //let filter = 'sepia(1)';
+        const modelParams = {
+            flipHorizontal: true,
+            maxNumBoxes: 20,
+            iouThreshold: 0.5,
+            scoreThreshold: 0.6,
+        }
 
-        //function onStart(options) {
-        //    video = document.getElementById(options.videoID);
-        //    canvas = document.getElementById(options.canvasID);
-        //    context = canvas.getContext('2d');
-        //    width = options.width;
-        //    filter = options.filter;
+        function startVideo() {
+            handTrack.startVideo(video).then(function (status) {
+                console.log("video started", status);
+                if (status) {
+                    updateNote.innerText = "Video started. Now tracking"
+                    isVideo = true
+                    runDetection()
+                } else {
+                    updateNote.innerText = "Please enable video"
+                }
+            });
+        }
 
-        //    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-        //        .then(function (stream) {
-        //            video.srcObject = stream;
-        //            video.play();
-        //        })
-        //        .catch(function (err) {
-        //            console.log("An error occurred: " + err);
-        //        });
+        function toggleVideo() {
+            if (!isVideo) {
+                updateNote.innerText = "Starting video"
+                startVideo();
+            } else {
+                updateNote.innerText = "Stopping video"
+                handTrack.stopVideo(video)
+                isVideo = false;
+                updateNote.innerText = "Video stopped"
+            }
+        }
+        trackButton.addEventListener("click", function () {
+            toggleVideo();
+        });
+        function runDetection() {
+            model.detect(video).then(predictions => {
+                console.log("Predictions: ", predictions);
+                model.renderPredictions(predictions, canvas, context, video);
+                if (isVideo) {
+                    requestAnimationFrame(runDetection);
+                }
+            });
+        }
+        handTrack.load(modelParams).then(lmodel => {
 
-        //    video.addEventListener('canplay', function () {
-        //        if (!streaming) {
-        //            height = video.videoHeight / (video.videoWidth / width);
+            model = lmodel
+            updateNote.innerText = "Loaded Model!"
 
-        //            if (isNaN(height)) {
-        //                height = width / (4 / 3);
-        //            }
+            trackButton.disabled = false
 
-        //            video.setAttribute('width', width);
-        //            video.setAttribute('height', height);
-        //            canvas.setAttribute('width', width);
-        //            canvas.setAttribute('height', height);
-        //            streaming = true;
-        //        }
-        //    }, false);
+        });</script>
 
-        //    video.addEventListener("play", function () {
-        //        console.log('play');
-        //        timercallback();
-        //    }, false);
-        //}
-
-        //function timercallback() {
-        //    if (video.paused || video.ended) {
-        //        return;
-        //    }
-        //    computeFrame();
-        //    setTimeout(function () {
-        //        timercallback();
-        //    }, 0);
-        //}
-
-        //function computeFrame() {
-        //    context.drawImage(video, 0, 0, width, height);
-        //    context.filter = filter;
-        //}
-
-        //window.WebCamFunctions = {
-        //    start: (options) => { onStart(options); }
-        //};
-    </script>
-    <!--<!--<script src="js/handtracking.js"></script>-->
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
-    <script type="module" src="JS/JavaScript.js"></script>
-    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
-    <script src="_content/BlazorML5/WebCam.js"></script>
-    <script src="_content/BlazorML5/ml5ImageClassifier.js"></script>
-    <script src="_content/BlazorML5/ml5NeuralNetwork.js"></script>
-    <script src="_content/BlazorML5/ml5SoundClassifier.js"></script>
-    <script src="_content/BlazorML5/ml5ObjectDetector.js"></script>
-    <script src="_content/BlazorML5/ml5PoseNet.js"></script>
+
 
     <!--<script src="JS/app.js"></script>-->
 </body>

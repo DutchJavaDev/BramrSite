@@ -1,11 +1,11 @@
-.menu-wrap{
+.menu-wrap-CV{
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
 }
 
-.menu-wrap .toggler{
+.menu-wrap-CV .toggler-CV{
     position: absolute;
     top: 0;
     left: 0;
@@ -16,21 +16,22 @@
     opacity: 0;
 }
 
-.menu-wrap .hamburger{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 25px;
-    height: 25px;
-    padding: 1rem;
-    background: rgb(27, 25, 25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .menu-wrap-CV .hamburger-CV {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 20px;
+        height: 7px;
+        padding: 15px 10px;
+        background: linear-gradient(to right, rgb(6, 255, 248), rgb(0, 207, 255));
+        border: 1px solid white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.menu-wrap .hamburger > div {
+.menu-wrap-CV .hamburger-CV > div {
     position: relative;
     width: 100%;
     height: 2px;
@@ -41,8 +42,8 @@
     transition: all 0.4s ease;
 }
 
-.menu-wrap .hamburger > div:before,
-.menu-wrap .hamburger > div:after {
+.menu-wrap-CV .hamburger-CV > div:before,
+.menu-wrap-CV .hamburger-CV > div:after {
     content: '';
     position: absolute;
     z-index: 1;
@@ -52,25 +53,25 @@
     background-color: #fff;
 }
 
-.menu-wrap .hamburger > div:after {
+.menu-wrap-CV .hamburger-CV > div:after {
     top: 8px;
 }
 
-.menu-wrap .toggler:checked + .hamburger > div {
+.menu-wrap-CV .toggler-CV:checked + .hamburger-CV > div {
 transform: rotate(135deg);
 }
 
-.menu-wrap .toggler:checked + .hamburger > div:before,
-.menu-wrap .toggler:checked + .hamburger > div:after {
+.menu-wrap-CV .toggler-CV:checked + .hamburger-CV > div:before,
+.menu-wrap-CV .toggler-CV:checked + .hamburger-CV > div:after {
     top: 0;
     transform: rotate(90deg);
 }
 
-.menu-wrap .toggler:checked:hover + .hamburger > div {
+.menu-wrap-CV .toggler-CV:checked:hover + .hamburger-CV > div {
     transform: rotate(255deg);
 }
 
-.menu-wrap .menu {
+.menu-wrap-CV .menu-CV {
     position: fixed;
     top: 0;
     left: 0;
@@ -83,7 +84,7 @@ transform: rotate(135deg);
     justify-content: center;
 }
 
-.menu-wrap .menu > div {
+.menu-wrap-CV .menu-CV > div {
     background: rgb(17, 17, 22);
     opacity: 75%;
     border-radius: 50%;
@@ -97,7 +98,7 @@ transform: rotate(135deg);
     transition: all 0.4s ease;
 }
 
-.menu-wrap .menu > div > div {
+.menu-wrap-CV .menu-CV > div > div {
     text-align: center;
     max-width: 90vw;
     max-height: 100vh;
@@ -105,29 +106,31 @@ transform: rotate(135deg);
     transition: opacity 0.4s ease;
 }    
 
-.menu-wrap .menu > div > div > ul > li {
+.menu-wrap-CV .menu-CV > div > div > ul > li {
     list-style: none;
     color: #fff;
     font-size: 2rem;
     padding: 1.5rem;
 }
 
-.menu-wrap .menu > div > div > ul > li > a{
-    color: inherit;
+.menu-wrap-CV .menu-CV > div > div > ul > li > a{
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    letter-spacing: 5px;
     text-decoration: none;
     transition: color 0.4 ease;
 }
 
-.menu-wrap .toggler:checked ~ .menu {
+.menu-wrap-CV .toggler-CV:checked ~ .menu-CV {
     visibility: visible;
 }
 
-.menu-wrap .toggler:checked ~ .menu > div {
+.menu-wrap-CV .toggler-CV:checked ~ .menu-CV > div {
     transform: scale(1);
     transition-duration: 0.75s;
 }
 
-.menu-wrap .toggler:checked ~ .menu > div > div {
+.menu-wrap-CV .toggler-CV:checked ~ .menu-CV > div > div {
     opacity: 1;
     transition: opacity 0.4s ease;
 }
