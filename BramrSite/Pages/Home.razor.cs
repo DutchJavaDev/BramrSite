@@ -21,7 +21,7 @@ namespace BramrSite.Pages
         [Inject] public JWTAuthentication Auth { get; set; }
         [Inject] public NavigationManager Navigation { get; set; }
         [Inject] public ApiService Api { get; set; }
-        [Inject] public IJSRuntime  Runtime { get; set; }
+        [Inject] public IJSRuntime IJSRuntime { get; set; }
         [Parameter] public string ReturnUrl { get; set; }
 
         public string SignInMessage { get; set; }
@@ -33,8 +33,9 @@ namespace BramrSite.Pages
 
         protected async override void OnInitialized()
         {
-            await Task.Delay(100);
-            await Runtime.InvokeVoidAsync("updateContainer");
+            var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/HomeScript.js");
+
+            await module.InvokeVoidAsync("updateContainer");
 
             if (ReturnUrl == "index" || ReturnUrl == "/")
             {

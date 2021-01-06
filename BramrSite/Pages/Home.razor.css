@@ -1,140 +1,4 @@
-﻿.menu-wrap {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-    .menu-wrap .toggler {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 2;
-        cursor: pointer;
-        width: 50px;
-        height: 50px;
-        opacity: 0;
-    }
-
-    .menu-wrap .hamburger {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 1;
-        width: 25px;
-        height: 25px;
-        padding: 1rem;
-        background: #071053;
-        border: 1px solid rgb(255, 255, 255);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-        .menu-wrap .hamburger > div {
-            position: relative;
-            width: 100%;
-            height: 2px;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s ease;
-        }
-
-            .menu-wrap .hamburger > div:before,
-            .menu-wrap .hamburger > div:after {
-                content: '';
-                position: absolute;
-                z-index: 1;
-                top: -8px;
-                width: 100%;
-                height: 2px;
-                background-color: #fff;
-            }
-
-            .menu-wrap .hamburger > div:after {
-                top: 8px;
-            }
-
-    .menu-wrap .toggler:checked + .hamburger > div {
-        transform: rotate(135deg);
-    }
-
-        .menu-wrap .toggler:checked + .hamburger > div:before,
-        .menu-wrap .toggler:checked + .hamburger > div:after {
-            top: 0;
-            transform: rotate(90deg);
-        }
-
-    .menu-wrap .toggler:checked:hover + .hamburger > div {
-        transform: rotate(255deg);
-    }
-
-    .menu-wrap .menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        visibility: hidden;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-        .menu-wrap .menu > div {
-            background: rgb(17, 17, 22);
-            opacity: 75%;
-            border-radius: 50%;
-            width: 200vw;
-            height: 200vw;
-            display: flex;
-            flex: none;
-            align-items: center;
-            justify-content: center;
-            transform: scale(0);
-            transition: all 0.4s ease;
-        }
-
-            .menu-wrap .menu > div > div {
-                text-align: center;
-                max-width: 90vw;
-                max-height: 100vh;
-                opacity: 0;
-                transition: opacity 0.4s ease;
-            }
-
-                .menu-wrap .menu > div > div > ul > li {
-                    list-style: none;
-                    color: #fff;
-                    font-size: 2rem;
-                    padding: 1.5rem;
-                }
-
-                    .menu-wrap .menu > div > div > ul > li > a {
-                        color: inherit;
-                        text-decoration: none;
-                        transition: color 0.4 ease;
-                    }
-
-    .menu-wrap .toggler:checked ~ .menu {
-        visibility: visible;
-    }
-
-        .menu-wrap .toggler:checked ~ .menu > div {
-            transform: scale(1);
-            transition-duration: 0.75s;
-        }
-
-            .menu-wrap .toggler:checked ~ .menu > div > div {
-                opacity: 1;
-                transition: opacity 0.4s ease;
-            }
-
-
-/* MASTER STYLES */
+﻿/* MASTER STYLES */
 body {
     margin: 0px;
     padding: 0px;
@@ -281,7 +145,18 @@ a {
     display: none;
 }
 
-.form-container form {
+.form-container .sign-in-form {
+    background: rgb(40, 40, 40);
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-emphasis: circle;
+}
+
+.form-container-login form {
     background: rgb(40, 40, 40);
     display: flex;
     flex-direction: column;
@@ -316,13 +191,22 @@ a {
     width: 100%;
 }
 
+.form-container-login input {
+    background: rgb(137, 137, 137);
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
 #signIn-panel, #signUp-panel {
     border-radius: 20px;
     border: 1px solid rgb(255, 255, 255);
     background: 1px linear-gradient(to right, rgb(6, 255, 248), rgb(0, 207, 255));
     color: rgb(255, 255, 255);
     font-size: 12px;
-    padding: 12px 45px;
+    padding: 12px 50px;
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
@@ -360,11 +244,18 @@ button.ghost {
     transition: all 0.6s ease-in-out;
 }
 
+.form-container-login {
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
 .sign-in-container {
     left: 0;
     width: 50%;
     z-index: 2;
 }
+
 
 .sign-up-container {
     left: 0;
@@ -465,6 +356,7 @@ button.ghost {
     transition: transform 80ms ease-in;
     cursor: pointer;
     text-align: center;
+    box-sizing: initial;
 }
 
 .close-btn {

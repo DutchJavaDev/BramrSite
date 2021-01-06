@@ -27,7 +27,7 @@ namespace BramrSite.Pages.Components
         {
             var file = (await FileReader.CreateReference(FileReference).EnumerateFilesAsync()).FirstOrDefault();
             var fileInfo = await file.ReadFileInfoAsync();
-            
+
             if (file == null)
             {
                 ErrorMessage = "Geen bestand geselecteerd.";
@@ -49,7 +49,7 @@ namespace BramrSite.Pages.Components
             }
             else
             {
-              ErrorMessage = "Alleen bestands types: png, jpg, jpeg toegestaan.";
+                ErrorMessage = "Alleen bestands types: png, jpg, jpeg toegestaan.";
             }
         }
 
@@ -65,7 +65,7 @@ namespace BramrSite.Pages.Components
             CurrentImage.Src = $"https://bramr.tech/api/image/download/{CurrentImage.FileUri}";
 #endif
             CallBackMethod(CallBack);
-            if(apiResponse.Success == true)
+            if (apiResponse.Success == true)
             {
                 ErrorMessage = "Succesvol geüpload.";
             }

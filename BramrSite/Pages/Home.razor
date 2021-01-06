@@ -1,4 +1,5 @@
 ﻿@page "/home"
+@page "/"
 
 <div class="mastergrids">
     <div class="BRAMR-animatiegrid">
@@ -6,69 +7,75 @@
         <label for="show" class="popUp-btn-inlog">Inloggen</label>
         <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <EditForm Model="Model" OnValidSubmit="SignUpSubmit">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary Model="Model" />
+                <div class="sign-in-form">
+                    <EditForm Model="Model" OnValidSubmit="SignUpSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary Model="Model" />
 
-                    <h1>Registreer via:</h1>
-                    <div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <span>Of maak je eigen BRAMR-account aan</span>
-                    <input type="email" @bind-value="Model.Email" placeholder="Emailadres" />
-                    <input type="text" @bind-value="Model.UserName" placeholder="Username" />
-                    <section>
-                        <p>@SignUpMessage</p>
-                    </section>
-                    <section>
-                        <p>Wij generen een wachtwoord voor u :-)</p>
-                    </section>
-                    @if (Disabled)
-                    {
-                        <button id="signUp-panel" class="btn btn-lg btn-block btn-primary m-auto" disabled="@Disabled" type="submit">
-                            <div class="spinner-border" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                        </button>
-                    }
-                    else
-                    {
-                        <button id="signUp-panel" type="submit">Sign up!</button>
-                    }
-                </EditForm>
+                        <h1>Registreer via:</h1>
+                        <div class="social-container">
+                            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <span>Of maak je eigen BRAMR-account aan</span>
+                        <input type="email" @bind-value="Model.Email" placeholder="Emailadres" />
+                        <input type="text" @bind-value="Model.UserName" placeholder="Username" />
+                        <section>
+                            <p>@SignUpMessage</p>
+                        </section>
+                        <section>
+                            <p>Wij generen een wachtwoord voor u :-)</p>
+                        </section>
+                        @if (Disabled)
+                        {
+                            <button id="signUp-panel" class="btn btn-block btn-primary btn-block" disabled="@Disabled" type="submit">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </button>
+                        }
+                        else
+                        {
+                            <button id="signUp-panel" class="btn-block" type="submit">Sign up!</button>
+                        }
+                    </EditForm>
+                </div>
             </div>
             <div class="form-container sign-in-container">
-                <EditForm Model="Model" OnValidSubmit="SignInSubmit">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary Model="Model" />
-                    <h1>Log in via:</h1>
-                    <div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <span>of gebruik je eigen BRAMR-account</span>
-                    <input type="email" @bind-value="Model.Email" placeholder="Emailadres" />
-                    <input type="password" @bind-value="Model.Password" placeholder="Wachtwoord" />
-                    <section>
-                        <p>@SignInMessage</p>
-                    </section>
-                    <a href="#">Wachtwoord vergeten?</a>
-                    @if (Disabled)
-                    {
-                        <button id="signIn-panel" class="btn btn-lg btn-block btn-primary m-auto" disabled="@Disabled" type="submit">
-                            <div class="spinner-border" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
-                        </button>
-                    }
-                    else
-                    {
-                        <button id="signIn-panel" type="submit">Log in!</button>
-                    }
-                </EditForm>
+                <div class="sign-in-form">
+                    <EditForm Model="Model" OnValidSubmit="SignInSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary Model="Model" />
+                        <h1>Log in via:</h1>
+                        <div class="social-container">
+                            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <span>of gebruik je eigen BRAMR-account</span>
+                        <input type="email" @bind-value="Model.Email" placeholder="Emailadres" />
+                        <input type="password" @bind-value="Model.Password" placeholder="Wachtwoord" />
+                        <section>
+                            <p>@SignInMessage</p>
+                        </section>
+                        <div class="m-auto text-center">
+                            <a href="#">Wachtwoord vergeten?</a>
+                        </div>
+                        @if (Disabled)
+                        {
+                            <button id="signIn-panel" class="btn btn-block btn-primary" disabled="@Disabled" type="submit">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </button>
+                        }
+                        else
+                        {
+                            <button id="signIn-panel" class="btn-block" type="submit">Log in!</button>
+                        }
+                    </EditForm>
+                </div>
             </div>
             <div class="overlay-container">
                 <label for="show" class="close-btn">&times;</label>

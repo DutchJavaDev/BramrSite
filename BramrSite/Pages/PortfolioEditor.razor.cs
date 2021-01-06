@@ -1,6 +1,8 @@
 ﻿using BramrSite.Classes;
 using BramrSite.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using Microsoft.JSInterop.Implementation;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ namespace BramrSite.Pages
     public partial class PortfolioEditor : ComponentBase
     {
         [Inject] ApiService Api { get; set; }
+        [Inject] IJSRuntime IJSRuntime { get; set; }
 
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
         public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
@@ -19,7 +22,6 @@ namespace BramrSite.Pages
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
         private ImageModel CurrentImageElement { get; set; } = new ImageModel();
-
         private bool IsText { get; set; }
 
         private int HistoryAmount { get; set; }
@@ -30,13 +32,17 @@ namespace BramrSite.Pages
 
         protected override async void OnInitialized()
         {
+            var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/PortfolioScript.js");
+
+            await module.InvokeVoidAsync("Init");
+
             await Api.DeleteAllFromHistory();
 
-            for(int x = 0; x < 37; x++)
+            for (int x = 0; x < 37; x++)
             {
                 AllTextElements.Add(new TextModel { Location = x, TemplateType = "Portfolio" });
             }
-            for(int y = 37; y < 41; y++)
+            for (int y = 37; y < 41; y++)
             {
                 AllImageElements.Add(new ImageModel { Location = y, TemplateType = "Portfolio" });
             }

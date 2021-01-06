@@ -57,7 +57,7 @@ namespace BramrSite.Pages
         {
             CallBackMethod = ApplySource;
             await Api.DeleteAllFromHistory();
-            
+
             AllTextElements.Add(Naam);
             AllTextElements.Add(Adres);
             AllTextElements.Add(Postcode);
@@ -108,7 +108,7 @@ namespace BramrSite.Pages
         {
             List<object> AllDesignElements = await Api.GetDesignElements();
 
-            if(AllDesignElements.Count != 0)
+            if (AllDesignElements.Count != 0)
             {
                 Naam = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[0].ToString());
                 Adres = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[1].ToString());
@@ -234,19 +234,19 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Italic:
                     CurrentTextElement.Italic = bool.Parse(result.ToString());
                     break;
-                case ChangeModel.Type.Underlined:                   
+                case ChangeModel.Type.Underlined:
                     CurrentTextElement.Underlined = bool.Parse(result.ToString());
                     break;
-                case ChangeModel.Type.Strikedthrough:                    
+                case ChangeModel.Type.Strikedthrough:
                     CurrentTextElement.StrikedThrough = bool.Parse(result.ToString());
                     break;
-                case ChangeModel.Type.TextAllignment:                    
+                case ChangeModel.Type.TextAllignment:
                     CurrentTextElement.TextAllignment = (TextModel.Allignment)Enum.Parse(typeof(TextModel.Allignment), result.ToString());
                     break;
-                case ChangeModel.Type.FontSize:                    
+                case ChangeModel.Type.FontSize:
                     CurrentTextElement.FontSize = int.Parse(result.ToString());
                     break;
-                    //Art aanpassing
+                //Art aanpassing
                 case ChangeModel.Type.Width:
                     CurrentImageElement.Width = int.Parse(result.ToString());
                     break;
@@ -272,7 +272,7 @@ namespace BramrSite.Pages
                     CurrentImageElement.ObjectFitSet = (ImageModel.ObjectFit)Enum.Parse(typeof(ImageModel.ObjectFit), result.ToString());
                     break;
                 case ChangeModel.Type.Margin:
-                   //CurrentImageElement.Margin = int.Parse(result.ToString());
+                    //CurrentImageElement.Margin = int.Parse(result.ToString());
                     break;
                 case ChangeModel.Type.Padding:
                     CurrentImageElement.Padding = int.Parse(result.ToString());
@@ -328,7 +328,7 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Text:
                 case ChangeModel.Type.TextColor:
                 case ChangeModel.Type.BackgroundColor:
-                    //Art Aanpassing
+                //Art Aanpassing
                 case ChangeModel.Type.Src:
                 case ChangeModel.Type.Alt:
                     return string.Empty;
@@ -344,9 +344,9 @@ namespace BramrSite.Pages
                     return ImageModel.Float.none;
                 case ChangeModel.Type.ObjectFitSet:
                     return ImageModel.ObjectFit.cover;
-                    //Art Aanpassing einde
+                //Art Aanpassing einde
                 default:
-                    return TextModel.Allignment.Left; 
+                    return TextModel.Allignment.Left;
             }
         }
 
