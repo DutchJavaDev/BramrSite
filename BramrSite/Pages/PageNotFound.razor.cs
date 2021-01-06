@@ -1,19 +1,20 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System.Threading.Tasks;
 
 namespace BramrSite.Pages
 {
     public partial class PageNotFound : ComponentBase
     {
-        [Inject] IJSRuntime IJSRuntime { get; set; }
+        [Inject] NavigationManager NavigationManager { get; set; }
 
         [Parameter] public string Url { get; set; }
 
         protected override async void OnInitialized()
         {
-            var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/PageNotFoundScript.js");
+            await Task.Delay(10000);
+            NavigationManager.NavigateTo("/home");
 
-            await module.InvokeVoidAsync("startCountDown", "/home");
         }
     }
 }
