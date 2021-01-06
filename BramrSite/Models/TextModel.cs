@@ -12,6 +12,7 @@
         public bool StrikedThrough { get; set; }
         public Allignment TextAllignment { get; set; }
         public int FontSize { get; set; } = 10;
+        public string TemplateType { get; set; }
 
         public bool Selected { get; set; }
 

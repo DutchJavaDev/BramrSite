@@ -97,7 +97,7 @@ namespace BramrSite.Classes
             }
         }
 
-        public async Task<ApiResponse> UploadImage(Stream FileStream, string FileName)
+        public async Task<ApiResponse> UploadImage(Stream FileStream, string FileName, bool IsCV)
         {
             var content = new MultipartFormDataContent();
             content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
@@ -106,7 +106,16 @@ namespace BramrSite.Classes
             try
             {
                 using var client = CreateClient();
-                var response = await client.PostAsync("image/upload", content);
+                HttpResponseMessage response;
+                if (IsCV)
+                {
+                    response = await client.PostAsync("image/upload/cv", content);
+                }
+                else
+                {
+                    response = await client.PostAsync("image/upload/portfolio", content);
+                }
+
 
                 if (response.IsSuccessStatusCode)
                 {

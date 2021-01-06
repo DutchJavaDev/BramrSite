@@ -34,11 +34,11 @@ namespace BramrSite.Pages
 
             for(int x = 0; x < 15; x++)
             {
-                AllTextElements.Add(new TextModel { Location = x });
+                AllTextElements.Add(new TextModel { Location = x, TemplateType = "Portfolio" });
             }
             for(int y = 15; y < 20; y++)
             {
-                AllImageElements.Add(new ImageModel { Location = y });
+                AllImageElements.Add(new ImageModel { Location = y, TemplateType = "Portfolio" });
             }
 
             foreach (var item in AllTextElements)

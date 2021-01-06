@@ -16,6 +16,7 @@ namespace BramrSite.Pages.Components
         [Inject] ApiService Api { get; set; }
         [Parameter] public ImageModel CurrentImage { get; set; }
         [Parameter] public Del CallBack { get; set; }
+        [Parameter] public bool IsCV { get; set; }
         ElementReference FileReference { get; set; }
         Stream FileStream { get; set; }
         private bool IsDisabled { get; set; } = true;
@@ -46,7 +47,6 @@ namespace BramrSite.Pages.Components
                 IsDisabled = false;
                 return;
             }
-
             else
             {
               ErrorMessage = "Alleen bestands types: png, jpg, jpeg toegestaan.";
@@ -57,7 +57,7 @@ namespace BramrSite.Pages.Components
         {
             IsDisabled = true;
 
-            var apiResponse = await Api.UploadImage(FileStream, CurrentImage.Location.ToString());
+            var apiResponse = await Api.UploadImage(FileStream, CurrentImage.Location.ToString(), IsCV);
             CurrentImage.FileUri = await Api.GetFileInfo(CurrentImage.Location.ToString());
 #if DEBUG
             CurrentImage.Src = $"https://localhost:44372/api/image/download/{CurrentImage.FileUri}";

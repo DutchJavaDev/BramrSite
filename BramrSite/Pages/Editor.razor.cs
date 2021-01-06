@@ -17,23 +17,23 @@ namespace BramrSite.Pages
         public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
         public List<object> AllDesignElements { get; private set; } = new List<object>();
 
-        public TextModel Naam { get; private set; } = new TextModel() { Location = 0 };
-        public TextModel Adres { get; private set; } = new TextModel() { Location = 1 };
-        public TextModel Postcode { get; private set; } = new TextModel() { Location = 2 };
-        public TextModel Woonplaats { get; private set; } = new TextModel() { Location = 3 };
-        public TextModel Telefoon { get; private set; } = new TextModel() { Location = 4 };
-        public TextModel Email { get; private set; } = new TextModel() { Location = 5 };
-        public TextModel Geboortedatum { get; private set; } = new TextModel() { Location = 6 };
-        public TextModel Nationaliteit { get; private set; } = new TextModel() { Location = 7 };
-        public TextModel Rijbewijs { get; private set; } = new TextModel() { Location = 8 };
-        public TextModel LinkedIn { get; private set; } = new TextModel() { Location = 9 };
-        public TextModel Werkervaring { get; private set; } = new TextModel() { Location = 10 };
-        public TextModel Schoolervaring { get; private set; } = new TextModel() { Location = 11 };
-        public TextModel Skillset { get; private set; } = new TextModel() { Location = 12 };
-        public TextModel Interesses { get; private set; } = new TextModel() { Location = 13 };
-        public TextModel Motivatie { get; private set; } = new TextModel() { Location = 14 };
+        public TextModel Naam { get; private set; } = new TextModel() { Location = 0, TemplateType = "Cv" };
+        public TextModel Adres { get; private set; } = new TextModel() { Location = 1, TemplateType = "Cv" };
+        public TextModel Postcode { get; private set; } = new TextModel() { Location = 2, TemplateType = "Cv" };
+        public TextModel Woonplaats { get; private set; } = new TextModel() { Location = 3, TemplateType = "Cv" };
+        public TextModel Telefoon { get; private set; } = new TextModel() { Location = 4, TemplateType = "Cv" };
+        public TextModel Email { get; private set; } = new TextModel() { Location = 5, TemplateType = "Cv" };
+        public TextModel Geboortedatum { get; private set; } = new TextModel() { Location = 6, TemplateType = "Cv" };
+        public TextModel Nationaliteit { get; private set; } = new TextModel() { Location = 7, TemplateType = "Cv" };
+        public TextModel Rijbewijs { get; private set; } = new TextModel() { Location = 8, TemplateType = "Cv" };
+        public TextModel LinkedIn { get; private set; } = new TextModel() { Location = 9, TemplateType = "Cv" };
+        public TextModel Werkervaring { get; private set; } = new TextModel() { Location = 10, TemplateType = "Cv" };
+        public TextModel Schoolervaring { get; private set; } = new TextModel() { Location = 11, TemplateType = "Cv" };
+        public TextModel Skillset { get; private set; } = new TextModel() { Location = 12, TemplateType = "Cv" };
+        public TextModel Interesses { get; private set; } = new TextModel() { Location = 13, TemplateType = "Cv" };
+        public TextModel Motivatie { get; private set; } = new TextModel() { Location = 14, TemplateType = "Cv" };
         //Art Aanpassing 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Location = 15, Alt = "ProfielFoto", FileType = ImageModel.FileTypes.ProfielFoto };
+        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Location = 15, Alt = "ProfielFoto", TemplateType = "Cv" };
         //Art Aanpassing einde
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
