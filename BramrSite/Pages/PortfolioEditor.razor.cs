@@ -32,11 +32,11 @@ namespace BramrSite.Pages
         {
             await Api.DeleteAllFromHistory();
 
-            for(int x = 0; x < 15; x++)
+            for(int x = 0; x < 37; x++)
             {
                 AllTextElements.Add(new TextModel { Location = x, TemplateType = "Portfolio" });
             }
-            for(int y = 15; y < 20; y++)
+            for(int y = 37; y < 41; y++)
             {
                 AllImageElements.Add(new ImageModel { Location = y, TemplateType = "Portfolio" });
             }
