@@ -13,7 +13,7 @@ namespace BramrSite.Classes
     public class ApiService
     {
 #if DEBUG
-            private readonly string BaseUrl = "https://localhost:44372/api/";
+        private readonly string BaseUrl = "https://localhost:44372/api/";
 #else
             private readonly string BaseUrl = "https://bramr.tech/api/";
 #endif
@@ -79,7 +79,7 @@ namespace BramrSite.Classes
 
         public async Task<ApiResponse> SignIn(User model)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(new { model.Email, model.Password}), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonConvert.SerializeObject(new { model.Email, model.Password }), Encoding.UTF8, "application/json");
 
             try
             {
@@ -97,7 +97,7 @@ namespace BramrSite.Classes
             }
         }
 
-        public async Task<ApiResponse> UploadImage(Stream FileStream, string FileName)
+        public async Task<ApiResponse> UploadImage(Stream FileStream, string FileName, bool IsCV)
         {
             var content = new MultipartFormDataContent();
             content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
@@ -106,16 +106,25 @@ namespace BramrSite.Classes
             try
             {
                 using var client = CreateClient();
-                var response = await client.PostAsync("image/upload", content);
+                HttpResponseMessage response;
+                if (IsCV)
+                {
+                    response = await client.PostAsync("image/upload/cv", content);
+                }
+                else
+                {
+                    response = await client.PostAsync("image/upload/portfolio", content);
+                }
+
 
                 if (response.IsSuccessStatusCode)
                 {
                     return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
-                }   
+                }
                 else
                 {
                     return new ApiResponse { Message = response.ReasonPhrase };
-                }   
+                }
             }
             catch (Exception e)
             {
@@ -129,7 +138,7 @@ namespace BramrSite.Classes
             {
                 using var client = CreateClient();
                 var response = await client.GetAsync($"image/info/{FileName}");
-                var result =  JsonConvert.DeserializeObject<string>(await response.Content.ReadAsStringAsync());
+                var result = JsonConvert.DeserializeObject<string>(await response.Content.ReadAsStringAsync());
                 return result;
             }
             catch (Exception)
@@ -287,7 +296,46 @@ namespace BramrSite.Classes
                 return new ApiResponse { Success = false, Message = e.Message };
             }
         }
+        public async Task<ApiResponse> ForgotPassword(string email)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(email), Encoding.UTF8, "application/json");
 
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.PostAsync("password/forgot", content);
+
+                if (response.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
+                else
+                    return new ApiResponse { Message = response.ReasonPhrase };
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse { Success = false, Message = e.Message };
+            }
+        }
+        public async Task<ApiResponse> ResetPassword(ResetPasswordModel model)
+        {
+            var i = JsonConvert.SerializeObject(model);
+            Console.WriteLine(i);
+            var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.PostAsync("password/reset", content);
+
+                if (response.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<ApiResponse>(await response.Content.ReadAsStringAsync());
+                else
+                    return new ApiResponse { Message = response.ReasonPhrase };
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse { Success = false, Message = e.Message };
+            }
+        }
 
         private HttpClient CreateClient()
         {

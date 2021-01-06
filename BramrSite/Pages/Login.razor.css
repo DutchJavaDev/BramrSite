@@ -5,15 +5,24 @@ body {
     font-family: 'Prompt', sans-serif;
 }
 
-/* MASTER GRIDS */
+#bg {
+    background-color: rgb(40,40,40);
+    height: 100vh;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
 
 .mastergrids {
     display: grid;
     height: 300vh;
     width: 100%;
-    grid-template-columns: 1fr;
-    grid-template-rows: 3fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
 
 .BRAMR-animatiegrid {
     grid-column: 1 / 1;
@@ -50,7 +59,19 @@ body {
     grid-row: 7 / 7;
 }
 
+section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+}
 
+section#home{
+    background-color: lightblue
+}
 
 /* LAPTOP 1024px en lager*/
 @media screen and (max-width: 1024px) {
@@ -156,7 +177,7 @@ a {
     text-emphasis: circle;
 }
 
-.form-container-login form {
+.form-container-login #login-form {
     background: rgb(40, 40, 40);
     display: flex;
     flex-direction: column;
@@ -164,7 +185,6 @@ a {
     height: 100%;
     justify-content: center;
     align-items: center;
-    text-emphasis: center;
 }
 
 .social-container {

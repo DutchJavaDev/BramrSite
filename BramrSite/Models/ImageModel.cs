@@ -16,7 +16,9 @@
         public int Padding { get; set; }
 
         public string FileUri { get; set; }
-        public FileTypes FileType { get; set; }
+        public string TemplateType { get; set; }
+
+        public bool Selected { get; set; }
 
         public enum Float
         {

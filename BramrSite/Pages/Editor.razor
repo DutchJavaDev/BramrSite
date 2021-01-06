@@ -2,8 +2,37 @@
 @using BramrSite.Classes
 @using BramrSite.Models
 @using BramrSite.Pages.Components
+@*@attribute [Authorize]*@
 
-    <div class="mastergrids-CV">
+@*<head>
+    <meta charset="utf-8" />
+    <title>BRAMR - CV</title>
+    <link rel="stylesheet" href="css/StylesheetCV.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="css/grid.css">
+</head>*@
+
+    <div class="PopUp">
+        <div class="Icon">
+            <b>!</b>
+        </div>
+        <div class="Titel">
+            Duidelijk?
+        </div>
+        <div class="Uitleg">
+            1. Start met je <b>foto</b> en <b>persoonlijke gegevens</b>. <br>
+            2. Vul je <b>schoolervaringen</b> en <b>werkervaringen</b> nauwkeurig in. <br>
+            3. Beschrijf de <b>skills</b> waar jij het trots op bent. <br>
+            4. Geef aan waar jouw <b>interesses</b> liggen. <br>
+            5. Sla je <b>CV</b> op en je bent klaar voor je solicitatie! <br>
+        </div>
+        <div class="SluitAf-btn">
+            <button id="SluitAf-PopUp-btn">
+                Terug!
+            </button>
+        </div>
+    </div>
 
             <div class="dropdown-zijbalk">
                 <button class="dropbtn-zijbalk"><i class="fas fa-newspaper"></i></button>
@@ -152,7 +181,7 @@
                     <div class="gridceptionafbeelding">
                         <div id="afbeeldingkiezen">
                             <label for="afbeeldingkiezen">Kies een foto:</label>
-                            <ImageUpload CurrentImage="@ProfielFoto" CallBack="@CallBackMethod" />
+                            <ImageUpload CurrentImage="@ProfielFoto" CallBack="@CallBackMethod" IsCV="true" />
                             <button @onclick="() => { Save(); }">Save</button>
                         </div>
                         <div id="hyperlinktext">
