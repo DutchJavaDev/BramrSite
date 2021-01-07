@@ -37,6 +37,7 @@ namespace BramrSite.Pages
         //Art Aanpassing einde
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
+        private ImageModel CurrentImageElement { get; set; } = new ImageModel();
 
         private List<int> AllFontSizes { get; set; } = new List<int>()
         {
@@ -49,13 +50,18 @@ namespace BramrSite.Pages
         private bool UndoButton { get; set; } = true;
         private bool RedoButton { get; set; } = true;
 
+        private bool IsText { get; set; }
+
         public delegate void Del(string uri, string src);
+        public delegate void CvDel(bool IsText, int Index);
 
         Del CallBackMethod;
+        CvDel SelectionCallback;
 
         protected override async void OnInitialized()
         {
             CallBackMethod = ApplySource;
+            SelectionCallback = Selection;
             await Api.DeleteAllFromHistory();
 
             AllTextElements.Add(Naam);
@@ -87,13 +93,27 @@ namespace BramrSite.Pages
             }
 
             LoadSite();
+            StateHasChanged();
         }
 
-        private void Selection(TextModel NewTextElement)
+        private void Selection(bool IsText, int Index)
         {
+            this.IsText = IsText;
             CurrentTextElement.Selected = false;
-            CurrentTextElement = NewTextElement;
-            CurrentTextElement.Selected = true;
+            CurrentImageElement.Selected = false;
+
+            if (IsText)
+            {
+                CurrentTextElement = AllTextElements[Index];
+                CurrentTextElement.Selected = true;
+            }
+            else
+            {
+                CurrentImageElement = AllImageElements[Index];
+                CurrentImageElement.Selected = true;
+            }
+
+            StateHasChanged();
         }
 
         private async void Save()
@@ -132,6 +152,8 @@ namespace BramrSite.Pages
                 ProfielFoto.Src = $"https://bramr.tech/api/image/download/{ProfielFoto.FileUri}";
 #endif
             }
+
+            Console.WriteLine(ProfielFoto.CssCode);
 
             StateHasChanged();
         }
@@ -185,6 +207,7 @@ namespace BramrSite.Pages
             }
 
             await Api.AddToHistory(HistoryLocation, CurrentChange);
+            StateHasChanged();
         }
 
         private async Task UseChange(ChangeModel CurrentChange, bool GoingBack)
@@ -271,9 +294,6 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.ObjectFitSet:
                     CurrentImageElement.ObjectFitSet = (ImageModel.ObjectFit)Enum.Parse(typeof(ImageModel.ObjectFit), result.ToString());
                     break;
-                case ChangeModel.Type.Margin:
-                    //CurrentImageElement.Margin = int.Parse(result.ToString());
-                    break;
                 case ChangeModel.Type.Padding:
                     CurrentImageElement.Padding = int.Parse(result.ToString());
                     break;
@@ -336,7 +356,6 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Width:
                     return 100;
                 case ChangeModel.Type.Padding:
-                case ChangeModel.Type.Margin:
                     return 0;
                 case ChangeModel.Type.Opacity:
                     return 1;

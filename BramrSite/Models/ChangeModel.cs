@@ -39,9 +39,7 @@ namespace BramrSite.Models
             FloatSet,
             Opacity,
             ObjectFitSet,
-            Margin,
             Padding
-                
         }
     }
 }

@@ -12,7 +12,8 @@
         public Allignment TextAllignment { get; set; }
         public bool StrikedThrough { get; set; }
         public string TemplateType { get; set; }
-        public int FontSize { get; set; } = 10;
+        public double FontSize { get; set; } = 2;
+        public string CssCode { get; set; } = string.Empty;
 
         public bool Selected { get; set; }
 
