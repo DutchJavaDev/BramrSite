@@ -317,8 +317,7 @@ namespace BramrSite.Classes
         }
         public async Task<ApiResponse> ResetPassword(ResetPasswordModel model)
         {
-            var i = JsonConvert.SerializeObject(model);
-            Console.WriteLine(i);
+
             var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 
             try
