@@ -9,7 +9,7 @@ using Tewr.Blazor.FileReader;
 
 namespace BramrSite.Pages
 {
-    public partial class Editor : ComponentBase
+    public partial class CvEditor : ComponentBase
     {
         [Inject] ApiService Api { get; set; }
 
@@ -43,11 +43,6 @@ namespace BramrSite.Pages
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
         private ImageModel CurrentImageElement { get; set; } = new ImageModel();
-
-        private List<int> AllFontSizes { get; set; } = new List<int>()
-        {
-            8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72
-        };
 
         public int EditAmount { get; set; }
         public int HistoryLocation { get; set; }
@@ -126,13 +121,17 @@ namespace BramrSite.Pages
                 {
                     AllTextElements[x] = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[x].ToString());
                 }
-                AllImageElements[0] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[15].ToString());
+                for(int y = 0; y < 1; y++)
+                {
+                    AllImageElements[y] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[y + 15].ToString());
 #if DEBUG
-                AllImageElements[0].Src = $"https://localhost:44372/api/image/download/{AllImageElements[0].FileUri}";
+                    AllImageElements[y].Src = $"https://localhost:44372/api/image/download/{AllImageElements[y].FileUri}";
 #else
-                AllImageElements[0].Src = $"https://bramr.tech/api/image/download/{AllImageElements[0].FileUri}";
+                    AllImageElements[y].Src = $"https://bramr.tech/api/image/download/{AllImageElements[y].FileUri}";
 #endif
+                }
             }
+
             StateHasChanged();
         }
 

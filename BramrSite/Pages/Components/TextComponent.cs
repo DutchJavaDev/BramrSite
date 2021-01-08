@@ -4,7 +4,7 @@ using BramrSite.Models;
 using Microsoft.AspNetCore.Components.Web;
 using System.Collections.Generic;
 using static BramrSite.Pages.PortfolioEditor;
-using static BramrSite.Pages.Editor;
+using static BramrSite.Pages.CvEditor;
 
 namespace BramrSite.Classes
 {
