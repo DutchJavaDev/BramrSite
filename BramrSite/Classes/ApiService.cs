@@ -337,6 +337,22 @@ namespace BramrSite.Classes
             }
         }
 
+        public async Task<List<string>> GetUserInfo()
+        {
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.GetAsync($"account/info");
+                var result = JsonConvert.DeserializeObject<List<string>>(await response.Content.ReadAsStringAsync());
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return new List<string>();
+            }
+        }
+
         private HttpClient CreateClient()
         {
             var client = new HttpClient

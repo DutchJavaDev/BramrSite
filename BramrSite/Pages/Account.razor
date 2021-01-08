@@ -8,10 +8,10 @@
                 <img src="./img/profile.png" width="200" alt="">
             </div>
             <div class="profile-nav-info">
-                <h3 class="user-name">insert name</h3>
+                <h3 class="user-name">@UserInfo[0]</h3>
                 <div class="address">
-                    <p class="city">insert city,</p>
-                    <span class="country">insert country</span>
+                    <p class="city">@UserInfo[1]</p>
+                    <span class="country"></span>
                 </div>
             </div>
             <div class="profile-option">
@@ -25,10 +25,13 @@
             <div class="left-side">
                 <div class="profile-side">
                     <p class="user-phone">
-                        <i class="fa fa-phone">insert phone number</i>
+                        <a class="fa fa-laptop" href="@UserInfo[2]">CV</a>
+                    </p>
+                    <p class="user-phone">
+                        <a class="fa fa-laptop" href="@UserInfo[3]">Portfolio</a>
                     </p>
                     <p class="user-mail">
-                        <i class="fa fa-envelope">insert mail address</i>
+                        <i class="fa fa-envelope">@UserInfo[4]</i>
                     </p>
                     <div class="user-bio">
                         <h3>Bio</h3>
@@ -38,11 +41,11 @@
                     </div>
                     <div class="profile-btn">
                         <button class="questionbtn">
-                            <i class="fa fa-comment"></i> Question
+                            <i class="fa fa-comment"></i> Contact
                         </button>
-                        <button class="createbtn">
+                        @*<button class="createbtn">
                             <i class="fa fa-plus"></i> Create
-                        </button>
+                        </button>*@
                     </div>
                 </div>
             </div>
@@ -61,6 +64,11 @@
                             Here you can start with editing your very own CV. <br>
                             Don't forget to wacht the instruction video to learn how to use the editor.
                         </h6>
+                        <a href="cv">
+                            <button class="createbtn">
+                                <i class="fa fa-plus"></i> Create
+                            </button>
+                        </a>
                     </div>
                     <div class="profile-Portfolio tab">
                         <h1>Your Portfolio-projects</h1>
@@ -68,6 +76,11 @@
                             Here you can start with editing your very own Portfolio. <br>
                             Don't forget to wacht the instruction video to learn how to use the editor.
                         </h6>
+                        <a href="portfolio">
+                            <button class="createbtn">
+                                <i class="fa fa-plus"></i> Create
+                            </button>
+                        </a>
                     </div>
                     <div class="profile-Notepad tab">
                         <h1>Notepad</h1>
