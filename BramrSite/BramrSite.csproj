@@ -27,6 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\fonts\Teko.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\img\profile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
