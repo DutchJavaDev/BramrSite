@@ -4,8 +4,8 @@
     {
         public int Location { get; set; }
         public string Text { get; set; }
-        public string TextColor { get; set; }
-        public string BackgroundColor { get; set; }
+        public string TextColor { get; set; } = string.Empty;
+        public string BackgroundColor { get; set; } = string.Empty;
         public bool Bold { get; set; }
         public bool Italic { get; set; }
         public bool Underlined { get; set; }

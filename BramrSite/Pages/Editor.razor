@@ -1,4 +1,4 @@
-﻿@page "/editor"
+﻿@page "/cv"
 @using BramrSite.Classes
 @using BramrSite.Models
 @using BramrSite.Pages.Components
@@ -61,7 +61,7 @@
         </div>
         <div class="fotogrid">
             <div class='nestedfoto' @onclick="() => { Selection(false, 0); }">
-                <ImageComponent CurrentDesignElement="@ProfielFoto" />
+                <ImageComponent CurrentDesignElement="AllImageElements[0]" />
             </div>
         </div>
         <div class="maingrid">
@@ -90,19 +90,19 @@
                 </div>
                 <div id="textinput1">
                     <div id="naaminput">
-                        <TextComponent CurrentDesignElement="Naam" TagType="p" CvCallback="SelectionCallback" Index="0"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[0]" TagType="p" CvCallback="SelectionCallback" Index="0"/>
                     </div>
                     <div id="adresinput">
-                        <TextComponent CurrentDesignElement="Adres" TagType="p" CvCallback="SelectionCallback" Index="1"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[1]" TagType="p" CvCallback="SelectionCallback" Index="1"/>
                     </div>
                     <div id="postcodeinput">
-                        <TextComponent CurrentDesignElement="Postcode" TagType="p" CvCallback="SelectionCallback" Index="2"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[2]" TagType="p" CvCallback="SelectionCallback" Index="2"/>
                     </div>
                     <div id="woonplaatsinput">
-                        <TextComponent CurrentDesignElement="Woonplaats" TagType="p" CvCallback="SelectionCallback" Index="3"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[3]" TagType="p" CvCallback="SelectionCallback" Index="3"/>
                     </div>
                     <div id="telefooninput">
-                        <TextComponent CurrentDesignElement="Telefoon" TagType="p" CvCallback="SelectionCallback" Index="4"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[4]" TagType="p" CvCallback="SelectionCallback" Index="4"/>
                     </div>
                 </div>
                 <div id="pgegevens2"><br>
@@ -139,19 +139,19 @@
                 </div>
                 <div id="textinput2"><br>
                     <div id="emailinput">
-                        <TextComponent CurrentDesignElement="Email" TagType="p" CvCallback="SelectionCallback" Index="5"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[5]" TagType="p" CvCallback="SelectionCallback" Index="5"/>
                     </div>
                     <div id="geboortedatuminput">
-                        <TextComponent CurrentDesignElement="Geboortedatum" TagType="p" CvCallback="SelectionCallback" Index="6"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[6]" TagType="p" CvCallback="SelectionCallback" Index="6"/>
                     </div>
                     <div id="nationaliteitinput">
-                        <TextComponent CurrentDesignElement="Nationaliteit" TagType="p" CvCallback="SelectionCallback" Index="7"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[7]" TagType="p" CvCallback="SelectionCallback" Index="7"/>
                     </div>
                     <div id="rijbewijsinput">
-                        <TextComponent CurrentDesignElement="Rijbewijs" TagType="p" CvCallback="SelectionCallback" Index="8"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[8]" TagType="p" CvCallback="SelectionCallback" Index="8"/>
                     </div>
                     <div id="linkedIninput">
-                        <TextComponent CurrentDesignElement="LinkedIn" TagType="p" CvCallback="SelectionCallback" Index="9"/>
+                        <TextComponent CurrentDesignElement="AllTextElements[9]" TagType="p" CvCallback="SelectionCallback" Index="9"/>
                     </div>
                 </div>
             </div>
@@ -162,11 +162,11 @@
                     <div class="gridceptionafbeelding">
                         <div id="afbeeldingkiezen">
                             <label for="afbeeldingkiezen">Kies een foto:</label>
-                            <ImageUpload CurrentImage="@ProfielFoto" CallBack="@CallBackMethod" IsCV="true" />
+                            <ImageUpload CurrentImage="@CurrentImageElement" CallBack="@CallBackMethod" IsCV="true" />
                             <button @onclick="() => { Save(); }">Save</button>
                         </div>
                         <div id="hyperlinktext">
-                            <input type="text" placeholder="Type some text..." @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString()); }" @bind-value="CurrentTextElement.Text" />
+                            <input type="text" placeholder="Type some text..." @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString());}" @bind-value="CurrentTextElement.Text" />
                         </div>
                         <div id="animatietext">
 
@@ -263,31 +263,31 @@
         <div class="content1grid">
             <div id="contenttext1">
                 <h1>Werkervaring</h1>
-                <TextComponent CurrentDesignElement="Werkervaring" TagType="p" CvCallback="SelectionCallback" Index="10"/>
+                <TextComponent CurrentDesignElement="AllTextElements[10]" TagType="p" CvCallback="SelectionCallback" Index="10"/>
             </div>
         </div>
         <div class="content2grid">
             <div id="contenttext2">
                 <h2>Schoolervaring</h2>
-                <TextComponent CurrentDesignElement="Schoolervaring" TagType="p" CvCallback="SelectionCallback" Index="11"/>
+                <TextComponent CurrentDesignElement="AllTextElements[11]" TagType="p" CvCallback="SelectionCallback" Index="11"/>
             </div>
         </div>
         <div class="content3grid">
             <div id="contenttext3">
                 <h3>Skillset</h3>
-                <TextComponent CurrentDesignElement="Skillset" TagType="p" CvCallback="SelectionCallback" Index="12"/>
+                <TextComponent CurrentDesignElement="AllTextElements[12]" TagType="p" CvCallback="SelectionCallback" Index="12"/>
             </div>
         </div>
         <div class="interesses">
             <div id="interessesgrid">
                 <h4>Interesses</h4>
-                <TextComponent CurrentDesignElement="Interesses" TagType="p" CvCallback="SelectionCallback" Index="13"/>
+                <TextComponent CurrentDesignElement="AllTextElements[13]" TagType="p" CvCallback="SelectionCallback" Index="13"/>
             </div>
         </div>
         <div class="motivatie">
             <div id="motivatiegrid">
                 <h5>Motivatie</h5>
-                <TextComponent CurrentDesignElement="Motivatie" TagType="p" CvCallback="SelectionCallback" Index="14"/>
+                <TextComponent CurrentDesignElement="AllTextElements[14]" TagType="p" CvCallback="SelectionCallback" Index="14"/>
             </div>
         </div>
     </div>
