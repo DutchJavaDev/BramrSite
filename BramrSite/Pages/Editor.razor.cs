@@ -13,25 +13,30 @@ namespace BramrSite.Pages
     {
         [Inject] ApiService Api { get; set; }
 
-        public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
-        public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
+        public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>() 
+        {
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel(),
+            new TextModel()
+        };
+        public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>() 
+        {
+            new ImageModel()
+        };
         public List<object> AllDesignElements { get; private set; } = new List<object>();
 
-        public TextModel Naam { get; private set; } = new TextModel() { Location = 0, TemplateType = "Cv" };
-        public TextModel Adres { get; private set; } = new TextModel() { Location = 1, TemplateType = "Cv" };
-        public TextModel Postcode { get; private set; } = new TextModel() { Location = 2, TemplateType = "Cv" };
-        public TextModel Woonplaats { get; private set; } = new TextModel() { Location = 3, TemplateType = "Cv" };
-        public TextModel Telefoon { get; private set; } = new TextModel() { Location = 4, TemplateType = "Cv" };
-        public TextModel Email { get; private set; } = new TextModel() { Location = 5, TemplateType = "Cv" };
-        public TextModel Geboortedatum { get; private set; } = new TextModel() { Location = 6, TemplateType = "Cv" };
-        public TextModel Nationaliteit { get; private set; } = new TextModel() { Location = 7, TemplateType = "Cv" };
-        public TextModel Rijbewijs { get; private set; } = new TextModel() { Location = 8, TemplateType = "Cv" };
-        public TextModel LinkedIn { get; private set; } = new TextModel() { Location = 9, TemplateType = "Cv" };
-        public TextModel Werkervaring { get; private set; } = new TextModel() { Location = 10, TemplateType = "Cv" };
-        public TextModel Schoolervaring { get; private set; } = new TextModel() { Location = 11, TemplateType = "Cv" };
-        public TextModel Skillset { get; private set; } = new TextModel() { Location = 12, TemplateType = "Cv" };
-        public TextModel Interesses { get; private set; } = new TextModel() { Location = 13, TemplateType = "Cv" };
-        public TextModel Motivatie { get; private set; } = new TextModel() { Location = 14, TemplateType = "Cv" };
         //Art Aanpassing 
         public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Location = 15, Alt = "ProfielFoto", TemplateType = "Cv" };
         //Art Aanpassing einde
@@ -64,33 +69,11 @@ namespace BramrSite.Pages
             SelectionCallback = Selection;
             await Api.DeleteAllFromHistory();
 
-            AllTextElements.Add(Naam);
-            AllTextElements.Add(Adres);
-            AllTextElements.Add(Postcode);
-            AllTextElements.Add(Woonplaats);
-            AllTextElements.Add(Telefoon);
-            AllTextElements.Add(Email);
-            AllTextElements.Add(Geboortedatum);
-            AllTextElements.Add(Nationaliteit);
-            AllTextElements.Add(Rijbewijs);
-            AllTextElements.Add(LinkedIn);
-            AllTextElements.Add(Werkervaring);
-            AllTextElements.Add(Schoolervaring);
-            AllTextElements.Add(Skillset);
-            AllTextElements.Add(Interesses);
-            AllTextElements.Add(Motivatie);
-            //Art Aanpassing 
-            AllImageElements.Add(ProfielFoto);
-            //Art Aanpassing einde
-
-            foreach (var item in AllTextElements)
+            for (int x = 0; x < 15; x++)
             {
-                AllDesignElements.Add(item);
+                AllTextElements[x].Location = x; AllTextElements[x].TemplateType = "Cv";
             }
-            foreach (var item in AllImageElements)
-            {
-                AllDesignElements.Add(item);
-            }
+            AllImageElements[0].Location = 15; AllImageElements[0].TemplateType = "Cv"; AllImageElements[0].Alt = "Profielfoto";
 
             LoadSite();
             StateHasChanged();
@@ -118,6 +101,15 @@ namespace BramrSite.Pages
 
         private async void Save()
         {
+            foreach (var item in AllTextElements)
+            {
+                AllDesignElements.Add(item);
+            }
+            foreach (var item in AllImageElements)
+            {
+                AllDesignElements.Add(item);
+            }
+
             string json = JsonConvert.SerializeObject(AllDesignElements, Formatting.Indented);
 
             await Api.UploadCV(json);
@@ -130,32 +122,27 @@ namespace BramrSite.Pages
 
             if (AllDesignElements.Count != 0)
             {
-                Naam = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[0].ToString());
-                Adres = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[1].ToString());
-                Postcode = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[2].ToString());
-                Woonplaats = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[3].ToString());
-                Telefoon = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[4].ToString());
-                Email = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[5].ToString());
-                Geboortedatum = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[6].ToString());
-                Nationaliteit = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[7].ToString());
-                Rijbewijs = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[8].ToString());
-                LinkedIn = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[9].ToString());
-                Werkervaring = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[10].ToString());
-                Schoolervaring = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[11].ToString());
-                Skillset = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[12].ToString());
-                Interesses = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[13].ToString());
-                Motivatie = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[14].ToString());
-                ProfielFoto = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[15].ToString());
+                for (int x = 0; x < 15; x++)
+                {
+                    AllTextElements[x] = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[x].ToString());
+                }
+                AllImageElements[0] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[15].ToString());
 #if DEBUG
-                ProfielFoto.Src = $"https://localhost:44372/api/image/download/{ProfielFoto.FileUri}";
+                AllImageElements[0].Src = $"https://localhost:44372/api/image/download/{AllImageElements[0].FileUri}";
 #else
-                ProfielFoto.Src = $"https://bramr.tech/api/image/download/{ProfielFoto.FileUri}";
+                AllImageElements[0].Src = $"https://bramr.tech/api/image/download/{AllImageElements[0].FileUri}";
 #endif
             }
-
-            Console.WriteLine(ProfielFoto.CssCode);
-
             StateHasChanged();
+        }
+
+        private bool SelectionCheck(bool IsTextEdit)
+        {
+            if(IsText == IsTextEdit)
+            {
+                return true;
+            }
+            return false;
         }
 
         private async Task Undo()
@@ -185,7 +172,6 @@ namespace BramrSite.Pages
             if (HistoryLocation == EditAmount)
             {
                 RedoButton = true;
-
             }
 
             await UseChange(CurrentChange, false);
@@ -371,8 +357,8 @@ namespace BramrSite.Pages
 
         public void ApplySource(string Uri, string Src)
         {
-            ProfielFoto.FileUri = Uri;
-            ProfielFoto.Src = Src;
+            AllImageElements[0].FileUri = Uri;
+            AllImageElements[0].Src = Src;
             StateHasChanged();
         }
     }

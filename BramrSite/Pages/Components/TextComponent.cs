@@ -44,7 +44,7 @@ namespace BramrSite.Classes
             else
             {
                 builder.OpenElement(ElementIndex, TagType); ElementIndex++;
-                builder.AddAttribute(ElementIndex, "style", $"{(CurrentDesignElement.TextColor == string.Empty ? $"color:{CurrentDesignElement.TextColor};" : string.Empty)} {(CurrentDesignElement.BackgroundColor == string.Empty ? $"background-color:{CurrentDesignElement.BackgroundColor};" : string.Empty)} font-size:{CurrentDesignElement.FontSize}rem; text-align:{CurrentDesignElement.TextAllignment}"); ElementIndex++;
+                builder.AddAttribute(ElementIndex, "style", $"{(CurrentDesignElement.TextColor != string.Empty ? $"color:{CurrentDesignElement.TextColor};" : string.Empty)} {(CurrentDesignElement.BackgroundColor != string.Empty ? $"background-color:{CurrentDesignElement.BackgroundColor};" : string.Empty)} font-size:{CurrentDesignElement.FontSize}rem; text-align:{CurrentDesignElement.TextAllignment}"); ElementIndex++;
                 if (CurrentDesignElement.CssCode != string.Empty) { builder.AddAttribute(ElementIndex, "b-qmx0h9ieg0"); ElementIndex++; }
                 if (CvCallback != null)
                 {
