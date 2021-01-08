@@ -65,6 +65,32 @@ namespace BramrSite.Pages
         public delegate void PortfolioDel(bool IsText, int Index);
         PortfolioDel SelectionCallBack;
 
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender)
+            {
+                for (int x = 0; x < 24; x++)
+                {
+                    AllTextElements[x].Location = x; AllTextElements[x].TemplateType = "Portfolio"; AllTextElements[x].CssCode = "b-qmx0h9ieg0";
+                }
+                for (int y = 0; y < 4; y++)
+                {
+                    AllImageElements[y].Location = y + 24; AllImageElements[y].TemplateType = "Portfolio"; AllImageElements[y].CssCode = "b-qmx0h9ieg0";
+                }
+
+                foreach (var item in AllTextElements)
+                {
+                    AllDesignElements.Add(item);
+                }
+                foreach (var item in AllImageElements)
+                {
+                    AllDesignElements.Add(item);
+                }
+
+                StateHasChanged();
+            }
+        }
+
         protected override async void OnInitialized()
         {
             SelectionCallBack = Selection;
@@ -74,26 +100,6 @@ namespace BramrSite.Pages
             var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/PortfolioScript.js");
 
             await module.InvokeVoidAsync("Init");
-
-            for (int x = 0; x < 24; x++)
-            {
-                AllTextElements[x].Location = x; AllTextElements[x].TemplateType = "Portfolio"; AllTextElements[x].CssCode = "b-qmx0h9ieg0";
-            }
-            for (int y = 0; y < 4; y++)
-            {
-                AllImageElements[y].Location = y + 24; AllImageElements[y].TemplateType = "Portfolio"; AllImageElements[y].CssCode = "b-qmx0h9ieg0";
-            }
-
-            foreach (var item in AllTextElements)
-            {
-                AllDesignElements.Add(item);
-            }
-            foreach (var item in AllImageElements)
-            {
-                AllDesignElements.Add(item);
-            }
-
-            StateHasChanged();
         }
 
         private void Selection(bool IsText, int Index)
