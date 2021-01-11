@@ -1,0 +1,1057 @@
+﻿.menu-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+    .menu-wrap .toggler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        opacity: 0;
+    }
+
+    .menu-wrap .hamburger {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 25px;
+        height: 25px;
+        padding: 1rem;
+        background: rgb(27, 25, 25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .menu-wrap .hamburger > div {
+            position: relative;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+        }
+
+            .menu-wrap .hamburger > div:before,
+            .menu-wrap .hamburger > div:after {
+                content: '';
+                position: absolute;
+                z-index: 1;
+                top: -8px;
+                width: 100%;
+                height: 2px;
+                background-color: #fff;
+            }
+
+            .menu-wrap .hamburger > div:after {
+                top: 8px;
+            }
+
+    .menu-wrap .toggler:checked + .hamburger > div {
+        transform: rotate(135deg);
+    }
+
+        .menu-wrap .toggler:checked + .hamburger > div:before,
+        .menu-wrap .toggler:checked + .hamburger > div:after {
+            top: 0;
+            transform: rotate(90deg);
+        }
+
+    .menu-wrap .toggler:checked:hover + .hamburger > div {
+        transform: rotate(255deg);
+    }
+
+    .menu-wrap .menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .menu-wrap .menu > div {
+            background: rgb(17, 17, 22);
+            opacity: 75%;
+            border-radius: 50%;
+            width: 200vw;
+            height: 200vw;
+            display: flex;
+            flex: none;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0);
+            transition: all 0.4s ease;
+        }
+
+            .menu-wrap .menu > div > div {
+                text-align: center;
+                max-width: 90vw;
+                max-height: 100vh;
+                opacity: 0;
+                transition: opacity 0.4s ease;
+            }
+
+                .menu-wrap .menu > div > div > ul > li {
+                    list-style: none;
+                    color: #fff;
+                    font-size: 2rem;
+                    padding: 1.5rem;
+                }
+
+                    .menu-wrap .menu > div > div > ul > li > a {
+                        color: inherit;
+                        text-decoration: none;
+                        transition: color 0.4 ease;
+                    }
+
+    .menu-wrap .toggler:checked ~ .menu {
+        visibility: visible;
+    }
+
+        .menu-wrap .toggler:checked ~ .menu > div {
+            transform: scale(1);
+            transition-duration: 0.75s;
+        }
+
+            .menu-wrap .toggler:checked ~ .menu > div > div {
+                opacity: 1;
+                transition: opacity 0.4s ease;
+            }
+/* MASTERGRIDSTYLES */
+.mastergrids {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.25fr 1fr 1fr 1fr;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+}
+
+.navgrid {
+    background: rgb(40,40,40);
+    grid-column: 1 / 5;
+    grid-row: 1 / 1;
+}
+
+.fotogrid {
+    background: rgb(0, 21, 206);
+    grid-column: 2 / 2;
+    grid-row: 2 / 2;
+}
+
+.maingrid {
+    background: rgb(137,137,137);
+    grid-column: 3 / 5;
+    grid-row: 2 / 2;
+}
+
+.zijbalkgrid {
+    background: rgb(61,61,61);
+    grid-column: 1 / 1;
+    grid-row: 2 / 5;
+}
+
+.content1grid {
+    background: rgb(39,163,255);
+    grid-column: 2 / 2;
+    grid-row: 3 / 3;
+}
+
+.content2grid {
+    background: rgb(39,163,255);
+    grid-column: 3 / 3;
+    grid-row: 3 / 3;
+}
+
+.content3grid {
+    background: rgb(39,163,255);
+    grid-column: 4 / 4;
+    grid-row: 3 / 3;
+}
+
+.motivatie {
+    background: rgb(39,163,255);
+    grid-column: 2 / 4;
+    grid-row: 4 / 4;
+}
+
+.interesses {
+    background: rgb(39,163,255);
+    grid-column: 4 / 5;
+    grid-row: 4 / 4;
+}
+
+/* FOTO GRID */
+
+.nestedfoto {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+#afbeelding {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+}
+
+/* NESTED GRID MAIN */
+
+.nestedgrid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+}
+
+#pgegevens1 {
+    grid-column: 1 / 1;
+    grid-row: 1 / 6;
+}
+
+#textinput1 {
+    grid-column: 2 / 2;
+    grid-row: 1 / 6;
+}
+
+#pgegevens2 {
+    grid-column: 3 / 3;
+    grid-row: 1 / 6;
+}
+
+#textinput2 {
+    grid-column: 4 / 4;
+    grid-row: 1 / 6;
+}
+
+/* CONTENTGRIDS */
+
+.content1grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+#contenttext1 {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+}
+
+.content2grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+#contenttext2 {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+}
+
+.content3grid {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+#contenttext3 {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+}
+
+/* Intersesses grid */
+
+.interesses {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 10px;
+}
+
+#interessesgrid {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+}
+
+/* MOTIVATIE */
+
+.motivatie {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 10px;
+}
+
+#motivatiegrid {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+}
+
+/* ZIJBALK GRID */
+.nestedgridzijbalk {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+/* AFBEELDING GEDEELTE */
+
+.afbeeldinggrid {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+    margin: 2%;
+    border: 1px solid rgb(0, 21, 206);
+}
+
+.gridceptionafbeelding {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#afbeeldingkiezen {
+    grid-column: 1 / span 3;
+    grid-row: 1 / 1;
+    margin: 2%;
+}
+
+#hyperlinktext {
+    grid-column: 1 / span 3;
+    grid-row: 2 / 2;
+    margin: 2%;
+}
+
+#animatietext {
+    grid-column: 1 / span 3;
+    grid-row: 3 / 3;
+    margin: 2%;
+}
+
+#grootebtn {
+    grid-column: 1 / 1;
+    grid-row: 4 / 4;
+    margin: 10%;
+}
+
+#opvullingbtn {
+    grid-column: 2 / 2;
+    grid-row: 4 / 4;
+    margin: 10%;
+}
+
+#alphabtn {
+    grid-column: 3 / 3;
+    grid-row: 4 / 4;
+    margin: 10%;
+}
+
+#borderbtn {
+    grid-column: 1 / 1;
+    grid-row: 5 / 5;
+    margin: 10%;
+}
+
+#borderradiusbtn {
+    grid-column: 2 / 2;
+    grid-row: 5 / 5;
+    margin: 10%;
+}
+
+#animatiebtn {
+    grid-column: 3 / 3;
+    grid-row: 5 / 5;
+    margin: 10%;
+}
+
+/* TEXT GEDEELTE */
+
+.lettertypegrid {
+    grid-column: 1 / 1;
+    grid-row: 2 / 2;
+    margin: 2%;
+    border: 1px solid rgb(0, 21, 206);
+}
+
+.gridceptionlettertype {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#fontkiezen {
+    grid-column: 1 / span 3;
+    grid-row: 1 / 1;
+    margin: 2%;
+}
+
+#fontgroote {
+    grid-column: 1 / span 3;
+    grid-row: 2 / 2;
+    margin: 2%;
+}
+
+#fontweight {
+    grid-column: 1 / span 3;
+    grid-row: 3 / 3;
+    margin: 2%;
+}
+
+#boldbtn {
+    grid-column: 1 / 1;
+    grid-row: 4 / 4;
+    margin: 10%;
+}
+
+#italicbtn {
+    grid-column: 2 / 2;
+    grid-row: 4 / 4;
+    margin: 10%;
+}
+
+#streeponderbtn {
+    grid-column: 3 / 3;
+    grid-row: 4 / 4;
+    margin: 10%;
+}
+
+#streepbovenbtn {
+    grid-column: 1 / 1;
+    grid-row: 5 / 5;
+    margin: 10%;
+}
+
+#textshadowbtn {
+    grid-column: 2 / 2;
+    grid-row: 5 / 5;
+    margin: 10%;
+}
+
+#alingrechtsbtn {
+    grid-column: 1 / 1;
+    grid-row: 6 / 6;
+    margin: 10%;
+}
+
+#alinglinksbtn {
+    grid-column: 2 / 2;
+    grid-row: 6 / 6;
+    margin: 10%;
+}
+
+#alingmiddenbtn {
+    grid-column: 3 / 3;
+    grid-row: 6 / 6;
+    margin: 10%;
+}
+
+/* KLEUREN GEDEELTE */
+
+.kleurgrid {
+    grid-column: 1 / 1;
+    grid-row: 3 / 3;
+    margin: 2%;
+    border: 1px solid rgb(0, 21, 206);
+}
+
+.gridceptionkleur {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+#textkleurkiezen {
+    grid-column: 1 / span 3;
+    grid-row: 1 / 1;
+    margin: 2%;
+}
+
+#backgroundtext {
+    grid-column: 1 / span 3;
+    grid-row: 2 / 2;
+    margin: 2%;
+}
+
+/* LAPTOP 1024px en lager*/
+@media screen and (max-width: 1024px) {
+    .mastergrids {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: repeat(7, 1fr);
+    }
+
+    .navgrid {
+        grid-column: 1 / span 3;
+        grid-row: 1 / 1;
+    }
+
+    .fotogrid {
+        grid-column: 1 / 1;
+        grid-row: 2 / 2;
+    }
+
+    .maingrid {
+        grid-column: 2 / span 3;
+        grid-row: 2 / 2;
+    }
+
+    .zijbalkgrid {
+        grid-column: 1 / 1;
+        grid-row: 4 / span 7;
+    }
+
+    .content1grid {
+        grid-column: 2 / 2;
+        grid-row: 5 / 5;
+    }
+
+    .content2grid {
+        grid-column: 3 / 3;
+        grid-row: 5 / 5;
+    }
+
+    .content3grid {
+        grid-column: 2 / 2;
+        grid-row: 6 / 6;
+    }
+
+    .interesses {
+        grid-column: 3 / 3;
+        grid-row: 6 / 6;
+    }
+
+    .motivatie {
+        grid-column: 2 / span 3;
+        grid-row: 7 / 7;
+    }
+}
+
+/* TABLET 768px en lager*/
+@media screen and (max-width: 768px) {
+    .mastergrids {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(6, 1fr);
+    }
+
+    .navgrid {
+        grid-column: 1 / span 2;
+        grid-row: 1 / 1;
+    }
+
+    .fotogrid {
+        grid-column: 1 / span 1;
+        grid-row: 3 / 3;
+    }
+
+    .maingrid {
+        grid-column: 1 / span 2;
+        grid-row: 4 / 4;
+    }
+
+    .zijbalkgrid {
+        grid-column: 1 / span 1;
+        grid-row: 2 / 3;
+    }
+
+    .content1grid {
+        grid-column: 1 / span 1;
+        grid-row: 5 / 5;
+    }
+
+    .content2grid {
+        grid-column: 2 / span 2;
+        grid-row: 5 / 5;
+    }
+
+    .content3grid {
+        grid-column: 2 / span 2;
+        grid-row: 2 / 2;
+    }
+
+    .interesses {
+        grid-column: 2 / span 2;
+        grid-row: 3 / 3;
+    }
+
+    .motivatie {
+        grid-column: 1 / span 2;
+        grid-row: 4 / 4;
+    }
+}
+
+/* PHONE 480px en lager*/
+@media screen and (max-width: 480px) {
+    .mastergrids {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(9, 1fr);
+    }
+
+    .navgrid {
+        grid-column: 1 / span 1;
+        grid-row: 1 / 1;
+    }
+
+    .fotogrid {
+        grid-column: 1 / span 1;
+        grid-row: 3 / 3;
+    }
+
+    .maingrid {
+        grid-column: 1 / span 1;
+        grid-row: 4 / 4;
+    }
+
+    .zijbalkgrid {
+        grid-column: 1 / span 1;
+        grid-row: 2 / 2;
+    }
+
+    .content1grid {
+        grid-column: 1 / span 1;
+        grid-row: 5 / 5;
+    }
+
+    .content2grid {
+        grid-column: 1 / span 1;
+        grid-row: 6 / 6;
+    }
+
+    .content3grid {
+        grid-column: 1 / span 1;
+        grid-row: 7 / 7;
+    }
+
+    .interesses {
+        grid-column: 1 / span 1;
+        grid-row: 8 / 8;
+    }
+
+    .motivatie {
+        grid-column: 1 / span 1;
+        grid-row: 9 / 9;
+    }
+}
+
+/* master styles */
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Agency FB', arial;
+    background: rgb(0, 0, 0);
+}
+
+/* POPUP-UITLEG */
+
+.center {
+    display: flex;
+    justify-content: left;
+    margin-left: 85px;
+    align-items: center;
+    height: 100%;
+}
+
+.PopUp {
+    position: fixed;
+    width: 350px;
+    height: 280px;
+    padding: 30px 20px;
+    background: #f5f5f5;
+    border-radius: 10px;
+    box-sizing: border-box;
+    z-index: 2;
+    text-align: center;
+    top: 50%;
+    right: 50%;
+    opacity: 0;
+    transform: translate(50%, -50%) scale(0.5);
+    transition: opacity 300ms ease-in-out, top 1000ms ease-in-out, transform 1000ms ease-in-out;
+}
+
+    .PopUp.active {
+        position: fixed;
+        opacity: 1;
+        transform: translate(50%, -50%) scale(1);
+        transition: transform 300ms cubic-bezier(0.18, 0.89, 0.43, 1.19);
+    }
+
+    .PopUp .Icon {
+        margin: 5px 0px;
+        width: 50px;
+        height: 50px;
+        border: 2px solid #34f234;
+        text-align: center;
+        display: inline-block;
+        border-radius: 50%;
+        line-height: 60px;
+        font-size: 30px;
+        color: #34f234;
+    }
+
+    .PopUp .Titel {
+        margin: 5px 0px;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    .PopUp .Uitleg {
+        color: rgb(0, 0, 0);
+        font-size: 15px;
+        padding: 5px;
+    }
+
+    .PopUp .SluitAf-btn {
+        margin-top: 15px;
+    }
+
+        .PopUp .SluitAf-btn button {
+            padding: 10px 20px;
+            background: rgb(27, 25, 25);
+            color: #f5f5f5;
+            border: 2px rgb(27, 25, 25);
+            border-radius: 10%;
+            font-size: 16px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: all 300ms ease-in-out;
+        }
+
+#Open-PopUp-btn {
+    padding: 20px 24px;
+    background: rgb(27, 25, 25);
+    color: #f5f5f5;
+    border: 2px rgb(27, 25, 25);
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+
+
+.PopUp .SluitAf-btn button:hover {
+    color: #111;
+    background: #f5f5f5;
+}
+
+.PopUp > div {
+    position: relative;
+    top: 10px;
+    opacity: 0;
+}
+
+.PopUp.active > div {
+    top: 0px;
+    opacity: 1;
+}
+
+.PopUp.active .Icon {
+    transition: all 300ms ease-in-out 250ms;
+}
+
+.PopUp.active .Titel {
+    transition: all 300ms ease-in-out 300ms;
+}
+
+.PopUp.active .Uitleg {
+    transition: all 300ms ease-in-out 350ms;
+}
+
+.PopUp.active .SluitAf-btn {
+    transition: all 300ms ease-in-out 400ms;
+}
+
+/* PERSOONLIJKE GEGEVENS */
+
+.maingrid, .nestedgrid {
+    position: relative;
+}
+
+#pgegevens1, #pgegevens2, #textinput1, #textinput2 {
+    position: relative;
+    max-height: 226.45px;
+}
+
+#naam p {
+    position: relative;
+    bottom: 3px;
+    left: 55px;
+}
+
+#naam i {
+    position: relative;
+    bottom: 39px;
+    left: 35px;
+}
+
+#adres p {
+    position: relative;
+    bottom: 25px;
+    left: 55px;
+}
+
+#adres i {
+    position: relative;
+    bottom: 64px;
+    left: 35px;
+}
+
+#postcode p {
+    position: relative;
+    bottom: 50px;
+    left: 55px;
+}
+
+#postcode i {
+    position: relative;
+    bottom: 85px;
+    left: 35px;
+}
+
+#woonplaats p {
+    position: relative;
+    bottom: 74px;
+    left: 55px;
+}
+
+#woonplaats i {
+    position: relative;
+    bottom: 109px;
+    left: 30px;
+}
+
+#telefoon p {
+    position: relative;
+    bottom: 98px;
+    left: 55px;
+}
+
+#telefoon i {
+    position: relative;
+    bottom: 133px;
+    left: 35px;
+}
+
+#email p {
+    position: relative;
+    bottom: 3px;
+    left: 50px;
+}
+
+#email i {
+    position: relative;
+    bottom: 39px;
+    left: 30px;
+}
+
+#geboortedatum p {
+    position: relative;
+    bottom: 25px;
+    left: 50px;
+}
+
+#geboortedatum i {
+    position: relative;
+    bottom: 64px;
+    left: 30px;
+}
+
+#nationaliteit p {
+    position: relative;
+    bottom: 50px;
+    left: 50px;
+}
+
+#nationaliteit i {
+    position: relative;
+    bottom: 85px;
+    left: 30px;
+}
+
+#rijbewijs p {
+    position: relative;
+    bottom: 74px;
+    left: 50px;
+}
+
+#rijbewijs i {
+    position: relative;
+    bottom: 109px;
+    left: 30px;
+}
+
+#linkedIn p {
+    position: relative;
+    bottom: 98px;
+    left: 50px;
+}
+
+#linkedIn i {
+    position: relative;
+    bottom: 133px;
+    left: 30px;
+}
+
+#naaminput p, #adresinput p, #postcodeinput p, #woonplaatsinput p, #telefooninput p, #emailinput p, #geboortedatuminput p,
+#nationaliteitinput p, #rijbewijsinput p, #linkedIninput p {
+    max-width: 10vw;
+    position: relative;
+}
+
+#naaminput p {
+    top: 0px;
+    left: 35px;
+}
+
+#adresinput p {
+    top: 10px;
+    left: 35px;
+}
+
+#postcodeinput p {
+    top: 20px;
+    left: 35px;
+}
+
+#woonplaatsinput p {
+    top: 30px;
+    left: 35px;
+}
+
+#telefooninput p {
+    top: 40px;
+    left: 35px;
+}
+
+#emailinput p {
+    top: 0px;
+    left: 35px;
+}
+
+#geboortedatuminput p {
+    top: 10px;
+    left: 35px;
+}
+
+#nationaliteitinput p {
+    top: 20px;
+    left: 35px;
+}
+
+#rijbewijsinput p {
+    top: 30px;
+    left: 35px;
+}
+
+#linkedIninput p {
+    top: 40px;
+    left: 35px;
+}
+
+/* OVERIGE TEKSTVLAKKEN */
+
+.contentgrid1, .contentgrid2, .contentgrid3, .interesses, .motivatie {
+    position: relative;
+}
+
+#contenttext1 p, #contenttext2 p, #contenttext3 p, #interessesgrid p, #motivatiegrid p {
+    position: relative;
+    margin-top: 25px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#contenttext1 h1, #contenttext2 h2, #contenttext3 h3, #interessesgrid h4, #motivatiegrid h5 {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+/* ZIJBALK BUTTONS */
+
+.afbeeldinggrid, .gridceptionafbeelding, .lettertypegrid, .gridceptionlettertype, .kleurgrid, .gridceptionkleur {
+    position: relative;
+}
+
+.buttonGroote, .buttonOpvulling, .buttonAlpha, .buttonBorder, .buttonRadius, .buttonAnimatie {
+    position: relative;
+    background-color: #1e91fd;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.buttonBold, .buttonItalic, .buttonStreepOnder, .buttonStreepBoven, .buttonTextShadow,
+.buttonAlingRechts, .buttonAlingLinks, .buttonAlingMidden {
+    position: relative;
+    background-color: #1e91fd;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+/* ZIJBALK SELECTED INDEXEN */
+
+#fontkiezen, #fontgroote, #fontweight, #textkleurkiezen, #backgroundtext, #afbeeldingkiezen, #hyperlinktext p {
+    position: relative;
+    background-color: #0a3a68;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#fileselector {
+    position: relative;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+

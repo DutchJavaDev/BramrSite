@@ -10,12 +10,12 @@ using Tewr.Blazor.FileReader;
 
 namespace BramrSite.Pages
 {
-    public partial class CvEditor : ComponentBase
+    public partial class CvEditorOud : ComponentBase
     {
         [Inject] IJSRuntime IJSRuntime { get; set; }
         [Inject] ApiService Api { get; set; }
 
-        public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>()
+        public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>() 
         {
             new TextModel(),
             new TextModel(),
@@ -33,7 +33,7 @@ namespace BramrSite.Pages
             new TextModel(),
             new TextModel()
         };
-        public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>()
+        public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>() 
         {
             new ImageModel()
         };
@@ -127,7 +127,7 @@ namespace BramrSite.Pages
                 {
                     AllTextElements[x] = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[x].ToString());
                 }
-                for (int y = 0; y < 1; y++)
+                for(int y = 0; y < 1; y++)
                 {
                     AllImageElements[y] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[y + 15].ToString());
 #if DEBUG
@@ -143,7 +143,7 @@ namespace BramrSite.Pages
 
         private bool SelectionCheck(bool IsTextEdit)
         {
-            if (IsText == IsTextEdit)
+            if(IsText == IsTextEdit)
             {
                 return true;
             }

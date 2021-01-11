@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Web;
 using System.Collections.Generic;
 using static BramrSite.Pages.PortfolioEditor;
 using static BramrSite.Pages.CvEditor;
+using static BramrSite.Pages.CvEditorOud;
 
 namespace BramrSite.Classes
 {

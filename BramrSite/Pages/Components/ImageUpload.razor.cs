@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tewr.Blazor.FileReader;
 using static BramrSite.Pages.CvEditor;
+using static BramrSite.Pages.CvEditorOud;
 
 namespace BramrSite.Pages.Components
 {
