@@ -49,3 +49,107 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+
+<script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js">-->
+
+<!--</script>-->
+<!--Art is hier heel lang mee besig geweest maar heeft het helaas niet in blazor aan de praat gekregen.-->
+<!--<script>
+    function setup() {
+        if (window.location.href.indexOf("login") > -1) {
+            let video;
+            let accesLabel = document.getElementById("accesLabel");
+
+            let label = "waiting...";
+            let confidence = "score...";
+
+            let classifier;
+            let modelURL = 'https://teachablemachine.withgoogle.com/models/S4O5iAMtu/';
+
+            var accessGranted = false;
+            var ProvideInfo = false;
+            function preload() {
+                classifier = ml5.imageClassifier(modelURL + 'model.json');
+            }
+
+
+            function setup() {
+                createCanvas(640, 520);
+
+                video = createCapture(VIDEO);
+                video.hide();
+
+                classifyVideo();
+            }
+
+
+            function classifyVideo() {
+                classifier.classify(video, gotResults);
+            }
+
+            function draw() {
+                background(0);
+
+                // Draw the video
+                image(video, 0, 0);
+
+                // STEP 4: Draw the label
+                textSize(32);
+                textAlign(CENTER, CENTER);
+                fill(255);
+                text(label, width / 2, height - 16);
+
+
+                let emoji = "";
+                if (label == "ring") {
+                    emoji = "Ring Approved";
+                    accessGranted = true;
+                } else if (label == "Blank") {
+                    // emoji = "access denied";
+                } else if (label == "Art") {
+                    //  emoji= "access granted";
+                    ProvideInfo = true;
+                }
+                else if (label == "Wrong ring") {
+                    // emoji = "access denied";
+                }
+                if (label == "No ring") {
+                    accesLabel.innerText = "wrong code try again";
+                }
+
+
+                if (accessGranted == true) {
+                    accesLabel.innerText = "Page unlocked";
+                }
+                else if (ProvideInfo == true) {
+                    accesLabel.innerText = "Art pls provide Proof";
+                }
+
+                textSize(20);
+                text(emoji, width / 2, height / 2);
+            }
+
+
+            function gotResults(error, results) {
+
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+
+                label = results[0].label;
+                confidence = results[0].confidence;
+                classifyVideo();
+            }
+
+
+
+
+        }
+
+    }
+</script>-->
+

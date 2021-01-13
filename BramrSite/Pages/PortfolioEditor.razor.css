@@ -523,7 +523,7 @@ input, select, textarea {
     }
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 1298px) {
     body {
         background: 1px linear-gradient(90deg, rgb(26, 26, 26), rgb(54, 54, 54));
         font-family: 'Teko', sans-serif;
@@ -585,6 +585,7 @@ input, select, textarea {
     .timeline .date::after {
         left: -5.9rem;
     }
+   
 }
 
 @media screen and (max-width: 600px) {

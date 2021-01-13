@@ -6,6 +6,7 @@
     height: auto;
     display: flex;
     margin: 50px auto;
+    min-width: 800px;
 }
 
 .bold {
