@@ -27,7 +27,7 @@ namespace BramrSite.Classes
             if (string.IsNullOrWhiteSpace(CurrentDesignElement.Text))
             {
                 builder.OpenElement(ElementIndex, TagType); ElementIndex++;
-                if (CurrentDesignElement.CssCode != string.Empty) { builder.AddAttribute(ElementIndex, "b-qmx0h9ieg0"); ElementIndex++; }
+                if (CurrentDesignElement.CssCode != string.Empty) { builder.AddAttribute(ElementIndex, CurrentDesignElement.CssCode); ElementIndex++; }
                 if(CvCallback != null)
                 {
                     var method = new KeyValuePair<string, object>("onclick", EventCallback.Factory.Create<MouseEventArgs>(this, x => { CvCallback(true, Index); }));
@@ -44,8 +44,8 @@ namespace BramrSite.Classes
             else
             {
                 builder.OpenElement(ElementIndex, TagType); ElementIndex++;
-                builder.AddAttribute(ElementIndex, "style", $"{(CurrentDesignElement.TextColor != string.Empty ? $"color:{CurrentDesignElement.TextColor};" : string.Empty)} {(CurrentDesignElement.BackgroundColor != string.Empty ? $"background-color:{CurrentDesignElement.BackgroundColor};" : string.Empty)} font-size:{CurrentDesignElement.FontSize}rem; text-align:{CurrentDesignElement.TextAllignment}"); ElementIndex++;
-                if (CurrentDesignElement.CssCode != string.Empty) { builder.AddAttribute(ElementIndex, "b-qmx0h9ieg0"); ElementIndex++; }
+                builder.AddAttribute(ElementIndex, "style", $"{(CurrentDesignElement.TextColor != string.Empty ? $"color:{CurrentDesignElement.TextColor};" : string.Empty)} {(CurrentDesignElement.BackgroundColor != string.Empty ? $"background-color:{CurrentDesignElement.BackgroundColor};" : string.Empty)} {(CurrentDesignElement.Shadow ? $"text-shadow: 1px 1px 5px {(CurrentDesignElement.TextColor != string.Empty ? CurrentDesignElement.TextColor : "#000000")};" : string.Empty)} font-size:{CurrentDesignElement.FontSize.ToString().Replace(",", ".")}rem; {(CurrentDesignElement.FontWeight != 0 ? $"font-weight:{CurrentDesignElement.FontWeight};" : string.Empty)} text-align:{CurrentDesignElement.TextAllignment}; {(CurrentDesignElement.Font != string.Empty ? $"font-family:{CurrentDesignElement.Font}, sans-serif;" : string.Empty)}"); ElementIndex++;
+                if (CurrentDesignElement.CssCode != string.Empty) { builder.AddAttribute(ElementIndex, CurrentDesignElement.CssCode); ElementIndex++; }
                 if (CvCallback != null)
                 {
                     var method = new KeyValuePair<string, object>("onclick", EventCallback.Factory.Create<MouseEventArgs>(this, x => { CvCallback(true, Index); }));

@@ -1,3 +1,9 @@
-﻿<input type="file" id="fileselector" name="fileselector" accept="image/png, image/jpeg, image/jpg" @ref="FileReference" @onchange="async () => await OpenImage()" />
-<button disabled="@IsDisabled" @onclick="async () => await UploadImage()">Uploaden</button>
-@ErrorMessage
+﻿<div class="tool-list-img-upload">
+    <li class="tool">
+        <form action="/action_page.php">
+            <input type="file" id="myFile" name="filename" accept="image/png, image/jpeg, image/jpg" @ref="FileReference" @onchange="async () => await OpenImage()" />
+            <input type="submit" disabled="@IsDisabled" @onclick="async () => await UploadImage()">
+        </form>
+    </li>
+    @ErrorMessage
+</div>

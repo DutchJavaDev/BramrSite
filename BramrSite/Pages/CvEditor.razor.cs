@@ -17,25 +17,47 @@ namespace BramrSite.Pages
 
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>()
         {
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel(),
-            new TextModel()
+            new TextModel() { Text = "Insert Name", FontSize = 2 },
+            new TextModel() { Text = "Insert Job", FontSize = 1 },
+            new TextModel() { Text = "City, Country", FontSize = 1 },
+            new TextModel() { Text = "Phone Number", FontSize = 1 },
+            new TextModel() { Text = "Mail Address", FontSize = 1 },
+            new TextModel() { Text = "Personal Website", FontSize = 1 },
+            new TextModel() { Text = "Skill 1", FontSize = 1 },
+            new TextModel() { Text = "Skill 2", FontSize = 1 },
+            new TextModel() { Text = "Skill 3", FontSize = 1 },
+            new TextModel() { Text = "Skill 4", FontSize = 1 },
+            new TextModel() { Text = "Insert Accountname", FontSize = 1 },
+            new TextModel() { Text = "Insert Accountname", FontSize = 1 },
+            new TextModel() { Text = "Insert Accountname", FontSize = 1 },
+            new TextModel() { Text = "Insert Accountname", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis suscipit, vitae debitis quod, quibusdam odio eum possimus eveniet pariatur cumque totam nisi, tempora atque temporibus? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum facilis cumque a nisi nobis at ut et, iure officia dolore, hic, quae deserunt doloribus repellendus.", FontSize = 1 },
+            new TextModel() { Text = "0000-0000", FontSize = 1 },
+            new TextModel() { Text = "Insert Job Title", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-0000", FontSize = 1 },
+            new TextModel() { Text = "Insert Job Title", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-present", FontSize = 1 },
+            new TextModel() { Text = "Insert Job Title", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-0000", FontSize = 1 },
+            new TextModel() { Text = "Insert School", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-0000", FontSize = 1 },
+            new TextModel() { Text = "Insert School", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-present", FontSize = 1 },
+            new TextModel() { Text = "Insert School", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "Insert Hobby 1", FontSize = 1 },
+            new TextModel() { Text = "Insert Hobby 2", FontSize = 1 },
+            new TextModel() { Text = "Insert Hobby 3", FontSize = 1 },
+            new TextModel() { Text = "Insert Hobby 4", FontSize = 1 }
         };
         public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>()
         {
-            new ImageModel()
+            new ImageModel() { CssCode = "b-cvsqx07klj" }
         };
         public List<object> AllDesignElements { get; private set; } = new List<object>();
 
@@ -62,20 +84,22 @@ namespace BramrSite.Pages
 
         protected override async void OnInitialized()
         {
+            CallBackMethod = ApplySource;
+            SelectionCallback = Selection;
+
+            for (int x = 0; x < 37; x++)
+            {
+                AllTextElements[x].Location = x; AllTextElements[x].TemplateType = "Cv"; AllTextElements[x].CssCode = "b-cvsqx07klj";
+            }
+            AllImageElements[0].Location = 37; AllImageElements[0].TemplateType = "Cv"; AllImageElements[0].Alt = "Profielfoto";
+
+
             var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/CvScript.js");
 
             await module.InvokeVoidAsync("Init");
 
-            CallBackMethod = ApplySource;
-            SelectionCallback = Selection;
             await Api.DeleteAllFromHistory();
-
-            for (int x = 0; x < 15; x++)
-            {
-                AllTextElements[x].Location = x; AllTextElements[x].TemplateType = "Cv";
-            }
-            AllImageElements[0].Location = 15; AllImageElements[0].TemplateType = "Cv"; AllImageElements[0].Alt = "Profielfoto";
-
+            
             LoadSite();
             StateHasChanged();
         }
@@ -123,13 +147,13 @@ namespace BramrSite.Pages
 
             if (AllDesignElements.Count != 0)
             {
-                for (int x = 0; x < 15; x++)
+                for (int x = 0; x < 37; x++)
                 {
                     AllTextElements[x] = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[x].ToString());
                 }
                 for (int y = 0; y < 1; y++)
                 {
-                    AllImageElements[y] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[y + 15].ToString());
+                    AllImageElements[y] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[y + 37].ToString());
 #if DEBUG
                     AllImageElements[y].Src = $"https://localhost:44372/api/image/download/{AllImageElements[y].FileUri}";
 #else
@@ -139,15 +163,6 @@ namespace BramrSite.Pages
             }
 
             StateHasChanged();
-        }
-
-        private bool SelectionCheck(bool IsTextEdit)
-        {
-            if (IsText == IsTextEdit)
-            {
-                return true;
-            }
-            return false;
         }
 
         private async Task Undo()
@@ -254,11 +269,20 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Strikedthrough:
                     CurrentTextElement.StrikedThrough = bool.Parse(result.ToString());
                     break;
+                case ChangeModel.Type.Shadow:
+                    CurrentTextElement.Shadow = bool.Parse(result.ToString());
+                    break;
                 case ChangeModel.Type.TextAllignment:
                     CurrentTextElement.TextAllignment = (TextModel.Allignment)Enum.Parse(typeof(TextModel.Allignment), result.ToString());
                     break;
+                case ChangeModel.Type.Font:
+                    CurrentTextElement.Font = result.ToString();
+                    break;
                 case ChangeModel.Type.FontSize:
-                    CurrentTextElement.FontSize = int.Parse(result.ToString());
+                    CurrentTextElement.FontSize = double.Parse(result.ToString());
+                    break;
+                case ChangeModel.Type.FontWeight:
+                    CurrentTextElement.FontWeight = int.Parse(result.ToString());
                     break;
                 //Art aanpassing
                 case ChangeModel.Type.Width:
@@ -333,12 +357,16 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Italic:
                 case ChangeModel.Type.Underlined:
                 case ChangeModel.Type.Strikedthrough:
+                case ChangeModel.Type.Shadow:
                     return false;
                 case ChangeModel.Type.FontSize:
-                    return 10;
+                    return 1;
+                case ChangeModel.Type.FontWeight:
+                    return 0;
                 case ChangeModel.Type.Text:
                 case ChangeModel.Type.TextColor:
                 case ChangeModel.Type.BackgroundColor:
+                case ChangeModel.Type.Font:
                 //Art Aanpassing
                 case ChangeModel.Type.Src:
                 case ChangeModel.Type.Alt:

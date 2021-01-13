@@ -9,10 +9,13 @@
         public bool Bold { get; set; }
         public bool Italic { get; set; }
         public bool Underlined { get; set; }
-        public Allignment TextAllignment { get; set; }
         public bool StrikedThrough { get; set; }
+        public bool Shadow { get; set; }
+        public Allignment TextAllignment { get; set; }
         public string TemplateType { get; set; }
+        public string Font { get; set; } = string.Empty;
         public double FontSize { get; set; } = 2;
+        public int FontWeight { get; set; }
         public string CssCode { get; set; } = string.Empty;
 
         public bool Selected { get; set; }
