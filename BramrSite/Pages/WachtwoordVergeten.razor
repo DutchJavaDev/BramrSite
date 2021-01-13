@@ -33,6 +33,25 @@
             font-size: 16px;
             margin-left: 10px;
         }
+        .button2 {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            background-color: gray;
+            border: none;
+            color: white;
+            padding: 12px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            max-width: 50%;
+            max-height: 20%;
+            margin-top: 5px;
+            margin-left: 5px;
+        }
+
+        a:hover {
+            color: white;
+        }
         .disabled {
             opacity: 0.6;
             cursor: not-allowed;
@@ -40,7 +59,9 @@
     </style>
 </head>
 <body>
+    <a class="button2" href="home">Back to Home</a>
     <div class="dif">
+
         <h3 class="tekst">Password Recovery</h3>
         <p class="tekst">Lost your password? fill in your email to recover your password</p>
         <input class="invul" @bind="email" type="email" placeholder="Email" />
@@ -48,7 +69,7 @@
         <p class="message">@Message</p>
     </div>
 
-    
+
 </body>
 
 

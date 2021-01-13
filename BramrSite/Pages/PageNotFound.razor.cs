@@ -9,10 +9,17 @@ namespace BramrSite.Pages
         [Inject] NavigationManager NavigationManager { get; set; }
 
         [Parameter] public string Url { get; set; }
+        int count = 10;
 
         protected override async void OnInitialized()
         {
-            await Task.Delay(10000);
+            for (int i = 0; i < 10; i++)
+            {
+                await Task.Delay(1000);
+                count--;
+                StateHasChanged();
+            }
+            
             NavigationManager.NavigateTo("/home");
 
         }
