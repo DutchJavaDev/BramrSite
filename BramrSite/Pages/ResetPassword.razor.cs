@@ -31,17 +31,17 @@ namespace BramrSite.Pages
         {
             if(string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(NewPassword) || string.IsNullOrWhiteSpace(ConfirmPassword))
             {
-                ErrorMessage = "Vul alle velden in.";
+                ErrorMessage = "Please fill in all fields";
                 Disabled = true;
             }
             else if (NewPassword.Length < 8)
             {
-                ErrorMessage = "Wachtwoord is niet lang genoeg.";
+                ErrorMessage = "Your password is not long enough";
                 Disabled = true;
             }
             else if(NewPassword != ConfirmPassword)
             {
-                ErrorMessage = "Wachtwoorden komen niet overeen";
+                ErrorMessage = "Passwords do not match";
                 Disabled = true;
             }
             else
@@ -63,7 +63,7 @@ namespace BramrSite.Pages
                     }
                     if (!contains)
                     {
-                        ErrorMessage = "Uw wachtwoord bevat geen speciale tekens.";
+                        ErrorMessage = "Your password has to include atleast one number and one special character";
                         Disabled = true;
                         break;
                     }
@@ -85,19 +85,19 @@ namespace BramrSite.Pages
                 var respondse = await Api.ResetPassword(model);
                     if (respondse.Success)
                     {
-                    ErrorMessage = "U heeft uw wachtwoord succesvol kunnen veranderen.";
+                    ErrorMessage = "You have changed your password successfully.";
                     StateHasChanged();
                     }
                     else 
                     {
-                    ErrorMessage = "Er is iets misgegaan probeer het opnieuw";
+                    ErrorMessage = "Something went wrong, please try again.";
                     StateHasChanged();
                     Disabled = false;
                     }
                 }
                 else
                 {
-                ErrorMessage = "De ingevoerde wachtwoorden komen niet overeen.";
+                ErrorMessage = "Passwords do not match";
                 StateHasChanged();
                 Disabled = false;
                 }  

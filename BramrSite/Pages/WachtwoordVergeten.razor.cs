@@ -13,24 +13,34 @@ namespace BramrSite.Pages
         [Inject] ApiService Api { get; set; }
         bool Disabled { get; set; }
         string Message { get; set; }
-        string email;
+        string email = "";
         public async void klik() {
 
-            Disabled = true;
-            var response =  await Api.ForgotPassword(email);
-            if (response.Success)
+            if(email != string.Empty)
             {
-                Message = "Als dit email bij ons bekend is zal u een email van ons ontvangen.";
-                Console.WriteLine("Als dit email bij ons bekend is zal u een email van ons ontvangen.");
+                Message = "";
                 StateHasChanged();
+                Disabled = true;
+                var response = await Api.ForgotPassword(email);
+                if (response.Success)
+                {
+                    Message = ("If this email is linked to a Bramr Account you will receive an email from us with further instructions");
+                    StateHasChanged();
+                }
+                else
+                {
+                    Message = "Something went wrong please try again.";
+                    Disabled = false;
+                    StateHasChanged();
+                }
             }
             else
             {
-                Console.WriteLine("Er is iets misgegaan probeer het opnieuw");
-                Message = "Er is iets misgegaan probeer het opnieuw";
+                Message = "Please fill in your email";
                 Disabled = false;
                 StateHasChanged();
             }
+           
         }
     }
 }
