@@ -100,6 +100,8 @@ namespace BramrSite.Pages
             var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/PortfolioScript.js");
 
             await module.InvokeVoidAsync("Init");
+
+            StateHasChanged();
         }
 
         private void Selection(bool IsText, int Index)
@@ -118,6 +120,8 @@ namespace BramrSite.Pages
                 CurrentImageElement = AllImageElements[Index];
                 CurrentImageElement.Selected = true;
             }
+
+            StateHasChanged();
         }
 
         private async void Save()
@@ -190,6 +194,7 @@ namespace BramrSite.Pages
             }
 
             await Api.AddToHistory(HistoryLocation, CurrentChange);
+            StateHasChanged();
         }
 
         private async Task UseChange(ChangeModel CurrentChange, bool GoingBack)

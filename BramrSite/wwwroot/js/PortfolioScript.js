@@ -15,4 +15,27 @@
             scrollTop: $($(this).attr('href')).offset().top - 100
         }, Option(2000));
     });
+
+    $(document).ready(function () {
+        $(".draggable-item").draggable();
+    });
+
+    var modal = document.getElementById("editor");
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    console.log("oi");
+
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 }
