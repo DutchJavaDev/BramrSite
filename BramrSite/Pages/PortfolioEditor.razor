@@ -36,7 +36,7 @@
             {
                 <h1>Text editor tool</h1>
                 <div id="output">
-                    <textarea name="comment" form="usrform" cols="60" rows="5" @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString());}" @bind="CurrentTextElement.Text"></textarea>
+                    <textarea name="comment" form="usrform" cols="63" rows="3" @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString());}" @bind="CurrentTextElement.Text"></textarea>
                 </div>
                 <div class="tool-list-text">
                     <li class="tool">
@@ -111,7 +111,7 @@
                     </li>
                     <li>
                         <h3>Font size</h3>
-                        <input type="range" min="1" max="40" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentTextElement.FontSize = Convert.ToDouble(e.Value) / 10; }" @onchange="async(e) => { CurrentTextElement.FontSize = Convert.ToDouble(e.Value) / 10; await AddToDB(ChangeModel.Type.FontSize, CurrentTextElement.FontSize.ToString()); e.Value = CurrentTextElement.FontSize; }">
+                        <input type="range" min="1" max="100" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentTextElement.FontSize = Convert.ToDouble(e.Value) / 10; }" @onchange="async(e) => { CurrentTextElement.FontSize = Convert.ToDouble(e.Value) / 10; await AddToDB(ChangeModel.Type.FontSize, CurrentTextElement.FontSize.ToString()); e.Value = CurrentTextElement.FontSize; }">
                     </li>
                     <li>
                         <h3>Font weight</h3>

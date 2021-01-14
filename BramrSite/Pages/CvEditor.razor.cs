@@ -143,7 +143,7 @@ namespace BramrSite.Pages
 
         private async void LoadSite()
         {
-            List<object> AllDesignElements = await Api.GetDesignElements();
+            List<object> AllDesignElements = await Api.GetDesignElements(true);
 
             if (AllDesignElements.Count != 0)
             {
@@ -171,7 +171,6 @@ namespace BramrSite.Pages
 
             RedoButton = false;
             CurrentChange = await Api.GetOneFromHistory(HistoryLocation);
-            Console.WriteLine(HistoryLocation);
             HistoryLocation--;
             if (HistoryLocation == 0)
             {
@@ -188,7 +187,6 @@ namespace BramrSite.Pages
             UndoButton = false;
             HistoryLocation++;
             CurrentChange = await Api.GetOneFromHistory(HistoryLocation);
-            Console.WriteLine(HistoryLocation);
             if (HistoryLocation == EditAmount)
             {
                 RedoButton = true;

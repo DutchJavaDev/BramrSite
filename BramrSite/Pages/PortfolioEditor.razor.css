@@ -130,7 +130,7 @@ header {
 }
 
 li {
-    margin: 0 2rem;
+    margin: 0 0.7rem;
 }
 
 .nav-link {
@@ -219,7 +219,6 @@ li {
         text-transform: uppercase;
         background: rgb(0, 207, 255);
         -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
         padding: 2rem;
         user-select: none;
     }
@@ -647,18 +646,178 @@ input, select, textarea {
 
 /* EDITOR */
 
-/* OPMAAK GRID */
-
-.kleurgrid-titel, .afbeeldinggrid-titel, .lettertypegrid-titel {
-    font-size: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 2.5rem;
-    color: rgb(8, 93, 112);
-    font-weight: 600;
-    background: linear-gradient(to right, rgb(6, 255, 248), rgb(0, 207, 255));
+.editor {
+    background: rgb(26, 26, 26);
+    width: 40%;
+    padding: 1rem;
+    margin: 1rem;
+    position: absolute;
+    top: 10%;
+    left: 10%;
 }
+
+.toolbar {
+    width: 100%;
+}
+
+    .toolbar h1 {
+        border-bottom: 1px solid rgb(0, 207, 255);
+    }
+
+h1 {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: rgb(0, 207, 255);
+    text-transform: uppercase;
+    font-weight: 400;
+    position: relative;
+    margin: 0 1rem;
+    padding-top: 10px;
+    
+}
+
+h3 {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0 10px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+input {
+    font-weight: 400;
+    position: relative;
+    margin: 0.5rem;
+    background: rgb(56, 56, 56);
+    color: rgb(255, 255, 255);
+    font-family: 'Teko', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+select {
+    margin: 0.5rem;
+    margin-top: 20px;
+    padding: 0 50px;
+    padding-top: 5px;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    font-family: 'Teko', sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    background: rgb(56, 56, 56);
+    color: rgb(255, 255, 255);
+}
+
+.tool-list-text,
+.tool-list-font,
+.tool-list-img-upload,
+.tool-list-img-edit,
+.tool-list-color {
+    display: flex;
+    flex-flow: row nowrap;
+    list-style: none;
+    padding: 5px auto;
+    margin: 1rem;
+    overflow: hidden;
+}
+
+.tool-btn {
+    display: block;
+    justify-content: center;
+    width: 44px;
+    height: 45px;
+    border: none;
+    padding: .5rem;
+    font-size: 20px;
+    font-family: 'Teko', sans-serif;
+    background: rgb(56, 56, 56);
+    color: rgb(8, 93, 112);
+    margin: 0.2rem;
+}
+
+#output {
+    width: 93%;
+    height: 100px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    margin-top: 1rem;
+    margin-bottom: 2.3rem;
+    padding: .2rem 1rem;
+    color: rgb(0, 0, 0);
+}
+
+/* EDITOR-MODAL */
+
+#myBtn {
+    /*position: absolute;
+    top: 0%;
+    left: 0%;
+    width: initial;
+    background: rgb(0, 207, 255);
+    border: 1px solid rgb(255, 255, 255);
+    padding: 1rem 1rem;
+    cursor: pointer;*/
+}
+
+#myBtn-back {
+    position: absolute;
+    top: 0%;
+    left: 5%;
+    width: initial;
+    background: rgb(0, 207, 255);
+    border: 1px solid rgb(255, 255, 255);
+    padding: 1rem 1rem;
+    cursor: pointer;
+}
+
+#myBtn-save {
+    /*position: absolute;
+    top: 0%;
+    left: 9.4%;
+    width: initial;
+    background: rgb(0, 207, 255);
+    border: 1px solid rgb(255, 255, 255);
+    padding: 1rem 1rem;
+    cursor: pointer;*/
+}
+
+    #myBtn i,
+    #myBtn-back i,
+    #myBtn-save i {
+        font-size: 2rem;
+        color: rgb(255, 255, 255);
+    }
+
+.modal {
+    display: none;
+    padding-top: 100px;
+    overflow: auto;
+    background: rgb(26, 26, 26);
+    width: 42%;
+    height: 40%;
+    padding: 1rem;
+    margin: 1rem;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    z-index: 1;
+    cursor: move;
+}
+
+.close {
+    color: rgb(0, 207, 255);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        cursor: pointer;
+    }
 
 /* ZIJBALK BUTTONS */
 
@@ -673,41 +832,6 @@ input, select, textarea {
     text-decoration: none;
     display: inline-block;
     font-size: 2rem;
-}
-
-.buttonBold, .buttonItalic, .buttonStreepOnder, .buttonStreepBoven, .buttonTextShadow,
-.buttonAlingRechts, .buttonAlingLinks, .buttonAlingMidden {
-    position: relative;
-    left: 10px;
-    top: 5px;
-    background: rgb(0, 207, 255);
-    box-shadow: 0 0 25px 10px rgba(0, 0, 0, .25);
-    color: rgb(0, 0, 0);
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 2rem;
-}
-
-/* ZIJBALK SELECTED INDEXEN */
-
-#fontkiezen, #fontgroote, #fontweight, #textkleurkiezen, #backgroundtext, #afbeeldingkiezen, #hyperlinktext p {
-    position: relative;
-    box-shadow: 0 0 25px 10px rgba(0, 0, 0, .25);
-    color: rgb(255, 255, 255);
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-}
-
-#fileselector {
-    position: relative;
-    border: none;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
 }
 
 /* AFBEELDING GEDEELTE */

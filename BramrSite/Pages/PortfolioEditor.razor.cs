@@ -18,7 +18,7 @@ namespace BramrSite.Pages
 
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>()
         {
-            new TextModel() { Text = "Insert your name", TextAllignment = TextModel.Allignment.Center, FontSize = 10 },
+            new TextModel() { Text = "Insert your name", TextAllignment = TextModel.Allignment.Center, FontSize = 10, TextColor = "#00DBFF" },
             new TextModel() { Text = "Insert your profession", TextAllignment = TextModel.Allignment.Center, FontSize = 4 },
             new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolores consequatur error aliquam placeat odit quas quo, eius adipisci similique! Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam est nulla dolore perspiciatis excepturi explicabo!", FontSize = 2 },
             new TextModel() { Text = "Insert skill 1", TextAllignment = TextModel.Allignment.Center, FontSize = 1.5 },
@@ -101,6 +101,7 @@ namespace BramrSite.Pages
 
             await module.InvokeVoidAsync("Init");
 
+            LoadSite();
             StateHasChanged();
         }
 
@@ -130,6 +131,30 @@ namespace BramrSite.Pages
 
             await Api.UploadPortfolio(Json);
             await Api.DeleteAllFromHistory();
+        }
+
+        private async void LoadSite()
+        {
+            List<object> AllDesignElements = await Api.GetDesignElements(false);
+
+            if (AllDesignElements.Count != 0)
+            {
+                for (int x = 0; x < 23; x++)
+                {
+                    AllTextElements[x] = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[x].ToString());
+                }
+                for (int y = 0; y < 4; y++)
+                {
+                    AllImageElements[y] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[y + 23].ToString());
+#if DEBUG
+                    AllImageElements[y].Src = $"https://localhost:44372/api/image/download/{AllImageElements[y].FileUri}";
+#else
+                    AllImageElements[y].Src = $"https://bramr.tech/api/image/download/{AllImageElements[y].FileUri}";
+#endif
+                }
+            }
+
+            StateHasChanged();
         }
 
         private async Task Undo()
