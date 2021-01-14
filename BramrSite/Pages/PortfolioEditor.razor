@@ -324,19 +324,20 @@
                 <h1>Contact</h1>
                 <h6> Interested? Feel free to contact me! </h6>
             </div>
-            <form action="" data-aos="fade-up" data-aos-delay="300">
+            <form method="post" action="https://localhost:44372/api/website/contact" data-aos="fade-up" data-aos-delay="300">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Insert your name..." required>
+                <input type="text" id="name" name="sendersName" placeholder="Insert your name..." required>
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Insert your mail address..." required>
+                <input type="email" id="email" name="sendersEmail" placeholder="Insert your mail address..." required>
                 <label for="service">Services:</label>
-                <select name="services" id="service">
+                <select name="service" id="service">
                     <option value="Option 1">Insert option 1</option>
                     <option value="Option 2">Insert option 2</option>
                     <option value="Option 3">Insert option 3</option>
                 </select>
                 <label for="subject">Subject:</label>
-                <textarea name="subject" id="subject" cols="10" rows="10" placeholder="Art plaats hier je placeholder"></textarea>
+                <textarea name="message" id="subject" cols="10" rows="10" placeholder="Art plaats hier je placeholder"></textarea>
+                <input type="hidden" name="recipientUsername" value="[RUBEN PLAATS HIER DE USERNAME PLS]" />
                 <input type="submit" value="Versturen">
             </form>
         </div>
