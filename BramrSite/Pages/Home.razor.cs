@@ -94,7 +94,8 @@ namespace BramrSite.Pages
                 }
                 else
                 {
-                    SignUpMessage = "This username is available";
+                    SignUpMessage = "User created";
+                    Console.WriteLine(apiResult.Message);
                 }
 
                 apiResult = await Api.SignUp(Model);
@@ -131,7 +132,7 @@ namespace BramrSite.Pages
 
                     if (ReturnToIndex)
                     {
-                        Navigation.NavigateTo("/");
+                        Navigation.NavigateTo("/account");
                     }
                     else if (!string.IsNullOrEmpty(ReturnUrl))
                     {
@@ -139,7 +140,7 @@ namespace BramrSite.Pages
                     }
                     else
                     {
-                        Navigation.NavigateTo("/");
+                        Navigation.NavigateTo("/account");
                     }
                 }
             }
