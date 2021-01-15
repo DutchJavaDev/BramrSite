@@ -5,24 +5,11 @@
 
     <AuthorizeView>
         <Authorized>
-            @*<div class="topnav">
-            <NavLink href="/home" Match="NavLinkMatch.All">Home</NavLink>
-            @if (context.User.IsInRole("Admin"))
-            {
-                <NavLink href="/MaakApp">Maak app</NavLink>
-            }
-
-            @if (context.User.IsInRole("AppOwner"))
-            {
-                <NavLink href="/beheer/gebruikers">Gebruiker toevoegen</NavLink>
-                <NavLink href="/beheer/afbeeldingen">Beheer Afbeeldingen</NavLink>
-                <NavLink href="/beheer/widgets">Beheer Widgets</NavLink>
-            }
-
-            <NavLink class="float-right" href="#" @onclick="Logout">
+            <div class="topnav">
+            <NavLink class="fixed-top" style="float:right;" href="#" @onclick="Logout">
                 <span>Uitloggen</span>
             </NavLink>
-        </div>*@
+        </div>
             @Body
         </Authorized>
         <NotAuthorized>
@@ -30,9 +17,9 @@
         </NotAuthorized>
     </AuthorizeView>
 @code{
-    //private async void Logout()
-    //{
-    //    await tokenhandler.UpdateAutenticationState(string.Empty);
-    //    navigation.NavigateTo("/", false);
-    //}
+    private async void Logout()
+    {
+        await tokenhandler.UpdateAutenticationState(string.Empty);
+        navigation.NavigateTo("/", false);
+    }
 }
