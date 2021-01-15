@@ -29,13 +29,16 @@ namespace BramrSite.Pages
 
         private bool ReturnToIndex { get; set; }
 
+        public bool ShowModal { get; set; }
         public bool Disabled { get; set; }
+
+        private IJSObjectReference Module { get; set; }
 
         protected async override void OnInitialized()
         {
-            var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/HomeScript.js");
+            Module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/HomeScript.js");
 
-            await module.InvokeVoidAsync("updateContainer");
+            await Module.InvokeVoidAsync("updateContainer");
 
             if (ReturnUrl == "index" || ReturnUrl == "/")
             {
@@ -44,9 +47,29 @@ namespace BramrSite.Pages
             }
         }
 
+
+        /// <summary>
+        /// Beter fix: https://chrissainty.com/fragment-routing-with-blazor/
+        /// </summary>
+        public async void MeetTheTeam()
+        {
+            await Module.InvokeVoidAsync("scrollToId", "#meetTheTeam");
+        }
+
+        public async void About()
+        {
+            await Module.InvokeVoidAsync("scrollToId", "#about");
+        }
+
+        public async void _Home()
+        {
+            await Module.InvokeVoidAsync("scrollToId", "#Home");
+        }
+
         public async Task SignUpSubmit()
         {
             Disabled = true;
+            StateHasChanged();
 
             if (Model.IsValidSignUp())
             {
@@ -55,14 +78,18 @@ namespace BramrSite.Pages
                 if (!apiResult.Success)
                 {
                     SignUpMessage = apiResult.Message;
+                    Disabled = false;
+                    StateHasChanged();
                     return;
                 }
 
-                bool.TryParse(apiResult.GetData<string>("user_exists"), out var nameExists);
-
+                _ = bool.TryParse(apiResult.GetData<string>("user_exists"), out var nameExists);
+                
                 if (nameExists)
                 {
                     SignUpMessage = "This username is not available";
+                    Disabled = false;
+                    StateHasChanged();
                     return;
                 }
                 else
@@ -83,11 +110,13 @@ namespace BramrSite.Pages
             }
 
             Disabled = false;
+            StateHasChanged();
         }
 
         public async Task SignInSubmit()
         {
             Disabled = true;
+            StateHasChanged();
 
             if (Model.IsValidSignIn())
             {
@@ -116,6 +145,7 @@ namespace BramrSite.Pages
             }
 
             Disabled = false;
+            StateHasChanged();
         }
     }
 }
