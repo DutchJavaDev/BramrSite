@@ -12,7 +12,11 @@ namespace BramrSite.Pages
         [Inject] ApiService Api { get; set; }
         private IJSObjectReference Module;
 
-        private List<NoteModel> Notes { get; set; } = new List<NoteModel>();
+        private List<NoteModel> Notes { get; set; }
+
+        private bool HasCv { get; set; }
+        private bool HasPortfolio { get; set; }
+
         private List<string> UserInfo { get; set; } = new List<string>() 
         {
             "UserName",
@@ -25,7 +29,12 @@ namespace BramrSite.Pages
 
         protected override async void OnInitialized()
         {
+            Notes = new List<NoteModel>();
+
             UserInfo = await Api.GetUserInfo();
+
+            HasCv = bool.Parse(UserInfo[5]);
+            HasPortfolio = bool.Parse(UserInfo[6]);
 
             Module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/AccountScript.js");
 
