@@ -28,8 +28,11 @@ namespace BramrSite.Models
             Italic,
             Underlined,
             Strikedthrough,
+            Shadow,
             TextAllignment,
+            Font,
             FontSize,
+            FontWeight,
             // Art Aanpassing
             Width,
             Height,
@@ -39,9 +42,7 @@ namespace BramrSite.Models
             FloatSet,
             Opacity,
             ObjectFitSet,
-            Margin,
             Padding
-                
         }
     }
 }

@@ -261,12 +261,20 @@ namespace BramrSite.Classes
             }
         }
 
-        public async Task<List<object>> GetDesignElements()
+        public async Task<List<object>> GetDesignElements(bool IsCV)
         {
             try
             {
                 using var client = CreateClient();
-                var response = await client.GetAsync($"website/get");
+                HttpResponseMessage response;
+                if (IsCV)
+                {
+                    response = await client.GetAsync($"website/get/true");
+                }
+                else
+                {
+                    response = await client.GetAsync($"website/get/false");
+                }
                 var result = JsonConvert.DeserializeObject<List<object>>(await response.Content.ReadAsStringAsync());
                 return result;
             }
@@ -317,8 +325,7 @@ namespace BramrSite.Classes
         }
         public async Task<ApiResponse> ResetPassword(ResetPasswordModel model)
         {
-            var i = JsonConvert.SerializeObject(model);
-            Console.WriteLine(i);
+
             var content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
 
             try
@@ -334,6 +341,22 @@ namespace BramrSite.Classes
             catch (Exception e)
             {
                 return new ApiResponse { Success = false, Message = e.Message };
+            }
+        }
+
+        public async Task<List<string>> GetUserInfo()
+        {
+            try
+            {
+                using var client = CreateClient();
+                var response = await client.GetAsync($"account/info");
+                var result = JsonConvert.DeserializeObject<List<string>>(await response.Content.ReadAsStringAsync());
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return new List<string>();
             }
         }
 

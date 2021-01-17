@@ -1,6 +1,7 @@
 ﻿using BramrSite.Classes;
 using BramrSite.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,39 +10,59 @@ using Tewr.Blazor.FileReader;
 
 namespace BramrSite.Pages
 {
-    public partial class Editor : ComponentBase
+    public partial class CvEditor : ComponentBase
     {
+        [Inject] IJSRuntime IJSRuntime { get; set; }
         [Inject] ApiService Api { get; set; }
 
-        public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
-        public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
+        public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>()
+        {
+            new TextModel() { Text = "Insert Name", FontSize = 2 },
+            new TextModel() { Text = "Insert Job", FontSize = 1 },
+            new TextModel() { Text = "City, Country", FontSize = 1 },
+            new TextModel() { Text = "Phone Number", FontSize = 1 },
+            new TextModel() { Text = "Mail Address", FontSize = 1 },
+            new TextModel() { Text = "Personal Website", FontSize = 1 },
+            new TextModel() { Text = "Skill 1", FontSize = 1 },
+            new TextModel() { Text = "Skill 2", FontSize = 1 },
+            new TextModel() { Text = "Skill 3", FontSize = 1 },
+            new TextModel() { Text = "Skill 4", FontSize = 1 },
+            new TextModel() { Text = "Insert Accountname", FontSize = 1 },
+            new TextModel() { Text = "Insert Accountname", FontSize = 1 },
+            new TextModel() { Text = "Insert Accountname", FontSize = 1 },
+            new TextModel() { Text = "Insert Accountname", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis suscipit, vitae debitis quod, quibusdam odio eum possimus eveniet pariatur cumque totam nisi, tempora atque temporibus? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum facilis cumque a nisi nobis at ut et, iure officia dolore, hic, quae deserunt doloribus repellendus.", FontSize = 1 },
+            new TextModel() { Text = "0000-0000", FontSize = 1 },
+            new TextModel() { Text = "Insert Job Title", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-0000", FontSize = 1 },
+            new TextModel() { Text = "Insert Job Title", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-present", FontSize = 1 },
+            new TextModel() { Text = "Insert Job Title", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-0000", FontSize = 1 },
+            new TextModel() { Text = "Insert School", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-0000", FontSize = 1 },
+            new TextModel() { Text = "Insert School", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "0000-present", FontSize = 1 },
+            new TextModel() { Text = "Insert School", FontSize = 1 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione maiores qui porro illum alias magni?", FontSize = 1 },
+            new TextModel() { Text = "Insert Hobby 1", FontSize = 1 },
+            new TextModel() { Text = "Insert Hobby 2", FontSize = 1 },
+            new TextModel() { Text = "Insert Hobby 3", FontSize = 1 },
+            new TextModel() { Text = "Insert Hobby 4", FontSize = 1 }
+        };
+        public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>()
+        {
+            new ImageModel() { CssCode = "b-cvsqx07klj" }
+        };
         public List<object> AllDesignElements { get; private set; } = new List<object>();
 
-        public TextModel Naam { get; private set; } = new TextModel() { Location = 0, TemplateType = "Cv" };
-        public TextModel Adres { get; private set; } = new TextModel() { Location = 1, TemplateType = "Cv" };
-        public TextModel Postcode { get; private set; } = new TextModel() { Location = 2, TemplateType = "Cv" };
-        public TextModel Woonplaats { get; private set; } = new TextModel() { Location = 3, TemplateType = "Cv" };
-        public TextModel Telefoon { get; private set; } = new TextModel() { Location = 4, TemplateType = "Cv" };
-        public TextModel Email { get; private set; } = new TextModel() { Location = 5, TemplateType = "Cv" };
-        public TextModel Geboortedatum { get; private set; } = new TextModel() { Location = 6, TemplateType = "Cv" };
-        public TextModel Nationaliteit { get; private set; } = new TextModel() { Location = 7, TemplateType = "Cv" };
-        public TextModel Rijbewijs { get; private set; } = new TextModel() { Location = 8, TemplateType = "Cv" };
-        public TextModel LinkedIn { get; private set; } = new TextModel() { Location = 9, TemplateType = "Cv" };
-        public TextModel Werkervaring { get; private set; } = new TextModel() { Location = 10, TemplateType = "Cv" };
-        public TextModel Schoolervaring { get; private set; } = new TextModel() { Location = 11, TemplateType = "Cv" };
-        public TextModel Skillset { get; private set; } = new TextModel() { Location = 12, TemplateType = "Cv" };
-        public TextModel Interesses { get; private set; } = new TextModel() { Location = 13, TemplateType = "Cv" };
-        public TextModel Motivatie { get; private set; } = new TextModel() { Location = 14, TemplateType = "Cv" };
-        //Art Aanpassing 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Location = 15, Alt = "ProfielFoto", TemplateType = "Cv" };
-        //Art Aanpassing einde
-
         private TextModel CurrentTextElement { get; set; } = new TextModel();
-
-        private List<int> AllFontSizes { get; set; } = new List<int>()
-        {
-            8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72
-        };
+        private ImageModel CurrentImageElement { get; set; } = new ImageModel();
 
         public int EditAmount { get; set; }
         public int HistoryLocation { get; set; }
@@ -49,34 +70,58 @@ namespace BramrSite.Pages
         private bool UndoButton { get; set; } = true;
         private bool RedoButton { get; set; } = true;
 
-        public delegate void Del(string uri, string src);
+        private bool IsText { get; set; }
 
-        Del CallBackMethod;
+        public delegate void CvImageDel(string uri, string src);
+        public delegate void CvDel(bool IsText, int Index);
+
+        CvImageDel ImageCallback;
+        CvDel SelectionCallback;
 
         protected override async void OnInitialized()
         {
-            CallBackMethod = ApplySource;
+            ImageCallback = ApplySource;
+            SelectionCallback = Selection;
+
+            for (int x = 0; x < 37; x++)
+            {
+                AllTextElements[x].Location = x; AllTextElements[x].TemplateType = "Cv"; AllTextElements[x].CssCode = "b-cvsqx07klj";
+            }
+            AllImageElements[0].Location = 37; AllImageElements[0].TemplateType = "Cv"; AllImageElements[0].Alt = "Profielfoto";
+
+
+            var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/CvScript.js");
+
+            await module.InvokeVoidAsync("Init");
+
             await Api.DeleteAllFromHistory();
+            
+            LoadSite();
+            StateHasChanged();
+        }
 
-            AllTextElements.Add(Naam);
-            AllTextElements.Add(Adres);
-            AllTextElements.Add(Postcode);
-            AllTextElements.Add(Woonplaats);
-            AllTextElements.Add(Telefoon);
-            AllTextElements.Add(Email);
-            AllTextElements.Add(Geboortedatum);
-            AllTextElements.Add(Nationaliteit);
-            AllTextElements.Add(Rijbewijs);
-            AllTextElements.Add(LinkedIn);
-            AllTextElements.Add(Werkervaring);
-            AllTextElements.Add(Schoolervaring);
-            AllTextElements.Add(Skillset);
-            AllTextElements.Add(Interesses);
-            AllTextElements.Add(Motivatie);
-            //Art Aanpassing 
-            AllImageElements.Add(ProfielFoto);
-            //Art Aanpassing einde
+        private void Selection(bool IsText, int Index)
+        {
+            this.IsText = IsText;
+            CurrentTextElement.Selected = false;
+            CurrentImageElement.Selected = false;
 
+            if (IsText)
+            {
+                CurrentTextElement = AllTextElements[Index];
+                CurrentTextElement.Selected = true;
+            }
+            else
+            {
+                CurrentImageElement = AllImageElements[Index];
+                CurrentImageElement.Selected = true;
+            }
+
+            StateHasChanged();
+        }
+
+        private async void Save()
+        {
             foreach (var item in AllTextElements)
             {
                 AllDesignElements.Add(item);
@@ -86,18 +131,6 @@ namespace BramrSite.Pages
                 AllDesignElements.Add(item);
             }
 
-            LoadSite();
-        }
-
-        private void Selection(TextModel NewTextElement)
-        {
-            CurrentTextElement.Selected = false;
-            CurrentTextElement = NewTextElement;
-            CurrentTextElement.Selected = true;
-        }
-
-        private async void Save()
-        {
             string json = JsonConvert.SerializeObject(AllDesignElements, Formatting.Indented);
 
             await Api.UploadCV(json);
@@ -106,31 +139,23 @@ namespace BramrSite.Pages
 
         private async void LoadSite()
         {
-            List<object> AllDesignElements = await Api.GetDesignElements();
+            List<object> AllDesignElements = await Api.GetDesignElements(true);
 
             if (AllDesignElements.Count != 0)
             {
-                Naam = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[0].ToString());
-                Adres = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[1].ToString());
-                Postcode = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[2].ToString());
-                Woonplaats = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[3].ToString());
-                Telefoon = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[4].ToString());
-                Email = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[5].ToString());
-                Geboortedatum = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[6].ToString());
-                Nationaliteit = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[7].ToString());
-                Rijbewijs = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[8].ToString());
-                LinkedIn = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[9].ToString());
-                Werkervaring = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[10].ToString());
-                Schoolervaring = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[11].ToString());
-                Skillset = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[12].ToString());
-                Interesses = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[13].ToString());
-                Motivatie = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[14].ToString());
-                ProfielFoto = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[15].ToString());
+                for (int x = 0; x < 37; x++)
+                {
+                    AllTextElements[x] = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[x].ToString());
+                }
+                for (int y = 0; y < 1; y++)
+                {
+                    AllImageElements[y] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[y + 37].ToString());
 #if DEBUG
-                ProfielFoto.Src = $"https://localhost:44372/api/image/download/{ProfielFoto.FileUri}";
+                    AllImageElements[y].Src = $"https://localhost:44372/api/image/download/{AllImageElements[y].FileUri}";
 #else
-                ProfielFoto.Src = $"https://bramr.tech/api/image/download/{ProfielFoto.FileUri}";
+                    AllImageElements[y].Src = $"https://bramr.tech/api/image/download/{AllImageElements[y].FileUri}";
 #endif
+                }
             }
 
             StateHasChanged();
@@ -142,7 +167,6 @@ namespace BramrSite.Pages
 
             RedoButton = false;
             CurrentChange = await Api.GetOneFromHistory(HistoryLocation);
-            Console.WriteLine(HistoryLocation);
             HistoryLocation--;
             if (HistoryLocation == 0)
             {
@@ -159,11 +183,9 @@ namespace BramrSite.Pages
             UndoButton = false;
             HistoryLocation++;
             CurrentChange = await Api.GetOneFromHistory(HistoryLocation);
-            Console.WriteLine(HistoryLocation);
             if (HistoryLocation == EditAmount)
             {
                 RedoButton = true;
-
             }
 
             await UseChange(CurrentChange, false);
@@ -185,6 +207,7 @@ namespace BramrSite.Pages
             }
 
             await Api.AddToHistory(HistoryLocation, CurrentChange);
+            StateHasChanged();
         }
 
         private async Task UseChange(ChangeModel CurrentChange, bool GoingBack)
@@ -240,11 +263,20 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Strikedthrough:
                     CurrentTextElement.StrikedThrough = bool.Parse(result.ToString());
                     break;
+                case ChangeModel.Type.Shadow:
+                    CurrentTextElement.Shadow = bool.Parse(result.ToString());
+                    break;
                 case ChangeModel.Type.TextAllignment:
                     CurrentTextElement.TextAllignment = (TextModel.Allignment)Enum.Parse(typeof(TextModel.Allignment), result.ToString());
                     break;
+                case ChangeModel.Type.Font:
+                    CurrentTextElement.Font = result.ToString();
+                    break;
                 case ChangeModel.Type.FontSize:
-                    CurrentTextElement.FontSize = int.Parse(result.ToString());
+                    CurrentTextElement.FontSize = double.Parse(result.ToString());
+                    break;
+                case ChangeModel.Type.FontWeight:
+                    CurrentTextElement.FontWeight = int.Parse(result.ToString());
                     break;
                 //Art aanpassing
                 case ChangeModel.Type.Width:
@@ -270,9 +302,6 @@ namespace BramrSite.Pages
                     break;
                 case ChangeModel.Type.ObjectFitSet:
                     CurrentImageElement.ObjectFitSet = (ImageModel.ObjectFit)Enum.Parse(typeof(ImageModel.ObjectFit), result.ToString());
-                    break;
-                case ChangeModel.Type.Margin:
-                    //CurrentImageElement.Margin = int.Parse(result.ToString());
                     break;
                 case ChangeModel.Type.Padding:
                     CurrentImageElement.Padding = int.Parse(result.ToString());
@@ -322,12 +351,16 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Italic:
                 case ChangeModel.Type.Underlined:
                 case ChangeModel.Type.Strikedthrough:
+                case ChangeModel.Type.Shadow:
                     return false;
                 case ChangeModel.Type.FontSize:
-                    return 10;
+                    return 1;
+                case ChangeModel.Type.FontWeight:
+                    return 0;
                 case ChangeModel.Type.Text:
                 case ChangeModel.Type.TextColor:
                 case ChangeModel.Type.BackgroundColor:
+                case ChangeModel.Type.Font:
                 //Art Aanpassing
                 case ChangeModel.Type.Src:
                 case ChangeModel.Type.Alt:
@@ -336,7 +369,6 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Width:
                     return 100;
                 case ChangeModel.Type.Padding:
-                case ChangeModel.Type.Margin:
                     return 0;
                 case ChangeModel.Type.Opacity:
                     return 1;
@@ -352,8 +384,8 @@ namespace BramrSite.Pages
 
         public void ApplySource(string Uri, string Src)
         {
-            ProfielFoto.FileUri = Uri;
-            ProfielFoto.Src = Src;
+            AllImageElements[0].FileUri = Uri;
+            AllImageElements[0].Src = Src;
             StateHasChanged();
         }
     }

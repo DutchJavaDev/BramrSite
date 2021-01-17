@@ -1,139 +1,212 @@
 ﻿@page "/image"
-@*@using ML5*@
+@using ML5
 
 @inject IJSRuntime JSRuntime;
 @inject IJSInProcessRuntime Runtime
 
 
-
-<!--<div class="container">-->
-    <!--Section: Content-->
-    <!--<section class="p-5 my-md-0">
-        <div class="row">
-            <div class="col-md-12 mx-0">-->
-                <!-- Material form login -->
-                <!--<div class="card text-white" style="background-color: #141b29">
-                    <h4 class="card-header text-success" style="font-weight:bold">Image Classification </h4>-->
-                    <!--Card content-->
-                    <!--<div class="card-body">
-                        @if (loaded)
-                        {
-                            <center>
-                                <p>In current frame AI sees :</p>
-                                <div class="alert-primary" style="font-weight:bolder">@Res</div>
+@*<div class="container">
+        Section: Content
+        <section class="p-5 my-md-0">
+            <div class="row">
+                <div class="col-md-12 mx-0">
+                     Material form login
+                    <div class="card text-white" style="background-color: #141b29">
+                        <h4 class="card-header text-success" style="font-weight:bold">Image Classification </h4>
+                        Card content
+                        <div class="card-body">
+                            @if (loaded)
+                            {
+                                <center>
+                                    <p>In current frame AI sees :</p>
+                                    <div class="alert-primary" style="font-weight:bolder">@Res</div>
+                                    <br />
+                                    <video width="90%" height="60%" @ref="video"
+                                           crossorigin="anonymous" autoplay
+                                           src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4">
+                                    </video>
+                                </center>
+                            }
+                            else
+                            {
+                                <button class="btn btn-danger" type="button" disabled>
+                                    <span class="spinner-border spinner-border-sm"
+                                          role="status"
+                                          aria-hidden="true"></span>
+                                    Fetching Convolutional Model
+                                </button>
                                 <br />
-                                <video width="90%" height="60%" @ref="video"
-                                       crossorigin="anonymous" autoplay
-                                       src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4">
-                                </video>
-                            </center>
-                        }
-                        else
-                        {
-                            <button class="btn btn-danger" type="button" disabled>
-                                <span class="spinner-border spinner-border-sm"
-                                      role="status"
-                                      aria-hidden="true"></span>
-                                Fetching Convolutional Model
-                            </button>
-                            <br />
-                            <br />
-                        }
+                                <br />
+                            }
+                        </div>
+
                     </div>
+                     Material form login
+                </div>
+            </div>
 
-                </div>-->
-                <!-- Material form login -->
-            <!--</div>
-        </div>
-
-    </section>-->
-    <!--Section: Content-->
+        </section>
+        Section: Content
 
 
-<!--</div>
+    </div>
 
 
 
 
-@code
-{
-    
-    ElementReference video;
-    ML5.ImageClassifier classifier;
-    private string Res;
-    bool loaded;
-    protected override void OnAfterRender(bool firstRender)
+    @code
     {
-        if (firstRender)
+
+        ElementReference video;
+        ML5.ImageClassifier classifier;
+        private string Res;
+        bool loaded;
+        protected override void OnAfterRender(bool firstRender)
         {
-            classifier = new ML5.ImageClassifier(Runtime, ImageModel.MobileNet);
-            classifier.OnModelLoad += ModelLoad;
-            classifier.OnClassification += GetClassfy;
+            if (firstRender)
+            {
+                classifier = new ML5.ImageClassifier(Runtime, ImageModel.MobileNet);
+                classifier.OnModelLoad += ModelLoad;
+                classifier.OnClassification += GetClassfy;
+            }
+            else
+            {
+                classifier.Classify(video);
+            }
+
+            base.OnAfterRender(firstRender);
+
         }
-        else
+
+        private void ModelLoad()
         {
+            loaded = true;
+            StateHasChanged();
             classifier.Classify(video);
         }
-
-        base.OnAfterRender(firstRender);
-
+        private void GetClassfy(string err, CResult[] res)
+        {
+            Res = res[0].label;
+            StateHasChanged();
+        }
     }
 
-    private void ModelLoad()
-    {
-        loaded = true;
-        StateHasChanged();
-        classifier.Classify(video);
-    }
-    private void GetClassfy(string err, CResult[] res)
-    {
-        Res = res[0].label;
-        StateHasChanged();
-    }
+    <p id="accesLabel">...</p>
+    <video id="video" autoplay></video>
+    <button @onclick="async => videoStart() "></button>
+    <div>
+            <canvas id="@options.CanvasID"
+                    style="background-color:lightgray;"
+                    width="@options.Width"
+                    height="360">
+            </canvas>
+        </div>
+        <div>
+            <button @onclick="Start">Start</button>
+        </div>
+        <div>
+            <video id="@options.VideoID"
+                   style="background-color:lightblue; visibility:hidden;"
+                   width="@options.Width">
+                Video stream not available.
+            </video>
+        </div>
+
+    @code{
+
+            WebCamOptions options = new WebCamOptions()
+            {
+                CanvasID = "canvas",
+                VideoID = "video"
+            };
+
+            //protected override void OnInitialized()
+            //{
+
+            //    options.Filter =
+            //        "contrast(1.4) sepia(0.2) blur(3px) saturate(200%) hue-rotate(200deg)";
+            //    options.Width = 480;
+            //}
+
+            public async Task Start()
+            {
+                await JSRuntime.InvokeVoidAsync("WebCamFunctions.start", options);
+            }
+        }*@
+
+
+@*The ml5 text
+// Teachable Machine
+// The Coding Train / Daniel Shiffman
+// https://thecodingtrain.com/TeachableMachine/1-teachable-machine.html
+// https://editor.p5js.org/codingtrain/sketches/PoZXqbu4v
+
+// The video
+let video;
+// For displaying the label
+let label = "waiting...";
+// The classifier
+let classifier;
+let modelURL = 'https://storage.googleapis.com/tm-models/YadBJmj5/';
+
+// STEP 1: Load the model!
+function preload() {
+  classifier = ml5.imageClassifier(modelURL + 'model.json');
 }
 
-<p id="accesLabel">...</p>-->
-@*<video id="video" autoplay></video>*@
-@*<button @onclick="async => videoStart() "></button>*@
-@*<div>
-        <canvas id="@options.CanvasID"
-                style="background-color:lightgray;"
-                width="@options.Width"
-                height="360">
-        </canvas>
-    </div>
-    <div>
-        <button @onclick="Start">Start</button>
-    </div>
-    <div>
-        <video id="@options.VideoID"
-               style="background-color:lightblue; visibility:hidden;"
-               width="@options.Width">
-            Video stream not available.
-        </video>
-    </div>*@
 
-@*@code{
+function setup() {
+  createCanvas(640, 520);
+  // Create the video
+  video = createCapture(VIDEO);
+  video.hide();
+  // STEP 2: Start classifying
+  classifyVideo();
+}
 
-        WebCamOptions options = new WebCamOptions()
-        {
-            CanvasID = "canvas",
-            VideoID = "video"
-        };
+// STEP 2 classify the videeo!
+function classifyVideo() {
+  classifier.classify(video, gotResults);
+}
 
-        //protected override void OnInitialized()
-        //{
+function draw() {
+  background(0);
 
-        //    options.Filter =
-        //        "contrast(1.4) sepia(0.2) blur(3px) saturate(200%) hue-rotate(200deg)";
-        //    options.Width = 480;
-        //}
+  // Draw the video
+  image(video, 0, 0);
 
-        public async Task Start()
-        {
-            await JSRuntime.InvokeVoidAsync("WebCamFunctions.start", options);
-        }
-    }*@
+  // STEP 4: Draw the label
+  textSize(32);
+  textAlign(CENTER, CENTER);
+  fill(255);
+  text(label, width / 2, height - 16);
+
+  // Pick an emoji, the "default" is train
+  let emoji = "🚂";
+  if (label == "Rainbow") {
+    emoji = "🌈";
+  } else if (label == "Unicorn") {
+    emoji = "🦄";
+  } else if (label == "Ukulele") {
+    emoji = "🎸";
+  }
+
+  // Draw the emoji
+  textSize(256);
+  text(emoji, width / 2, height / 2);
+}
+
+// STEP 3: Get the classification!
+function gotResults(error, results) {
+  // Something went wrong!
+  if (error) {
+    console.error(error);
+    return;
+  }
+  // Store the label and classify again!
+  label = results[0].label;
+  classifyVideo();
+}*@
 
 
 

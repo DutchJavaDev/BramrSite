@@ -1,0 +1,389 @@
+﻿#account-content {
+    font-family: 'Teko', sans-serif;
+    padding-top: 90px;
+    margin: 0 100px;
+}
+
+.note-btn
+{
+    font-size: 1.1rem !important;
+    letter-spacing: 2px !important;
+    cursor: pointer;
+}
+
+.note-font
+{
+    font-size: 1.6rem;
+    color:white;
+}
+
+.note-font-edit {
+    font-size: 1.6rem;
+    color: black;
+}
+
+#background {
+    background: 1px linear-gradient(90deg, rgb(26, 26, 26), rgb(54, 54, 54));
+    color: #fff;
+    height: 100vh;
+}
+
+.nav 
+{
+    display: initial;
+}
+
+.profile-header {
+    background: rgb(26, 26, 26);
+    width: 100%;
+    display: flex;
+    height: 190px;
+    position: relative;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, .2);
+}
+
+.profile-img {
+    float: left;
+    width: 340px;
+    height: 200px;
+}
+
+    .profile-img img {
+        border-radius: 50%;
+        height: 230px;
+        width: 230px;
+        border: 4px solid rgb(0, 207, 255);
+        box-shadow: 0px 5px 10px rgba(0, 207, 255, .2);
+        position: absolute;
+        left: 50px;
+        top: 20px;
+        z-index: 5;
+        background: rgb(255, 255, 255);
+    }
+
+.profile-nav-info {
+    float: left;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 60px;
+}
+
+    .profile-nav-info h3 {
+        font-size: 3rem;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.3);
+        text-transform: uppercase;
+        font-weight: 400;
+        position: relative;
+    }
+
+    .profile-nav-info .address {
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: rgb(0, 207, 255);
+    }
+
+    .profile-nav-info address p {
+        margin-right: 5px;
+    }
+
+.profile-option {
+    width: 40px;
+    height: 40px;
+    background: 1px linear-gradient(to right, rgb(6, 255, 248), rgb(0, 207, 255));
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    outline: none;
+}
+
+    .profile-option .notification i {
+        color: rgb(26, 26, 26);
+        font-size: 1.2rem;
+        transition: all .5s ease-in-out;
+    }
+
+    .profile-option:hover .notification i {
+        color: rgb(255, 255, 255);
+    }
+
+    .profile-option:hover {
+        background: rgb(26, 26, 26);
+        border: 1px solid rgb(0, 207, 255);
+    }
+
+    .profile-option .notification .alert-message {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: rgb(26, 26, 26);
+        color: rgb(255, 255, 255);
+        border: 1px solid rgb(0, 207, 255);
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: .8rem;
+        font-weight: bold;
+    }
+
+.main-body {
+    width: 100%;
+    display: flex;
+    padding-right: 15px;
+}
+
+.profile-side {
+    width: 300px;
+    background: rgb(26, 26, 26);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, .2);
+    padding: 90px 30px 20px;
+    margin-left: 10px;
+    z-index: 6;
+}
+
+    .profile-side p {
+        margin-bottom: 7px;
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: 2px;
+    }
+
+        .profile-side p i {
+            color: rgba(255, 255, 255, 0.3);
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+.user-bio {
+    font-size: 2rem;
+    margin-top: 15px;
+}
+
+.profile-btn {
+    display: flex;
+}
+
+button.questionbtn, button.createbtn {
+    border: 0;
+    padding: 10px;
+    width: 12vh;
+    background: 1px linear-gradient(to right, rgb(6, 255, 248), rgb(0, 207, 255));
+    font-size: .7rem;
+    margin: 5px 2px;
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 10px;
+    transition: background .8s ease-in-out;
+    box-shadow: opx 5px 7px 0px rgba(0, 0, 0, .2);
+    color: rgb(26, 26, 26);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+button.createbtn {
+    border: 0;
+    padding: 10px;
+    width: 40%;
+    background: 1px linear-gradient(to right, rgb(6, 255, 248), rgb(0, 207, 255));
+    font-size: .7rem;
+    margin: 5px 2px;
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 10px;
+    transition: background .8s ease-in-out;
+    box-shadow: opx 5px 7px 0px rgba(0, 0, 0, .2);
+    color: rgb(26, 26, 26);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+    button.questionbtn:hover, button.createbtn:hover {
+        background: rgba(0, 207, 255, .7)
+    }
+
+    button.questionbtn i, button.createbtn i {
+        margin-right: 5px;
+    }
+
+.right-side {
+    width: 100%;
+}
+
+.nav {
+    width: 100%;
+    z-index: -1;
+}
+
+    .nav ul {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        height: 40px;
+        background: rgb(26, 26, 26);
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, .3);
+    }
+
+        .nav ul li {
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            text-align: center;
+            transition: all .2s ease-in-out;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+            .nav ul li.active,
+            .nav ul li:hover {
+                box-shadow: 0px -3px 0px rgba(0, 207, 255, .9) inset;
+            }
+
+.profile-body {
+    width: 100%;
+    z-index: -1;
+}
+
+    .profile-body h1 {
+        font-size: 3rem;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.3);
+        text-transform: uppercase;
+        font-weight: 400;
+        position: relative;
+    }
+
+    .profile-body h6 {
+        font-size: 1rem;
+        font-weight: 400;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+.tab {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+#see-more-bio,
+#see-less-bio {
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+@media(max-width: 1100px) {
+    .profile-side {
+        width: 300px;
+        padding: 90px 15px 20px;
+    }
+
+    .profile-img img {
+        height: 200px;
+        width: 200px;
+        left: 50px;
+        top: 50px;
+    }
+}
+
+@media(max-width: 900px) {
+    body {
+        margin: 0 20px;
+    }
+
+    .profile-header {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    .profile-img {
+        float: left;
+        width: 100%;
+        height: 200px;
+    }
+
+        .profile-img img {
+            position: relative;
+            left: 0;
+        }
+
+    .profile-nav-info {
+        text-align: center;
+    }
+
+        .profile-nav-info .address {
+            justify-content: center;
+        }
+
+    .profile-option {
+        right: 20px;
+        top: 75%;
+        transform: translateY(-50%);
+    }
+
+    .main-body {
+        flex-direction: column;
+        padding-right: 0px;
+    }
+
+    .profile-side {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        margin: 5px 0;
+    }
+}
+
+@media(max-width: 400px) {
+    body {
+        margin: 5px;
+    }
+
+    .profile-header h3 {
+        font-size: 1.7rem;
+    }
+
+    .profile-header p,
+    .profile-header span {
+        font-size: .9rem;
+    }
+
+    .profile-option {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 15px;
+        top: 83%;
+    }
+
+        .profile-option .notification .alert-message {
+            top: -3px;
+            right: -4px;
+            padding: 4px;
+            height: 15px;
+            width: 15px;
+            font-size: .7rem;
+        }
+}

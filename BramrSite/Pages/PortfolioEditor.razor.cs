@@ -16,8 +16,40 @@ namespace BramrSite.Pages
         [Inject] ApiService Api { get; set; }
         [Inject] IJSRuntime IJSRuntime { get; set; }
 
-        public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>();
-        public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>();
+        public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>()
+        {
+            new TextModel() { Text = "Insert your name", TextAllignment = TextModel.Allignment.Center, FontSize = 10, TextColor = "#00DBFF" },
+            new TextModel() { Text = "Insert your profession", TextAllignment = TextModel.Allignment.Center, FontSize = 4 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolores consequatur error aliquam placeat odit quas quo, eius adipisci similique! Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam est nulla dolore perspiciatis excepturi explicabo!", FontSize = 2 },
+            new TextModel() { Text = "Insert skill 1", TextAllignment = TextModel.Allignment.Center, FontSize = 1.5 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, et. Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, necessitatibus?", TextAllignment = TextModel.Allignment.Center, FontSize = 2 },
+            new TextModel() { Text = "Insert skill 2", TextAllignment = TextModel.Allignment.Center, FontSize = 1.5 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, et. Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, necessitatibus?", TextAllignment = TextModel.Allignment.Center, FontSize = 2 },
+            new TextModel() { Text = "Insert skill 3", TextAllignment = TextModel.Allignment.Center, FontSize = 1.5 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, et. Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, necessitatibus?", TextAllignment = TextModel.Allignment.Center, FontSize = 2 },
+            new TextModel() { Text = "Insert work 1", TextAllignment = TextModel.Allignment.Left, FontSize = 2 },
+            new TextModel() { Text = "Insert title work 1", TextAllignment = TextModel.Allignment.Left, FontSize = 3 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, a. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, nemo. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, molestias ipsam. Inventore totam vel commodi.", TextAllignment = TextModel.Allignment.Left, FontSize = 2 },
+            new TextModel() { Text = "Insert work 2", TextAllignment = TextModel.Allignment.Left, FontSize = 2 },
+            new TextModel() { Text = "Insert title work 2", TextAllignment = TextModel.Allignment.Left, FontSize = 3 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, a. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, nemo. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, molestias ipsam. Inventore totam vel commodi.", TextAllignment = TextModel.Allignment.Left, FontSize = 2 },
+            new TextModel() { Text = "Insert work 3", TextAllignment = TextModel.Allignment.Left, FontSize = 2 },
+            new TextModel() { Text = "Insert title work 3", TextAllignment = TextModel.Allignment.Left, FontSize = 3 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, a. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, nemo. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, molestias ipsam. Inventore totam vel commodi.", TextAllignment = TextModel.Allignment.Left, FontSize = 2 },
+            new TextModel() { Text = "Insert job 1", TextAllignment = TextModel.Allignment.Left, FontSize = 2 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, qui. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, cumque?", TextAllignment = TextModel.Allignment.Left, FontSize = 1.6 },
+            new TextModel() { Text = "Insert job 2", TextAllignment = TextModel.Allignment.Left, FontSize = 2 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, qui. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, cumque?", TextAllignment = TextModel.Allignment.Left, FontSize = 1.6 },
+            new TextModel() { Text = "Insert job 3", TextAllignment = TextModel.Allignment.Left, FontSize = 2 },
+            new TextModel() { Text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, qui. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, cumque?", TextAllignment = TextModel.Allignment.Left, FontSize = 1.6 }
+        };
+        public List<ImageModel> AllImageElements { get; private set; } = new List<ImageModel>()
+        {
+            new ImageModel() { Src="https://picsum.photos/200/300" },
+            new ImageModel() { Src="https://picsum.photos/200/300" },
+            new ImageModel() { Src="https://picsum.photos/200/300" },
+            new ImageModel() { Src="https://picsum.photos/200/300" }
+        };
         public List<object> AllDesignElements { get; private set; } = new List<object>();
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
@@ -30,31 +62,51 @@ namespace BramrSite.Pages
         private bool UndoButton { get; set; } = true;
         private bool RedoButton { get; set; } = true;
 
+        public delegate void PortfolioDel(bool IsText, int Index);
+        public delegate void PortfolioImageDel(string uri, string src);
+
+        PortfolioDel SelectionCallBack;
+        PortfolioImageDel ImageCallBack;
+
+        protected override void OnAfterRender(bool firstRender)
+        {
+            if (firstRender)
+            {
+                for (int x = 0; x < 24; x++)
+                {
+                    AllTextElements[x].Location = x; AllTextElements[x].TemplateType = "Portfolio"; AllTextElements[x].CssCode = "b-qmx0h9ieg0";
+                }
+                for (int y = 0; y < 4; y++)
+                {
+                    AllImageElements[y].Location = y + 24; AllImageElements[y].TemplateType = "Portfolio"; AllImageElements[y].CssCode = "b-qmx0h9ieg0";
+                }
+
+                foreach (var item in AllTextElements)
+                {
+                    AllDesignElements.Add(item);
+                }
+                foreach (var item in AllImageElements)
+                {
+                    AllDesignElements.Add(item);
+                }
+
+                StateHasChanged();
+            }
+        }
+
         protected override async void OnInitialized()
         {
+            SelectionCallBack = Selection;
+            ImageCallBack = ApplySource;
+
+            await Api.DeleteAllFromHistory();
+
             var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/PortfolioScript.js");
 
             await module.InvokeVoidAsync("Init");
 
-            await Api.DeleteAllFromHistory();
-
-            for (int x = 0; x < 37; x++)
-            {
-                AllTextElements.Add(new TextModel { Location = x, TemplateType = "Portfolio" });
-            }
-            for (int y = 37; y < 41; y++)
-            {
-                AllImageElements.Add(new ImageModel { Location = y, TemplateType = "Portfolio" });
-            }
-
-            foreach (var item in AllTextElements)
-            {
-                AllDesignElements.Add(item);
-            }
-            foreach (var item in AllImageElements)
-            {
-                AllDesignElements.Add(item);
-            }
+            LoadSite();
+            StateHasChanged();
         }
 
         private void Selection(bool IsText, int Index)
@@ -73,6 +125,8 @@ namespace BramrSite.Pages
                 CurrentImageElement = AllImageElements[Index];
                 CurrentImageElement.Selected = true;
             }
+
+            StateHasChanged();
         }
 
         private async void Save()
@@ -81,6 +135,30 @@ namespace BramrSite.Pages
 
             await Api.UploadPortfolio(Json);
             await Api.DeleteAllFromHistory();
+        }
+
+        private async void LoadSite()
+        {
+            List<object> AllDesignElements = await Api.GetDesignElements(false);
+
+            if (AllDesignElements.Count != 0)
+            {
+                for (int x = 0; x < 23; x++)
+                {
+                    AllTextElements[x] = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[x].ToString());
+                }
+                for (int y = 0; y < 4; y++)
+                {
+                    AllImageElements[y] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[y + 23].ToString());
+#if DEBUG
+                    AllImageElements[y].Src = $"https://localhost:44372/api/image/download/{AllImageElements[y].FileUri}";
+#else
+                    AllImageElements[y].Src = $"https://bramr.tech/api/image/download/{AllImageElements[y].FileUri}";
+#endif
+                }
+            }
+
+            StateHasChanged();
         }
 
         private async Task Undo()
@@ -123,8 +201,8 @@ namespace BramrSite.Pages
 
             if (IsText)
             {
-                CurrentChange.DesignElement = CurrentTextElement.Location; 
-                CurrentChange.EditType = EditType; 
+                CurrentChange.DesignElement = CurrentTextElement.Location;
+                CurrentChange.EditType = EditType;
                 CurrentChange.Edit = Edit;
             }
             else
@@ -145,6 +223,7 @@ namespace BramrSite.Pages
             }
 
             await Api.AddToHistory(HistoryLocation, CurrentChange);
+            StateHasChanged();
         }
 
         private async Task UseChange(ChangeModel CurrentChange, bool GoingBack)
@@ -288,7 +367,6 @@ namespace BramrSite.Pages
                 case ChangeModel.Type.Width:
                     return 100;
                 case ChangeModel.Type.Padding:
-                case ChangeModel.Type.Margin:
                     return 0;
                 case ChangeModel.Type.Opacity:
                     return 1;
@@ -299,6 +377,13 @@ namespace BramrSite.Pages
                 default:
                     return TextModel.Allignment.Left;
             }
+        }
+
+        public void ApplySource(string Uri, string Src)
+        {
+            CurrentImageElement.FileUri = Uri;
+            CurrentImageElement.Src = Src;
+            StateHasChanged();
         }
     }
 }

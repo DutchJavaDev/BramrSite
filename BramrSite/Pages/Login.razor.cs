@@ -10,6 +10,8 @@ namespace BramrSite.Pages
 {
     public partial class Login : ComponentBase
     {
+        //[Inject] IJSRuntime IJSRuntime { get; set; }
+        
         public readonly User Model = new User()
 #if DEBUG
         {
@@ -30,15 +32,21 @@ namespace BramrSite.Pages
 
         public bool Disabled { get; set; }
 
-        protected override void OnInitialized()
+        protected async override void OnInitialized()
         {
             if (ReturnUrl == "index" || ReturnUrl == "/")
             {
                 ReturnToIndex = true;
                 ReturnUrl = string.Empty;
             }
-        }
+            // eventuele delay
+            //await Task.Delay(5000);
+            //var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Imageclassification.js");
 
+            //await module.InvokeVoidAsync("setup");
+            //await module.InvokeVoidAsync("preload");
+        }
+        
         public async Task SignInSubmit()
         {
             Disabled = true;

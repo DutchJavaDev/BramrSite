@@ -1,109 +1,10 @@
-﻿@page "/ruben_lil_bitch"
+﻿@page "/portfolio"
+@using BramrSite.Classes
+@using BramrSite.Models
+@using BramrSite.Pages.Components
+@attribute [Authorize]
 
 <div class="main-body">
-    @*<div class="afbeeldinggrid">
-            <header class="afbeeldinggrid-titel">
-                Afbeelding opmaak>
-                <a href="#" class="kleurgrid-sluit">&times;</a>
-            </header>
-            <div class="gridceptionafbeelding">
-                <div id="afbeeldingkiezen">
-                    <label for="afbeeldingkiezen">Kies een foto:</label>
-                    <ImageUpload CurrentImage="@ProfielFoto" />
-                </div>
-                <div id="hyperlinktext">
-                    <input type="text" placeholder="Type some text..." @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString()); }" @bind-value="CurrentTextElement.Text" />
-                </div>
-                <div id="grootebtn">
-                    <button class="buttonGroote" disabled="@UndoButton" @onclick="async() => { await Undo(); }"><i class="fas fa-border-all"></i></button>
-                </div>
-                <div id="opvullingbtn">
-                    <button class="buttonOpvulling" disabled="@RedoButton" @onclick="async() => { await Redo(); }"><i class="fas fa-paint-brush"></i></button>
-                </div>
-                <div id="alphabtn">
-                    <button class="buttonAlpha"><i class="far fa-sun"></i></button>
-                </div>
-                <div id="borderbtn">
-                    <button class="buttonBorder"><i class="fas fa-border-none"></i></button>
-                </div>
-                <div id="borderradiusbtn">
-                    <button class="buttonRadius"><i class="far fa-circle"></i></button>
-                </div>
-            </div>
-        </div>
-        <div class="lettertypegrid">
-            <header class="lettertypegrid-titel">Text opmaak</header>
-            <div class="gridceptionlettertype">
-                <div id="fontkiezen">
-                    <label for="font">Fonts</label>
-                    <select name="font" id="fontkiezen">
-                        <option value="font1">Font1</option>
-                        <option value="font2">Font2</option>
-                        <option value="font3">Font3</option>
-                        <option value="font4">Font4</option>
-                        <option value="font5">Font5</option>
-                        <option value="font6">Font6</option>
-                        <option value="font7">Font7</option>
-                        <option value="font8">Font8</option>
-                        <option value="font9">Font9</option>
-                        <option value="font10">Font10</option>
-                    </select>
-                </div>
-                <div id="fontgroote">
-                    <div class="slideFontgroote">
-                        <p>Font groote</p>
-                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                    </div>
-                </div>
-                <div id="fontweight">
-                    <div class="slideFontweight">
-                        <p>Font weight</p>
-                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                    </div>
-                </div>
-                <div id="boldbtn">
-                    <button class="buttonBold" @onclick="async() => { CurrentTextElement.Bold = !CurrentTextElement.Bold; await AddToDB(ChangeModel.Type.Bold, CurrentTextElement.Bold.ToString()); }"><i class="fas fa-bold"></i></button>
-                </div>
-                <div id="italicbtn">
-                    <button class="buttonItalic" @onclick="async() => { CurrentTextElement.Italic = !CurrentTextElement.Italic; await AddToDB(ChangeModel.Type.Italic, CurrentTextElement.Italic.ToString()); }"><i class="fas fa-italic"></i></button>
-                </div>
-                <div id="streeponderbtn">
-                    <button class="buttonStreepOnder" @onclick="async() => { CurrentTextElement.Underlined = !CurrentTextElement.Underlined; await AddToDB(ChangeModel.Type.Underlined, CurrentTextElement.Underlined.ToString()); }"><i class="fas fa-underline"></i></button>
-                </div>
-                <div id="streepbovenbtn">
-                    <button class="buttonStreepBoven" @onclick="async() => { CurrentTextElement.StrikedThrough = !CurrentTextElement.StrikedThrough; await AddToDB(ChangeModel.Type.Strikedthrough, CurrentTextElement.StrikedThrough.ToString()); }"><i class="fas fa-strikethrough"></i></button>
-                </div>
-                <div id="textshadowbtn">
-                    <button class="buttonTextShadow"><i class="fas fa-moon"></i></button>
-                </div>
-                <div id="alinglinksbtn">
-                    <button class="buttonAlingLinks" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Left; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }"><i class="fas fa-align-left"></i></button>
-                </div>
-                <div id="alingmiddenbtn">
-                    <button class="buttonAlingMidden" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Center; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }"><i class="fas fa-align-center"></i></button>
-                </div>
-                <div id="alingrechtsbtn">
-                    <button class="buttonAlingRechts" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Right; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }"><i class="fas fa-align-right"></i></button>
-                </div>
-            </div>
-        </div>
-        <div class="kleurgrid" id="kleurgrid-modal">
-            <header class="kleurgrid-titel">
-                Colorpicker>
-                <a href="#" class="kleurgrid-sluit">&times;</a>
-            </header>
-            <div class="gridceptionkleur">
-                <div id="textkleurkiezen">
-                    <label for="textkleurkiezen"> Kleur font</label>
-                    <input name="Color Picker" type="color" @oninput="(e) => { CurrentTextElement.TextColor = e.Value.ToString(); }" @onchange="async(e) => { CurrentTextElement.TextColor = e.Value.ToString(); await AddToDB(ChangeModel.Type.TextColor, e.Value.ToString()); e.Value = CurrentTextElement.TextColor; }" />
-                </div>
-                <div id="backgroundtext">
-                    <label for="backgroundtext"> Kleur achtergrond</label>
-                    <input name="Color Picker" type="color" @oninput="(e) => { CurrentTextElement.BackgroundColor = e.Value.ToString(); }" @onchange="async(e) => { CurrentTextElement.BackgroundColor = e.Value.ToString(); await AddToDB(ChangeModel.Type.BackgroundColor, e.Value.ToString()); e.Value = CurrentTextElement.BackgroundColor; }" />
-                </div>
-            </div>
-        </div>*@
-
     <header>
         <div class="menu-toggler">
             <div class="bar half start">
@@ -116,36 +17,203 @@
         <nav class="top-nav">
             <div>
                 <ul class="nav-list">
-                    <li> <a href=PortfolioTemplate.html class="nav-link">Home</a> </li>
-                    <li> <a href=#about class="nav-link">About</a> </li>
-                    <li> <a href=#services class="nav-link">Services</a> </li>
-                    <li> <a href=#portfolio class="nav-link">Portfolio</a> </li>
-                    <li> <a href=#experience class="nav-link">Experience</a> </li>
-                    <li> <a href=#contact class="nav-link">Contact</a> </li>
+                    <li> <a href=home class="nav-link">Home</a> </li>
+                    <li> <a id="myBtn" class="nav-link">Editor</a> </li>
+                    <li @onclick="() => { Save(); }"> <a id="myBtn-save" class="nav-link">Save</a> </li>
                 </ul>
             </div>
         </nav>
         <div class="landing-text">
-            <h1>Insert name</h1>
-            <h6>Insert your profession</h6>
+            <TextComponent CurrentDesignElement="AllTextElements[0]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="0" />
+            <TextComponent CurrentDesignElement="AllTextElements[1]" TagType="h6" PortfolioCallback="SelectionCallBack" Index="1" />
         </div>
     </header>
+
+    <div id="editor" class="modal draggable-item">
+        <span class="close">&times;</span>
+        <div class="toolbar">
+            @if (IsText && CurrentTextElement.Selected)
+            {
+                <h1>Text editor tool</h1>
+                <div id="output">
+                    <textarea name="comment" form="usrform" cols="63" rows="3" @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString());}" @bind="CurrentTextElement.Text"></textarea>
+                </div>
+                <div class="tool-list-text">
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Left; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">
+                            <i class="fas fa-align-left"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Center; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">
+                            <i class="fas fa-align-center"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Right; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">
+                            <i class="fas fa-align-right"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.Bold = !CurrentTextElement.Bold; await AddToDB(ChangeModel.Type.Bold, CurrentTextElement.Bold.ToString()); }">
+                            <i class="fas fa-bold"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.Italic = !CurrentTextElement.Italic; await AddToDB(ChangeModel.Type.Italic, CurrentTextElement.Italic.ToString()); }">
+                            <i class="fas fa-italic"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.Underlined = !CurrentTextElement.Underlined; await AddToDB(ChangeModel.Type.Underlined, CurrentTextElement.Underlined.ToString()); }">
+                            <i class="fas fa-underline"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.StrikedThrough = !CurrentTextElement.StrikedThrough; await AddToDB(ChangeModel.Type.Strikedthrough, CurrentTextElement.StrikedThrough.ToString()); }">
+                            <i class="fas fa-strikethrough"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.Shadow = !CurrentTextElement.Shadow; await AddToDB(ChangeModel.Type.Shadow, CurrentTextElement.Shadow.ToString()); }">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" disabled="@UndoButton" @onclick="async() => { await Undo(); }">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" disabled="@RedoButton" @onclick="async() => { await Redo(); }">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </li>
+                </div>
+
+                <h1>Font tool</h1>
+                <div class="tool-list-font">
+                    <li class="tool">
+                        <select name="font" id="fontkiezen" @onchange="async(e) => { CurrentTextElement.Font = e.Value.ToString(); await AddToDB(ChangeModel.Type.Font, CurrentTextElement.Font); }">
+                            <option value="Montserrat">Montserrat</option>
+                            <option value="Open Sans Condensed">Open Sans Condensed</option>
+                            <option value="Rubik">Rubik</option>
+                            <option value="Quicksand">Quicksand</option>
+                            <option value="Teko">Teko</option>
+                            <option value="Exo 2">Exo 2</option>
+                            <option value="Maven Pro">Maven Pro</option>
+                            <option value="Sarabun">Sarabun</option>
+                            <option value="Old Standard TT">Old Standard TT</option>
+                            <option value="Marvel">Marvel</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Helvetica">Helvetica</option>
+                        </select>
+                    </li>
+                    <li>
+                        <h3>Font size</h3>
+                        <input type="range" min="1" max="100" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentTextElement.FontSize = Convert.ToDouble(e.Value) / 10; }" @onchange="async(e) => { CurrentTextElement.FontSize = Convert.ToDouble(e.Value) / 10; await AddToDB(ChangeModel.Type.FontSize, CurrentTextElement.FontSize.ToString()); e.Value = CurrentTextElement.FontSize; }">
+                    </li>
+                    <li>
+                        <h3>Font weight</h3>
+                        <input type="range" min="0" max="900" step="100" class="slider" id="myRange" @oninput="(e) => { CurrentTextElement.FontWeight = Convert.ToInt32(e.Value); }" @onchange="async(e) => { CurrentTextElement.FontWeight = Convert.ToInt32(e.Value); await AddToDB(ChangeModel.Type.FontWeight, CurrentTextElement.FontWeight.ToString()); e.Value = CurrentTextElement.FontWeight; }" />
+                    </li>
+                </div>
+
+                <h1>Color editor tool</h1>
+                <div class="tool-list-color">
+                    <li class="tool">
+                        <h3>Font color</h3>
+                        <input name="Color Picker" type="color" @oninput="(e) => { CurrentTextElement.TextColor = e.Value.ToString(); }" @onchange="async(e) => { CurrentTextElement.TextColor = e.Value.ToString(); await AddToDB(ChangeModel.Type.TextColor, e.Value.ToString()); e.Value = CurrentTextElement.TextColor; }" />
+                    </li>
+                    <li class="tool">
+                        <h3>Background color</h3>
+                        <input name="Color Picker" type="color" @oninput="(e) => { CurrentTextElement.BackgroundColor = e.Value.ToString(); }" @onchange="async(e) => { CurrentTextElement.BackgroundColor = e.Value.ToString(); await AddToDB(ChangeModel.Type.BackgroundColor, e.Value.ToString()); e.Value = CurrentTextElement.BackgroundColor; }" />
+                    </li>
+                </div>
+            }
+            else
+            {
+                @if (!IsText && CurrentImageElement.Selected)
+                {
+                    <h1>Images upload tool</h1>
+                    <ImageUpload CurrentImage="CurrentImageElement" PortfolioCallBack="ImageCallBack" IsCV="false" />
+
+                    <h1>Images editor tool</h1>
+                    <div class="tool-list-img-edit">
+                        <li class="tool">
+
+                            <select name="Object-fit" id="Object-fit-kiezen" @onchange="async(e) => { CurrentImageElement.ObjectFitSet = (ImageModel.ObjectFit)Enum.Parse(typeof(ImageModel.ObjectFit), e.Value.ToString()); await AddToDB(ChangeModel.Type.ObjectFitSet, CurrentImageElement.ObjectFitSet.ToString()); }">
+
+                                <option value="cover">cover</option>
+                                <option value="fill">fill</option>
+                                <option value="contain">contain</option>
+                                <option value="none">none</option>
+                            </select>
+                            <p style="color:white">Covertype</p>
+                        </li>
+                        <li class="tool">
+                            @*<button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentImageElement.Border = 2; await AddToDB(ChangeModel.Type.Border, CurrentImageElement.Border.ToString()); }">
+                            <i class="fas fa-border-all"></i>
+                        </button>
+                        <p>border on</p>*@
+                            <input type="range" min="0" max="20" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentImageElement.Border = Convert.ToInt32(e.Value); }" @onchange="async(e) => { CurrentImageElement.Border = Convert.ToInt32(e.Value); await AddToDB(ChangeModel.Type.Border, CurrentImageElement.Border.ToString()); e.Value = CurrentImageElement.Border; }" />
+                            <p style="color:white">border</p>
+                        </li>
+                        <li class="tool">
+                            @*<button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentImageElement.Border = 0; await AddToDB(ChangeModel.Type.Border, CurrentImageElement.Border.ToString()); }">
+                            <i class="fas fa-border-style"></i>
+                        </button>
+                        <p>border off</p>*@
+                        </li>
+                        <li class="tool">
+                            <select name="Float" id="Float-kiezen" @onchange="async(e) => { CurrentImageElement.FloatSet = (ImageModel.Float)Enum.Parse(typeof(ImageModel.Float), e.Value.ToString()); await AddToDB(ChangeModel.Type.FloatSet, CurrentImageElement.FloatSet.ToString()); }">
+
+                                <option value="none">none</option>
+                                <option value="left">left</option>
+                                <option value="right">right</option>
+                            </select>
+                            <p style="color:white">Direction</p>
+                        </li>
+                        <li class="tool">
+                            <input type="range" min="0" max="100" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentImageElement.Padding = Convert.ToInt32(e.Value); }" @onchange="async(e) => { CurrentImageElement.Padding = Convert.ToInt32(e.Value); await AddToDB(ChangeModel.Type.Padding, CurrentImageElement.Padding.ToString()); e.Value = CurrentImageElement.Padding; }" />
+                            <p style="color:white">Padding</p">
+                        </li>
+                        <li class="tool">
+                            <input type="range" min="0" max="10" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentImageElement.Opacity = Convert.ToInt32(e.Value)/10; }" @onchange="async(e) => { CurrentImageElement.Opacity = Convert.ToInt32(e.Value)/10; await AddToDB(ChangeModel.Type.Opacity, CurrentImageElement.Opacity.ToString()); e.Value = CurrentImageElement.Opacity; }" />
+                            <p style="color:white">Opacity</p>
+                        </li>
+                        @*Aanpassing Art Einde*@
+                        <li class="tool">
+                            <button type="button" href="#" class="tool-btn" disabled="@UndoButton" @onclick="async() => { await Undo(); }">
+                                <i class="fas fa-undo"></i>
+                            </button>
+                        </li>
+                        <li class="tool">
+                            <button type="button" href="#" class="tool-btn" disabled="@RedoButton" @onclick="async() => { await Redo(); }">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                        </li>
+                    </div>
+                }
+                else
+                {
+                    <h1>Select an element on the page to edit it.</h1>
+                }
+            }
+        </div>
+    </div>
 
     <section class="about" id="about">
         <div class="container">
             <div class="profile-img" data-aos="fade-right" data-aos-delay="300">
-                <img src="https://picsum.photos/200/300" alt="">
+                <ImageComponent CurrentDesignElement="AllImageElements[0]" PortfolioCallBack="SelectionCallBack" Index="0" />
             </div>
             <div class="about-details" data-aos="fade-left" data-aos-delay="600">
                 <div class="about-heading">
                     <h1>About</h1>
                     <h6>Myself</h6>
                 </div>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolores consequatur error aliquam
-                    placeat odit quas quo, eius adipisci similique! Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam est nulla dolore perspiciatis excepturi explicabo!
-                </p>
+                <TextComponent CurrentDesignElement="AllTextElements[2]" TagType="p" PortfolioCallback="SelectionCallBack" Index="2" />
                 <div class="social-media">
                     <ul class="nav-list">
                         <li>
@@ -180,31 +248,22 @@
                     <div class="icon-container">
                         <i class="fas fa-layer-group"></i>
                     </div>
-                    <h1>Insert skill 1</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, et.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, necessitatibus?
-                    </p>
+                    <TextComponent CurrentDesignElement="AllTextElements[3]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="3" />
+                    <TextComponent CurrentDesignElement="AllTextElements[4]" TagType="p" PortfolioCallback="SelectionCallBack" Index="4" />
                 </div>
                 <div class="skill" data-aos="fade-in" data-aos-delay="600">
                     <div class="icon-container">
                         <i class="fas fa-code"></i>
                     </div>
-                    <h1>Insert skill 2</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, et.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, necessitatibus?
-                    </p>
+                    <TextComponent CurrentDesignElement="AllTextElements[5]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="5" />
+                    <TextComponent CurrentDesignElement="AllTextElements[6]" TagType="p" PortfolioCallback="SelectionCallBack" Index="6" />
                 </div>
                 <div class="skill" data-aos="fade-in" data-aos-delay="900">
                     <div class="icon-container">
                         <i class="fas fa-chart-bar"></i>
                     </div>
-                    <h1>Insert skill 3</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, et.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, necessitatibus?
-                    </p>
+                    <TextComponent CurrentDesignElement="AllTextElements[7]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="7" />
+                    <TextComponent CurrentDesignElement="AllTextElements[8]" TagType="p" PortfolioCallback="SelectionCallBack" Index="8" />
                 </div>
             </div>
         </div>
@@ -218,46 +277,34 @@
             </div>
             <div class="portfolio-item">
                 <div class="portfolio-img has-margin-right" data-aos="fade-right" data-aos-delay="300">
-                    <img src="https://picsum.photos/200/300" alt="">
+                    <ImageComponent CurrentDesignElement="AllImageElements[1]" PortfolioCallBack="SelectionCallBack" Index="1" />
                 </div>
                 <div class="portfolio-description" data-aos="fade-left" data-aos-delay="600">
-                    <h6>Insert Work 1</h6>
-                    <h1>Insert titel work 1</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, a.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, nemo.
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laudantium, molestias ipsam. Inventore totam vel commodi.
-                    </p>
+                    <TextComponent CurrentDesignElement="AllTextElements[9]" TagType="h6" PortfolioCallback="SelectionCallBack" Index="9" />
+                    <TextComponent CurrentDesignElement="AllTextElements[10]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="10" />
+                    <TextComponent CurrentDesignElement="AllTextElements[11]" TagType="p" PortfolioCallback="SelectionCallBack" Index="11" />
                     <a href="#" class="cta">View details</a>
                 </div>
             </div>
             <div class="portfolio-item">
                 <div class="portfolio-description has-margin-right" data-aos="fade-right" data-aos-delay="900">
-                    <h6>Insert Work 2</h6>
-                    <h1>Insert titel work 2</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, a.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, nemo.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla iusto esse provident, quaerat accusamus facilis?
-                    </p>
+                    <TextComponent CurrentDesignElement="AllTextElements[12]" TagType="h6" PortfolioCallback="SelectionCallBack" Index="12" />
+                    <TextComponent CurrentDesignElement="AllTextElements[13]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="13" />
+                    <TextComponent CurrentDesignElement="AllTextElements[14]" TagType="p" PortfolioCallback="SelectionCallBack" Index="14" />
                     <a href="#" class="cta">View details</a>
                 </div>
                 <div class="portfolio-img" data-aos="fade-left" data-aos-delay="1200">
-                    <img src="https://picsum.photos/200/300" alt="">
+                    <ImageComponent CurrentDesignElement="AllImageElements[2]" PortfolioCallBack="SelectionCallBack" Index="2" />
                 </div>
             </div>
             <div class="portfolio-item">
                 <div class="portfolio-img has-margin-right" data-aos="fade-right" data-aos-delay="1500">
-                    <img src="https://picsum.photos/200/300" alt="">
+                    <ImageComponent CurrentDesignElement="AllImageElements[3]" PortfolioCallBack="SelectionCallBack" Index="3" />
                 </div>
                 <div class="portfolio-description" data-aos="fade-left" data-aos-delay="1800">
-                    <h6>Insert Work 2</h6>
-                    <h1>Insert titel work 2</h1>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio, a.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, nemo.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minima, sapiente sint quas error similique?
-                    </p>
+                    <TextComponent CurrentDesignElement="AllTextElements[15]" TagType="h6" PortfolioCallback="SelectionCallBack" Index="15" />
+                    <TextComponent CurrentDesignElement="AllTextElements[16]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="16" />
+                    <TextComponent CurrentDesignElement="AllTextElements[17]" TagType="p" PortfolioCallback="SelectionCallBack" Index="17" />
                     <a href="#" class="cta">View details</a>
                 </div>
             </div>
@@ -272,26 +319,17 @@
             </div>
             <div class="timeline" data-aos="fade-down" data-aos-delay="300">
                 <ul>
-                    <li class="date" data-date="job-1">
-                        <h1>Insert job 1</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, qui.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, cumque?
-                        </p>
+                    <li class="date" data-date="@(AllTextElements[18].Text == "Insert job 1" || AllTextElements[18].Text == string.Empty ? "job-1" : AllTextElements[18].Text)">
+                        <TextComponent CurrentDesignElement="AllTextElements[18]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="18" />
+                        <TextComponent CurrentDesignElement="AllTextElements[19]" TagType="p" PortfolioCallback="SelectionCallBack" Index="19" />
                     </li>
-                    <li class="date" data-date="job-2">
-                        <h1>Insert job 2</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, qui.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, cumque?
-                        </p>
+                    <li class="date" data-date="@(AllTextElements[20].Text == "Insert job 2" || AllTextElements[20].Text == string.Empty ? "job-2" : AllTextElements[20].Text)">
+                        <TextComponent CurrentDesignElement="AllTextElements[20]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="20" />
+                        <TextComponent CurrentDesignElement="AllTextElements[21]" TagType="p" PortfolioCallback="SelectionCallBack" Index="21" />
                     </li>
-                    <li class="date" data-date="job-3">
-                        <h1>Insert job 3</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, qui.
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, cumque?
-                        </p>
+                    <li class="date" data-date="@(AllTextElements[22].Text == "Insert job 3" || AllTextElements[22].Text == string.Empty ? "job-3" : AllTextElements[22].Text)">
+                        <TextComponent CurrentDesignElement="AllTextElements[22]" TagType="h1" PortfolioCallback="SelectionCallBack" Index="22" />
+                        <TextComponent CurrentDesignElement="AllTextElements[23]" TagType="p" PortfolioCallback="SelectionCallBack" Index="23" />
                     </li>
                 </ul>
             </div>
@@ -304,19 +342,20 @@
                 <h1>Contact</h1>
                 <h6> Interested? Feel free to contact me! </h6>
             </div>
-            <form action="" data-aos="fade-up" data-aos-delay="300">
+            <form method="post" action="https://localhost:44372/api/website/contact" data-aos="fade-up" data-aos-delay="300">
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Insert your name..." required>
+                <input type="text" id="name" name="sendersName" placeholder="Insert your name..." required>
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Insert your mail address..." required>
+                <input type="email" id="email" name="sendersEmail" placeholder="Insert your mail address..." required>
                 <label for="service">Services:</label>
-                <select name="services" id="service">
+                <select name="service" id="service">
                     <option value="Option 1">Insert option 1</option>
                     <option value="Option 2">Insert option 2</option>
                     <option value="Option 3">Insert option 3</option>
                 </select>
                 <label for="subject">Subject:</label>
-                <textarea name="subject" id="subject" cols="10" rows="10" placeholder="Art plaats hier je placeholder"></textarea>
+                <textarea name="message" id="subject" cols="10" rows="10" placeholder="Art plaats hier je placeholder"></textarea>
+                <input type="hidden" name="recipientUsername" value="[RUBEN PLAATS HIER DE USERNAME PLS]" />
                 <input type="submit" value="Versturen">
             </form>
         </div>
@@ -326,7 +365,7 @@
         <div class="up" id="up">
             <i class="fas fa-chevron-up"></i>
         </div>
-        <p>&copy; 2020 Insert name</p>
+        <p>&copy; 2021 Bramr</p>
     </footer>
 
 </div>

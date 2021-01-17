@@ -1,0 +1,172 @@
+﻿@page "/account"
+@using static BramrSite.Models.EditMode 
+@attribute [Authorize]
+
+<div id="background">
+    <div id="account-content">
+        <div class="profile-header">
+            <div class=profile-img>
+                <img src="./img/profile.png" width="200" alt="">
+            </div>
+            <div class="profile-nav-info">
+                <h3 class="user-name">@UserInfo[0]</h3>
+                <div class="address">
+                    <p class="city">@UserInfo[1]</p>
+                    <span class="country"></span>
+                </div>
+            </div>
+            <div class="profile-option">
+                <div class="notification">
+                    <i class="fa fa-bell"></i>
+                    <span class="alert-message">1</span>
+                </div>
+            </div>
+        </div>
+        <div class="main-body">
+            <div class="left-side">
+                <div class="profile-side">
+                    <p class="user-phone">
+                        <a class="fa fa-laptop" href="@UserInfo[2]">CV</a>
+                    </p>
+                    <p class="user-phone">
+                        <a class="fa fa-laptop" href="@UserInfo[3]">Portfolio</a>
+                    </p>
+                    <p class="user-mail">
+                        <i class="fa fa-envelope">@UserInfo[4]</i>
+                    </p>
+                    @*<div class="user-bio">
+                        <h3>Bio</h3>
+                        <p class="bio">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora modi eligendi magni? Cupiditate atque mollitia reiciendis eaque quia placeat voluptas?
+                        </p>
+                    </div>*@
+                    <div class="profile-btn">
+                        <section>
+                            <button class="questionbtn">
+                                <i class="fa fa-comment"></i> Contact
+                            </button>
+                        </section>
+                        <br />
+                        <section>
+                            <button class="questionbtn">
+                                <a href="password">
+                                    <i class="fa fa-plus"></i> Change Password
+                                </a>
+                            </button>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="nav">
+                    <ul>
+                        <li @onclick="(() => Tab(0))" class="user-CV active">CV-templates</li>
+                        <li @onclick="(() => Tab(1))" class="user-Portfolio">Portfolio-templates</li>
+                        <li @onclick="(() => Tab(2))" class="user-Notepad">Notepad</li>
+                    </ul>
+                </div>
+                <div class="profile-body">
+                    <div class="profile-CV tab">
+                        <h1>Your CV-projects</h1>
+                        <h6>
+                            Here you can start with editing your very own CV. <br>
+                            Don't forget to wacht the instruction video to learn how to use the editor.
+                        </h6>
+                        <a href="cv">
+                            <button class="createbtn">
+                                <i class="fa fa-plus"></i> @(HasCv ? "Bijwerken" : "Create")
+                            </button>
+                        </a>
+                    </div>
+                    <div class="profile-Portfolio tab">
+                        <h1>Your Portfolio-projects</h1>
+                        <h6>
+                            Here you can start with editing your very own Portfolio. <br>
+                            Don't forget to wacht the instruction video to learn how to use the editor.
+                        </h6>
+                        <a href="portfolio">
+                            <button class="createbtn">
+                                <i class="fa fa-plus"></i> @(HasPortfolio ? "Bijwerken" : "Create")
+                            </button>
+                        </a>
+                    </div>
+                    <div class="profile-Notepad tab">
+                        <h1>Notepad</h1>
+                        <h6>Here you can write down your to-do list</h6>
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                <div @onclick="(() => AddNote())" class="btn btn-block btn-primary note-btn">
+                                    New note
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="btn btn-block btn-danger note-btn">
+                                    Delete all note's
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="container pt-4">
+
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var note in Notes)
+                                    {
+
+                                    <tr>
+                                        @if (note.EditMode == Edit)
+                                        {
+                                            <td>
+                                                <div class="row">
+
+                                                    <div class="col-6">
+                                                        <textarea class="note-font-edit" placeholder="Empty note" @bind-value="@note.Text" @bind-value:event="oninput"></textarea>
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <div class="btn btn-block btn-success" @onclick="(() => { note.EditMode = Models.EditMode.Done; })">Done</div>
+                                                        <div class="btn btn-block btn-danger">Delete</div>
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <div class="row">
+
+                                                    <div class="col-6">
+                                                        <span class="note-font">@note.Text</span>
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <div class="btn btn-block btn-info" @onclick="(() => { note.EditMode = Models.EditMode.Edit; })">Edit</div>
+                                                        <div class="btn btn-block btn-danger" @onclick="(() => { RemoveNote(note);  })">Delete</div>
+                                                    </div>
+
+                                                </div>
+                                            </td>
+                                        }
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

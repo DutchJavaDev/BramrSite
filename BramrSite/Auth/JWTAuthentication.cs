@@ -24,6 +24,10 @@ namespace BramrSite.Auth
             apiService = api;
         }
 
+        /// <summary>
+        /// Checks if there is a token in session storage, if there is then build a new state where the user is authenticated or else unautorized
+        /// </summary>
+        /// <returns></returns>
         public async override Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             var token = await localStorage.GetItemAsync<string>(AUTHTOKENKEY);
@@ -37,6 +41,11 @@ namespace BramrSite.Auth
             return BuildAuthenticationState(token);
         }
 
+        /// <summary>
+        /// Updates the current state of the users authentication
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public async Task UpdateAutenticationState(string token)
         {
             if (string.IsNullOrEmpty(token))
@@ -54,17 +63,31 @@ namespace BramrSite.Auth
             }
         }
 
+        /// <summary>
+        /// Makes sure that httpclient gets the token for sending request to authorized endpoints
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         private AuthenticationState BuildAuthenticationState(string token)
         {
             apiService.SetToken(token);
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(ParseClaimsFromJwt(token), "jwt")));
         }
 
+        /// <summary>
+        /// Name says it
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> HasToken()
         {
             return await localStorage.ContainKeyAsync(AUTHTOKENKEY);
         }
 
+        /// <summary>
+        /// FROM STACKOVERFLOW: Parses the JWT token we can get the information out of it
+        /// </summary>
+        /// <param name="jwt"></param>
+        /// <returns></returns>
         private IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
         {
             var claims = new List<Claim>();

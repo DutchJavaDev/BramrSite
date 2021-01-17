@@ -5,7 +5,7 @@
         public int Location { get; set; }
 
         public int Width { get; set; } = 100;
-        public int Height { get; set; } = 1000;
+        public int Height { get; set; } = 100;
         public string Src { get; set; }
         public string Alt { get; set; }
         public int Border { get; set; } 
@@ -17,6 +17,7 @@
 
         public string FileUri { get; set; }
         public string TemplateType { get; set; }
+        public string CssCode { get; set; } = string.Empty;
 
         public bool Selected { get; set; }
 
@@ -34,11 +35,5 @@
             contain,
             none
         }
-
-        public enum FileTypes
-        {
-            ProfielFoto
-        }
-
     }
 }

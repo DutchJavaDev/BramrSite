@@ -2,6 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: 1px linear-gradient(90deg, rgb(26, 26, 26), rgb(54, 54, 54)) !important;
 }
 
 a, .btn-link {

@@ -1,0 +1,416 @@
+﻿@page "/cv"
+@using BramrSite.Classes
+@using BramrSite.Models
+@using BramrSite.Pages.Components
+@attribute [Authorize]
+
+<div class="resume">
+    <div class="resume-left">
+        <div class="resume-profile">
+            <ImageComponent CurrentDesignElement="AllImageElements[0]" CvCallBack="SelectionCallback" Index="0" />
+        </div>
+        <div class="resume-content">
+            <div class="resume-item resume-info">
+                <div class="title">
+                    <div class="bold">
+                        <TextComponent CurrentDesignElement="AllTextElements[0]" TagType="p" CvCallback="SelectionCallback" Index="0" />
+                    </div>
+                    <div class="regular">
+                        <TextComponent CurrentDesignElement="AllTextElements[1]" TagType="p" CvCallback="SelectionCallback" Index="1" />
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <div class="icon"><i class="fas fa-map-signs"></i></div>
+                        <div class="data">
+                            <TextComponent CurrentDesignElement="AllTextElements[2]" TagType="p" CvCallback="SelectionCallback" Index="2" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="data">
+                            <TextComponent CurrentDesignElement="AllTextElements[3]" TagType="p" CvCallback="SelectionCallback" Index="3" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div class="data">
+                            <TextComponent CurrentDesignElement="AllTextElements[4]" TagType="p" CvCallback="SelectionCallback" Index="4" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon"><i class="fab fa-weebly"></i></div>
+                        <div class="data">
+                            <TextComponent CurrentDesignElement="AllTextElements[5]" TagType="p" CvCallback="SelectionCallback" Index="5" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="resume-item resume-skills">
+                <div class="title">
+                    <p class="bold">Skills</p>
+                </div>
+                <ul>
+                    <li>
+                        <div class="skill-name">
+                            <TextComponent CurrentDesignElement="AllTextElements[6]" TagType="p" CvCallback="SelectionCallback" Index="6" />
+                        </div>
+                        <div class="skill-progress">
+                            <span style="width: 50%;"></span>
+                        </div>
+                        <div class="skill-per">50%</div>
+                    </li>
+                    <li>
+                        <div class="skill-name">
+                            <TextComponent CurrentDesignElement="AllTextElements[7]" TagType="p" CvCallback="SelectionCallback" Index="7" />
+                        </div>
+                        <div class="skill-progress">
+                            <span style="width: 50%;"></span>
+                        </div>
+                        <div class="skill-per">50%</div>
+                    </li>
+                    <li>
+                        <div class="skill-name">
+                            <TextComponent CurrentDesignElement="AllTextElements[8]" TagType="p" CvCallback="SelectionCallback" Index="8" />
+                        </div>
+                        <div class="skill-progress">
+                            <span style="width: 50%;"></span>
+                        </div>
+                        <div class="skill-per">50%</div>
+                    </li>
+                    <li>
+                        <div class="skill-name">
+                            <TextComponent CurrentDesignElement="AllTextElements[9]" TagType="p" CvCallback="SelectionCallback" Index="9" />
+                        </div>
+                        <div class="skill-progress">
+                            <span style="width: 50%;"></span>
+                        </div>
+                        <div class="skill-per">50%</div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="resume-item resume-social">
+                <div class="title">
+                    <p class="bold">Social</p>
+                </div>
+                <ul>
+                    <li>
+                        <div class="icon"><i class="fab fa-facebook-square"></i></div>
+                        <div class="data">
+                            <p class="semi-bold">Facebook</p>
+                            <TextComponent CurrentDesignElement="AllTextElements[10]" TagType="p" CvCallback="SelectionCallback" Index="10" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon"><i class="fab fa-twitter-square"></i></div>
+                        <div class="data">
+                            <p class="semi-bold">Twitter</p>
+                            <TextComponent CurrentDesignElement="AllTextElements[11]" TagType="p" CvCallback="SelectionCallback" Index="11" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon"><i class="fab fa-linkedin"></i></div>
+                        <div class="data">
+                            <p class="semi-bold">LinkedIn</p>
+                            <TextComponent CurrentDesignElement="AllTextElements[12]" TagType="p" CvCallback="SelectionCallback" Index="12" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon"><i class="fab fa-pinterest-square"></i></div>
+                        <div class="data">
+                            <p class="semi-bold">Pinterest</p>
+                            <TextComponent CurrentDesignElement="AllTextElements[13]" TagType="p" CvCallback="SelectionCallback" Index="13" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="resume-right">
+        <div class="resume-item resume-about">
+            <div class="title">
+                <p class="bold">About me</p>
+            </div>
+            <TextComponent CurrentDesignElement="AllTextElements[14]" TagType="p" CvCallback="SelectionCallback" Index="14" />
+        </div>
+        <div class="resume-item resume-work">
+            <div class="title">
+                <p class="bold">Work experience</p>
+            </div>
+            <ul>
+                <li>
+                    <div class="date">
+                        <TextComponent CurrentDesignElement="AllTextElements[15]" TagType="p" CvCallback="SelectionCallback" Index="15" />
+                    </div>
+                    <div class="info">
+                        <div class=semi-bold>
+                            <TextComponent CurrentDesignElement="AllTextElements[16]" TagType="p" CvCallback="SelectionCallback" Index="16" />
+                        </div>
+                        <TextComponent CurrentDesignElement="AllTextElements[17]" TagType="p" CvCallback="SelectionCallback" Index="17" />
+                    </div>
+                </li>
+                <li>
+                    <div class="date">
+                        <TextComponent CurrentDesignElement="AllTextElements[18]" TagType="p" CvCallback="SelectionCallback" Index="18" />
+                    </div>
+                    <div class="info">
+                        <div class=semi-bold>
+                            <TextComponent CurrentDesignElement="AllTextElements[19]" TagType="p" CvCallback="SelectionCallback" Index="19" />
+                        </div>
+                        <TextComponent CurrentDesignElement="AllTextElements[20]" TagType="p" CvCallback="SelectionCallback" Index="20" />
+                    </div>
+                </li>
+                <li>
+                    <div class="date">
+                        <TextComponent CurrentDesignElement="AllTextElements[21]" TagType="p" CvCallback="SelectionCallback" Index="21" />
+                    </div>
+                    <div class="info">
+                        <div class=semi-bold>
+                            <TextComponent CurrentDesignElement="AllTextElements[22]" TagType="p" CvCallback="SelectionCallback" Index="22" />
+                        </div>
+                        <TextComponent CurrentDesignElement="AllTextElements[23]" TagType="p" CvCallback="SelectionCallback" Index="23" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="resume-item resume-education">
+            <div class="title">
+                <p class="bold">Edcuation</p>
+            </div>
+            <ul>
+                <li>
+                    <div class="date">
+                        <TextComponent CurrentDesignElement="AllTextElements[24]" TagType="p" CvCallback="SelectionCallback" Index="24" />
+                    </div>
+                    <div class="info">
+                        <div class=semi-bold>
+                            <TextComponent CurrentDesignElement="AllTextElements[25]" TagType="p" CvCallback="SelectionCallback" Index="25" />
+                        </div>
+                        <TextComponent CurrentDesignElement="AllTextElements[26]" TagType="p" CvCallback="SelectionCallback" Index="26" />
+                    </div>
+                </li>
+                <li>
+                    <div class="date">
+                        <TextComponent CurrentDesignElement="AllTextElements[27]" TagType="p" CvCallback="SelectionCallback" Index="27" />
+                    </div>
+                    <div class="info">
+                        <div class=semi-bold>
+                            <TextComponent CurrentDesignElement="AllTextElements[28]" TagType="p" CvCallback="SelectionCallback" Index="28" />
+                        </div>
+                        <TextComponent CurrentDesignElement="AllTextElements[29]" TagType="p" CvCallback="SelectionCallback" Index="29" />
+                    </div>
+                </li>
+                <li>
+                    <div class="date">
+                        <TextComponent CurrentDesignElement="AllTextElements[30]" TagType="p" CvCallback="SelectionCallback" Index="30" />
+                    </div>
+                    <div class="info">
+                        <div class=semi-bold>
+                            <TextComponent CurrentDesignElement="AllTextElements[31]" TagType="p" CvCallback="SelectionCallback" Index="31" />
+                        </div>
+                        <TextComponent CurrentDesignElement="AllTextElements[32]" TagType="p" CvCallback="SelectionCallback" Index="32" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="resume-item resume-hobby">
+            <div class="title">
+                <p class="bold">Hobby</p>
+            </div>
+            <ul>
+                <li><TextComponent CurrentDesignElement="AllTextElements[33]" TagType="p" CvCallback="SelectionCallback" Index="33" /></li>
+                <li><TextComponent CurrentDesignElement="AllTextElements[34]" TagType="p" CvCallback="SelectionCallback" Index="34" /></li>
+                <li><TextComponent CurrentDesignElement="AllTextElements[35]" TagType="p" CvCallback="SelectionCallback" Index="35" /></li>
+                <li><TextComponent CurrentDesignElement="AllTextElements[36]" TagType="p" CvCallback="SelectionCallback" Index="36" /></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div id="editor" class="modal draggable-item">
+    <span class="close">&times;</span>
+    <div class="toolbar">
+        @if (IsText && CurrentTextElement.Selected)
+        {
+            <h1>Text editor tool</h1>
+            <div id="output">
+                <textarea name="comment" form="usrform" cols="60" rows="5" @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString());}" @bind="CurrentTextElement.Text"></textarea>
+            </div>
+            <div class="tool-list-text">
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Left; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                </li>
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Center; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">
+                        <i class="fas fa-align-center"></i>
+                    </button>
+                </li>
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.TextAllignment = TextModel.Allignment.Right; await AddToDB(ChangeModel.Type.TextAllignment, CurrentTextElement.TextAllignment.ToString()); }">
+                        <i class="fas fa-align-right"></i>
+                    </button>
+                </li>
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.Bold = !CurrentTextElement.Bold; await AddToDB(ChangeModel.Type.Bold, CurrentTextElement.Bold.ToString()); }">
+                        <i class="fas fa-bold"></i>
+                    </button>
+                </li>
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.Italic = !CurrentTextElement.Italic; await AddToDB(ChangeModel.Type.Italic, CurrentTextElement.Italic.ToString()); }">
+                        <i class="fas fa-italic"></i>
+                    </button>
+                </li>
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.Underlined = !CurrentTextElement.Underlined; await AddToDB(ChangeModel.Type.Underlined, CurrentTextElement.Underlined.ToString()); }">
+                        <i class="fas fa-underline"></i>
+                    </button>
+                </li>
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.StrikedThrough = !CurrentTextElement.StrikedThrough; await AddToDB(ChangeModel.Type.Strikedthrough, CurrentTextElement.StrikedThrough.ToString()); }">
+                        <i class="fas fa-strikethrough"></i>
+                    </button>
+                </li>
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentTextElement.Shadow = !CurrentTextElement.Shadow; await AddToDB(ChangeModel.Type.Shadow, CurrentTextElement.Shadow.ToString()); }">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" disabled="@UndoButton" @onclick="async() => { await Undo(); }">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                </li>
+                <li class="tool">
+                    <button type="button" href="#" class="tool-btn" disabled="@RedoButton" @onclick="async() => { await Redo(); }">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                </li>
+            </div>
+
+            <h1>Font tool</h1>
+            <div class="tool-list-font">
+                <li class="tool">
+                    <select name="font" id="fontkiezen" @onchange="async(e) => { CurrentTextElement.Font = e.Value.ToString(); await AddToDB(ChangeModel.Type.Font, CurrentTextElement.Font); }">
+                        <option value="Montserrat">Montserrat</option>
+                        <option value="Open Sans Condensed">Open Sans Condensed</option>
+                        <option value="Rubik">Rubik</option>
+                        <option value="Quicksand">Quicksand</option>
+                        <option value="Teko">Teko</option>
+                        <option value="Exo 2">Exo 2</option>
+                        <option value="Maven Pro">Maven Pro</option>
+                        <option value="Sarabun">Sarabun</option>
+                        <option value="Old Standard TT">Old Standard TT</option>
+                        <option value="Marvel">Marvel</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Helvetica">Helvetica</option>
+                    </select>
+                </li>
+                <li>
+                    <h3>Font size</h3>
+                    <input type="range" min="1" max="40" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentTextElement.FontSize = Convert.ToDouble(e.Value) / 10; }" @onchange="async(e) => { CurrentTextElement.FontSize = Convert.ToDouble(e.Value) / 10; await AddToDB(ChangeModel.Type.FontSize, CurrentTextElement.FontSize.ToString()); e.Value = CurrentTextElement.FontSize; }">
+                </li>
+                <li>
+                    <h3>Font weight</h3>
+                    <input type="range" min="0" max="900" step="100" class="slider" id="myRange" @oninput="(e) => { CurrentTextElement.FontWeight = Convert.ToInt32(e.Value); }" @onchange="async(e) => { CurrentTextElement.FontWeight = Convert.ToInt32(e.Value); await AddToDB(ChangeModel.Type.FontWeight, CurrentTextElement.FontWeight.ToString()); e.Value = CurrentTextElement.FontWeight; }"/>
+                </li>
+            </div>
+
+            <h1>Color editor tool</h1>
+            <div class="tool-list-color">
+                <li class="tool">
+                    <h3>Font color</h3>
+                    <input name="Color Picker" type="color" @oninput="(e) => { CurrentTextElement.TextColor = e.Value.ToString(); }" @onchange="async(e) => { CurrentTextElement.TextColor = e.Value.ToString(); await AddToDB(ChangeModel.Type.TextColor, e.Value.ToString()); e.Value = CurrentTextElement.TextColor; }" />
+                </li>
+                <li class="tool">
+                    <h3>Background color</h3>
+                    <input name="Color Picker" type="color" @oninput="(e) => { CurrentTextElement.BackgroundColor = e.Value.ToString(); }" @onchange="async(e) => { CurrentTextElement.BackgroundColor = e.Value.ToString(); await AddToDB(ChangeModel.Type.BackgroundColor, e.Value.ToString()); e.Value = CurrentTextElement.BackgroundColor; }" />
+                </li>
+            </div>
+        }
+        else
+        {
+            @if (!IsText && CurrentImageElement.Selected)
+            {
+                <h1>Images upload tool</h1>
+                <ImageUpload CurrentImage="CurrentImageElement" CvCallBack="ImageCallback" IsCV="true" />
+                //Aanpassingen Art
+                <h1>Images editor tool</h1>
+                <div class="tool-list-img-edit">
+                    <li class="tool">
+
+                        <select name="Object-fit" id="Object-fit-kiezen" @onchange="async(e) => { CurrentImageElement.ObjectFitSet = (ImageModel.ObjectFit)Enum.Parse(typeof(ImageModel.ObjectFit), e.Value.ToString()); await AddToDB(ChangeModel.Type.ObjectFitSet, CurrentImageElement.ObjectFitSet.ToString()); }">
+
+                            <option value="cover">cover</option>
+                            <option value="fill">fill</option>
+                            <option value="contain">contain</option>
+                            <option value="none">none</option>
+                        </select>
+                        <p style="color:white">Covertype</p>
+                    </li>
+                    <li class="tool">
+                        @*<button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentImageElement.Border = 2; await AddToDB(ChangeModel.Type.Border, CurrentImageElement.Border.ToString()); }">
+                <i class="fas fa-border-all"></i>
+            </button>
+            <p>border on</p>*@
+                        <input type="range" min="0" max="20" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentImageElement.Border = Convert.ToInt32(e.Value); }" @onchange="async(e) => { CurrentImageElement.Border = Convert.ToInt32(e.Value); await AddToDB(ChangeModel.Type.Border, CurrentImageElement.Border.ToString()); e.Value = CurrentImageElement.Border; }" />
+                        <p style="color:white">border</p>
+                    </li>
+                    <li class="tool">
+                        @*<button type="button" href="#" class="tool-btn" @onclick="async() => { CurrentImageElement.Border = 0; await AddToDB(ChangeModel.Type.Border, CurrentImageElement.Border.ToString()); }">
+                <i class="fas fa-border-style"></i>
+            </button>
+            <p>border off</p>*@
+                    </li>
+                    <li class="tool">
+                        <select name="Float" id="Float-kiezen" @onchange="async(e) => { CurrentImageElement.FloatSet = (ImageModel.Float)Enum.Parse(typeof(ImageModel.Float), e.Value.ToString()); await AddToDB(ChangeModel.Type.FloatSet, CurrentImageElement.FloatSet.ToString()); }">
+
+                            <option value="none">none</option>
+                            <option value="left">left</option>
+                            <option value="right">right</option>
+                        </select>
+                        <p style="color:white">Direction</p>
+                    </li>
+                    <li class="tool">
+                        <input type="range" min="0" max="100" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentImageElement.Padding = Convert.ToInt32(e.Value); }" @onchange="async(e) => { CurrentImageElement.Padding = Convert.ToInt32(e.Value); await AddToDB(ChangeModel.Type.Padding, CurrentImageElement.Padding.ToString()); e.Value = CurrentImageElement.Padding; }" />
+                        <p style="color:white">Padding</p">
+                    </li>
+                    <li class="tool">
+                        <input type="range" min="0" max="10" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentImageElement.Opacity = Convert.ToInt32(e.Value)/10; }" @onchange="async(e) => { CurrentImageElement.Opacity = Convert.ToInt32(e.Value)/10; await AddToDB(ChangeModel.Type.Opacity, CurrentImageElement.Opacity.ToString()); e.Value = CurrentImageElement.Opacity; }" />
+                        <p style="color:white">Opacity</p>
+                    </li>
+             @*Aanpassing Art Einde*@
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" disabled="@UndoButton" @onclick="async() => { await Undo(); }">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                    </li>
+                    <li class="tool">
+                        <button type="button" href="#" class="tool-btn" disabled="@RedoButton" @onclick="async() => { await Redo(); }">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </li>
+                </div>
+            }
+            else 
+            { 
+                <h1>Select an element on the page to edit it.</h1>
+            }
+        }
+    </div>
+</div>
+
+
+<button id="myBtn">
+    <i class="fas fa-keyboard"></i>
+</button>
+
+<button id="myBtn-back">
+    <a href="home"><i class="fas fa-arrow-left"></i></a>
+</button>
+
+<button id="myBtn-save" @onclick="() => { Save(); }">
+    <i class="fas fa-save"></i>
+</button>
