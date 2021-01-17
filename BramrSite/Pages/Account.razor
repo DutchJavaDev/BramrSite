@@ -1,5 +1,6 @@
 ﻿@page "/account"
 @using static BramrSite.Models.EditMode 
+@attribute [Authorize]
 
 <div id="background">
     <div id="account-content">
@@ -73,7 +74,7 @@
                         </h6>
                         <a href="cv">
                             <button class="createbtn">
-                                <i class="fa fa-plus"></i> Create
+                                <i class="fa fa-plus"></i> @(HasCv ? "Bijwerken" : "Create")
                             </button>
                         </a>
                     </div>
@@ -85,7 +86,7 @@
                         </h6>
                         <a href="portfolio">
                             <button class="createbtn">
-                                <i class="fa fa-plus"></i> Create
+                                <i class="fa fa-plus"></i> @(HasPortfolio ? "Bijwerken" : "Create")
                             </button>
                         </a>
                     </div>
