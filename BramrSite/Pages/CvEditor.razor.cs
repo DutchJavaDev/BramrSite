@@ -61,10 +61,6 @@ namespace BramrSite.Pages
         };
         public List<object> AllDesignElements { get; private set; } = new List<object>();
 
-        //Art Aanpassing 
-        public ImageModel ProfielFoto { get; private set; } = new ImageModel() { Location = 15, Alt = "ProfielFoto", TemplateType = "Cv" };
-        //Art Aanpassing einde
-
         private TextModel CurrentTextElement { get; set; } = new TextModel();
         private ImageModel CurrentImageElement { get; set; } = new ImageModel();
 
@@ -76,15 +72,15 @@ namespace BramrSite.Pages
 
         private bool IsText { get; set; }
 
-        public delegate void Del(string uri, string src);
+        public delegate void CvImageDel(string uri, string src);
         public delegate void CvDel(bool IsText, int Index);
 
-        Del CallBackMethod;
+        CvImageDel ImageCallback;
         CvDel SelectionCallback;
 
         protected override async void OnInitialized()
         {
-            CallBackMethod = ApplySource;
+            ImageCallback = ApplySource;
             SelectionCallback = Selection;
 
             for (int x = 0; x < 37; x++)

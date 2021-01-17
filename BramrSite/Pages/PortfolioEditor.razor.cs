@@ -63,7 +63,10 @@ namespace BramrSite.Pages
         private bool RedoButton { get; set; } = true;
 
         public delegate void PortfolioDel(bool IsText, int Index);
+        public delegate void PortfolioImageDel(string uri, string src);
+
         PortfolioDel SelectionCallBack;
+        PortfolioImageDel ImageCallBack;
 
         protected override void OnAfterRender(bool firstRender)
         {
@@ -94,6 +97,7 @@ namespace BramrSite.Pages
         protected override async void OnInitialized()
         {
             SelectionCallBack = Selection;
+            ImageCallBack = ApplySource;
 
             await Api.DeleteAllFromHistory();
 
@@ -373,6 +377,13 @@ namespace BramrSite.Pages
                 default:
                     return TextModel.Allignment.Left;
             }
+        }
+
+        public void ApplySource(string Uri, string Src)
+        {
+            CurrentImageElement.FileUri = Uri;
+            CurrentImageElement.Src = Src;
+            StateHasChanged();
         }
     }
 }

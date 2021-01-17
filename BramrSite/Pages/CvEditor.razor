@@ -335,8 +335,8 @@
             @if (!IsText && CurrentImageElement.Selected)
             {
                 <h1>Images upload tool</h1>
-                <ImageUpload CurrentImage="CurrentImageElement" CallBack="CallBackMethod" IsCV="true" />
-                // aanpassingen Art
+                <ImageUpload CurrentImage="CurrentImageElement" CvCallBack="ImageCallback" IsCV="true" />
+                //Aanpassingen Art
                 <h1>Images editor tool</h1>
                 <div class="tool-list-img-edit">
                     <li class="tool">
@@ -381,7 +381,7 @@
                         <input type="range" min="0" max="10" step="1" class="slider" id="myRange" @oninput="(e) => { CurrentImageElement.Opacity = Convert.ToInt32(e.Value)/10; }" @onchange="async(e) => { CurrentImageElement.Opacity = Convert.ToInt32(e.Value)/10; await AddToDB(ChangeModel.Type.Opacity, CurrentImageElement.Opacity.ToString()); e.Value = CurrentImageElement.Opacity; }" />
                         <p style="color:white">Opacity</p>
                     </li>
-
+             @*Aanpassing Art Einde*@
                     <li class="tool">
                         <button type="button" href="#" class="tool-btn" disabled="@UndoButton" @onclick="async() => { await Undo(); }">
                             <i class="fas fa-undo"></i>

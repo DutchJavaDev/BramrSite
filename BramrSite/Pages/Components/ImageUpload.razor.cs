@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tewr.Blazor.FileReader;
 using static BramrSite.Pages.CvEditor;
+using static BramrSite.Pages.PortfolioEditor;
 
 namespace BramrSite.Pages.Components
 {
@@ -15,7 +16,8 @@ namespace BramrSite.Pages.Components
         [Inject] IFileReaderService FileReader { get; set; }
         [Inject] ApiService Api { get; set; }
         [Parameter] public ImageModel CurrentImage { get; set; }
-        [Parameter] public Del CallBack { get; set; }
+        [Parameter] public CvImageDel CvCallBack { get; set; }
+        [Parameter] public PortfolioImageDel PortfolioCallBack { get; set; }
         [Parameter] public bool IsCV { get; set; }
         ElementReference FileReference { get; set; }
         Stream FileStream { get; set; }
@@ -64,7 +66,15 @@ namespace BramrSite.Pages.Components
 #else
             CurrentImage.Src = $"https://bramr.tech/api/image/download/{CurrentImage.FileUri}";
 #endif
-            CallBackMethod(CallBack);
+            if (IsCV)
+            {
+                CvCallBack.Invoke(CurrentImage.FileUri, CurrentImage.Src);
+            }
+            else
+            {
+                PortfolioCallBack.Invoke(CurrentImage.FileUri, CurrentImage.Src);
+            }
+            
             if (apiResponse.Success == true)
             {
                 ErrorMessage = "Succesvol geüpload.";
@@ -73,11 +83,6 @@ namespace BramrSite.Pages.Components
             {
                 ErrorMessage = apiResponse.Message;
             }
-        }
-
-        public void CallBackMethod(Del CallBackMethod)
-        {
-            CallBackMethod.Invoke(CurrentImage.FileUri, CurrentImage.Src);
         }
     }
 }

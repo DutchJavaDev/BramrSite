@@ -179,7 +179,7 @@
 button.questionbtn, button.createbtn {
     border: 0;
     padding: 10px;
-    width: 100%;
+    width: 12vh;
     background: 1px linear-gradient(to right, rgb(6, 255, 248), rgb(0, 207, 255));
     font-size: .7rem;
     margin: 5px 2px;
