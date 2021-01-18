@@ -399,6 +399,7 @@ namespace BramrSite.Pages
         private async void Logout()
         {
             await TokenHandler.UpdateAutenticationState(string.Empty);
+            await Task.Delay(500);
             Navigation.NavigateTo("/");
         }
         public void ApplySource(string Uri, string Src)

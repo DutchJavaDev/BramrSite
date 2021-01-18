@@ -113,6 +113,7 @@ namespace BramrSite.Pages
 
                 if (apiResult.Success)
                 {
+                    await Task.Delay(1000);
                     Navigation.NavigateTo("/");
                 }
                 else
@@ -143,14 +144,17 @@ namespace BramrSite.Pages
 
                     if (ReturnToIndex)
                     {
+                        await Task.Delay(1000);
                         Navigation.NavigateTo("/account");
                     }
                     else if (!string.IsNullOrEmpty(ReturnUrl))
                     {
-                        Navigation.NavigateTo(ReturnUrl, true);
+                        await Task.Delay(1000);
+                        Navigation.NavigateTo(ReturnUrl);
                     }
                     else
                     {
+                        await Task.Delay(1000);
                         Navigation.NavigateTo("/account");
                     }
                 }
