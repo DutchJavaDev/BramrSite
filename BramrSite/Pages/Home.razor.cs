@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using BramrSite.Auth;
 using Microsoft.JSInterop;
 using System;
+using BramrSite.Auth;
 
 namespace BramrSite.Pages
 {
@@ -36,6 +37,11 @@ namespace BramrSite.Pages
 
         protected async override void OnInitialized()
         {
+            if ( await Auth.HasToken())
+            {
+                Navigation.NavigateTo("/account", true);
+            }
+
             Module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/HomeScript.js");
 
             await Module.InvokeVoidAsync("updateContainer");

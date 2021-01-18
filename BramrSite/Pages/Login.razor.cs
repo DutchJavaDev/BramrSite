@@ -34,6 +34,11 @@ namespace BramrSite.Pages
 
         protected async override void OnInitialized()
         {
+            if (await Auth.HasToken())
+            {
+                Navigation.NavigateTo("/account", true);
+            }
+
             if (ReturnUrl == "index" || ReturnUrl == "/")
             {
                 ReturnToIndex = true;
