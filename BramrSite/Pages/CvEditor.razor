@@ -55,37 +55,29 @@
                         <div class="skill-name">
                             <TextComponent CurrentDesignElement="AllTextElements[6]" TagType="p" CvCallback="SelectionCallback" Index="6" />
                         </div>
-                        <div class="skill-progress">
-                            <span style="width: 50%;"></span>
-                        </div>
-                        <div class="skill-per">50%</div>
+                        <input type="range" min="0" max="100" step="1" class="slider" id="myRange" @bind-value="Skills[0]"/>
+                        <div class="skill-per">@Skills[0]%</div>
                     </li>
                     <li>
                         <div class="skill-name">
                             <TextComponent CurrentDesignElement="AllTextElements[7]" TagType="p" CvCallback="SelectionCallback" Index="7" />
                         </div>
-                        <div class="skill-progress">
-                            <span style="width: 50%;"></span>
-                        </div>
-                        <div class="skill-per">50%</div>
+                        <input type="range" min="0" max="100" step="1" class="slider" id="myRange" @bind-value="Skills[1]" />
+                        <div class="skill-per">@Skills[1]%</div>
                     </li>
                     <li>
                         <div class="skill-name">
                             <TextComponent CurrentDesignElement="AllTextElements[8]" TagType="p" CvCallback="SelectionCallback" Index="8" />
                         </div>
-                        <div class="skill-progress">
-                            <span style="width: 50%;"></span>
-                        </div>
-                        <div class="skill-per">50%</div>
+                        <input type="range" min="0" max="100" step="1" class="slider" id="myRange" @bind-value="Skills[2]" />
+                        <div class="skill-per">@Skills[2]%</div>
                     </li>
                     <li>
                         <div class="skill-name">
                             <TextComponent CurrentDesignElement="AllTextElements[9]" TagType="p" CvCallback="SelectionCallback" Index="9" />
                         </div>
-                        <div class="skill-progress">
-                            <span style="width: 50%;"></span>
-                        </div>
-                        <div class="skill-per">50%</div>
+                        <input type="range" min="0" max="100" step="1" class="slider" id="myRange" @bind-value="Skills[3]" />
+                        <div class="skill-per">@Skills[3]%</div>
                     </li>
 
                 </ul>
