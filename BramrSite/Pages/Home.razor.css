@@ -546,6 +546,8 @@ button.ghost {
 
 .container.right-panel-active .sign-in-container {
     transform: translateX(100%);
+    opacity: 0;
+    z-index: 0;
 }
 
 .container.right-panel-active .overlay-container {
