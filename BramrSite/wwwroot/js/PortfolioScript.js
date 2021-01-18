@@ -23,14 +23,19 @@
     var modal = document.getElementById("editor");
     var btn = document.getElementById("myBtn");
     var span = document.getElementsByClassName("close")[0];
-    console.log("oi");
 
-    btn.onclick = function () {
-        modal.style.display = "block";
+    if (btn != null)
+    {
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
     }
 
-    span.onclick = function () {
-        modal.style.display = "none";
+    if (span != null)
+    {
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
     }
 
     window.onclick = function (event) {

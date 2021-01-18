@@ -154,6 +154,8 @@ namespace BramrSite.Pages
         {
             List<object> AllDesignElements = await Api.GetDesignElements(true);
 
+            if (AllDesignElements == null) return;
+
             if (AllDesignElements.Count != 0)
             {
                 for (int x = 0; x < 37; x++)
@@ -397,7 +399,7 @@ namespace BramrSite.Pages
         private async void Logout()
         {
             await TokenHandler.UpdateAutenticationState(string.Empty);
-            Navigation.NavigateTo("/", false);
+            Navigation.NavigateTo("/");
         }
         public void ApplySource(string Uri, string Src)
         {
