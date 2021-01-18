@@ -3,6 +3,7 @@
 @attribute [Authorize]
 
 <div id="background">
+    <button class="questionbtn" @onclick="Logout">logout</button>
     <div id="account-content">
         <div class="profile-header">
             <div class=profile-img>
@@ -35,11 +36,11 @@
                         <i class="fa fa-envelope">@UserInfo[4]</i>
                     </p>
                     @*<div class="user-bio">
-                        <h3>Bio</h3>
-                        <p class="bio">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora modi eligendi magni? Cupiditate atque mollitia reiciendis eaque quia placeat voluptas?
-                        </p>
-                    </div>*@
+                            <h3>Bio</h3>
+                            <p class="bio">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora modi eligendi magni? Cupiditate atque mollitia reiciendis eaque quia placeat voluptas?
+                            </p>
+                        </div>*@
                     <div class="profile-btn">
                         <section>
                             <button class="questionbtn">
@@ -70,11 +71,11 @@
                         <h1>Your CV-projects</h1>
                         <h6>
                             Here you can start with editing your very own CV. <br>
-                            Don't forget to wacht the instruction video to learn how to use the editor.
+                            Don't forget to <a href="https://www.youtube.com/embed/JHRAhjLWXlE" target="_blank">watch</a> the instruction video to learn how to use the editor.
                         </h6>
                         <a href="cv">
                             <button class="createbtn">
-                                <i class="fa fa-plus"></i> @(HasCv ? "Bijwerken" : "Create")
+                                <i class="fa fa-plus"></i> @(HasCv ? "Edit" : "Create")
                             </button>
                         </a>
                     </div>
@@ -82,11 +83,11 @@
                         <h1>Your Portfolio-projects</h1>
                         <h6>
                             Here you can start with editing your very own Portfolio. <br>
-                            Don't forget to wacht the instruction video to learn how to use the editor.
+                            Don't forget to <a href="https://www.youtube.com/embed/JHRAhjLWXlE" target="_blank">watch</a> the instruction video to learn how to use the editor.
                         </h6>
                         <a href="portfolio">
                             <button class="createbtn">
-                                <i class="fa fa-plus"></i> @(HasPortfolio ? "Bijwerken" : "Create")
+                                <i class="fa fa-plus"></i> @(HasPortfolio ? "Edit" : "Create")
                             </button>
                         </a>
                     </div>
@@ -109,7 +110,6 @@
                             </div>
 
                         </div>
-
                         <div class="container pt-4">
 
                             <table class="table table-borderless">
@@ -122,47 +122,47 @@
                                     @foreach (var note in Notes)
                                     {
 
-                                    <tr>
-                                        @if (note.EditMode == Edit)
-                                        {
-                                            <td>
-                                                <div class="row">
+                                        <tr>
+                                            @if (note.EditMode == Edit)
+                                            {
+                                                <td>
+                                                    <div class="row">
 
-                                                    <div class="col-6">
-                                                        <textarea class="note-font-edit" placeholder="Empty note" @bind-value="@note.Text" @bind-value:event="oninput"></textarea>
+                                                        <div class="col-6">
+                                                            <textarea class="note-font-edit" placeholder="Empty note" @bind-value="@note.Text" @bind-value:event="oninput"></textarea>
+                                                        </div>
+
+                                                        <div class="col-6">
+                                                            <div class="btn btn-block btn-success" @onclick="(() => { note.EditMode = Models.EditMode.Done; })">Done</div>
+                                                            <div class="btn btn-block btn-danger">Delete</div>
+                                                        </div>
+
                                                     </div>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <div class="row">
 
-                                                    <div class="col-6">
-                                                        <div class="btn btn-block btn-success" @onclick="(() => { note.EditMode = Models.EditMode.Done; })">Done</div>
-                                                        <div class="btn btn-block btn-danger">Delete</div>
+                                                        <div class="col-6">
+                                                            <span class="note-font">@note.Text</span>
+                                                        </div>
+
+                                                        <div class="col-6">
+                                                            <div class="btn btn-block btn-info" @onclick="(() => { note.EditMode = Models.EditMode.Edit; })">Edit</div>
+                                                            <div class="btn btn-block btn-danger" @onclick="(() => { RemoveNote(note);  })">Delete</div>
+                                                        </div>
+
                                                     </div>
-
-                                                </div>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>
-                                                <div class="row">
-
-                                                    <div class="col-6">
-                                                        <span class="note-font">@note.Text</span>
-                                                    </div>
-
-                                                    <div class="col-6">
-                                                        <div class="btn btn-block btn-info" @onclick="(() => { note.EditMode = Models.EditMode.Edit; })">Edit</div>
-                                                        <div class="btn btn-block btn-danger" @onclick="(() => { RemoveNote(note);  })">Delete</div>
-                                                    </div>
-
-                                                </div>
-                                            </td>
-                                        }
-                                    </tr>
+                                                </td>
+                                            }
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
 
-                           
+
                         </div>
                     </div>
                 </div>

@@ -25,6 +25,7 @@ namespace BramrSite.Pages
         [Inject] public IJSRuntime IJSRuntime { get; set; }
         [Parameter] public string ReturnUrl { get; set; }
 
+
         public string SignInMessage { get; set; }
         public string SignUpMessage { get; set; }
 

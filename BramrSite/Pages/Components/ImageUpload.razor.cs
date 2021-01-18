@@ -36,9 +36,9 @@ namespace BramrSite.Pages.Components
                 return;
             }
 
-            if (fileInfo.Size > 314572)
+            if (fileInfo.Size > 1014572)
             {
-                ErrorMessage = "Bestand mag niet groter zijn dan 3 mb.";
+                ErrorMessage = "Bestand mag niet groter zijn dan 10 mb.";
                 return;
             }
 

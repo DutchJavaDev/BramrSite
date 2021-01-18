@@ -11,5 +11,6 @@ export function tabs(panelIndex) {
     tab.forEach(function (node) {
         node.style.display = 'none';
     });
+    if(tab.length > 0)
     tab[panelIndex].style.display = 'block';
 }

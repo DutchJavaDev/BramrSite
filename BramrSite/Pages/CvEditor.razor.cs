@@ -14,6 +14,8 @@ namespace BramrSite.Pages
     {
         [Inject] IJSRuntime IJSRuntime { get; set; }
         [Inject] ApiService Api { get; set; }
+        [Inject] BramrSite.Auth.ITokenHandler TokenHandler { get; set; }
+        [Inject] NavigationManager Navigation { get; set; }
 
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>()
         {
@@ -392,7 +394,11 @@ namespace BramrSite.Pages
                     return TextModel.Allignment.Left;
             }
         }
-
+        private async void Logout()
+        {
+            await TokenHandler.UpdateAutenticationState(string.Empty);
+            Navigation.NavigateTo("/", false);
+        }
         public void ApplySource(string Uri, string Src)
         {
             AllImageElements[0].FileUri = Uri;

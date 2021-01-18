@@ -15,7 +15,8 @@ namespace BramrSite.Pages
     {
         [Inject] ApiService Api { get; set; }
         [Inject] IJSRuntime IJSRuntime { get; set; }
-
+        [Inject] BramrSite.Auth.ITokenHandler TokenHandler { get; set; }
+        [Inject] NavigationManager Navigation { get; set; }
         public List<TextModel> AllTextElements { get; private set; } = new List<TextModel>()
         {
             new TextModel() { Text = "Insert your name", TextAllignment = TextModel.Allignment.Center, FontSize = 10, TextColor = "#00DBFF" },
@@ -384,6 +385,11 @@ namespace BramrSite.Pages
             CurrentImageElement.FileUri = Uri;
             CurrentImageElement.Src = Src;
             StateHasChanged();
+        }
+        private async void Logout()
+        {
+            await TokenHandler.UpdateAutenticationState(string.Empty);
+            Navigation.NavigateTo("/", false);
         }
     }
 }

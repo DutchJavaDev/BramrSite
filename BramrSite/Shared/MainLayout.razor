@@ -5,21 +5,21 @@
 
     <AuthorizeView>
         <Authorized>
-            <div class="topnav">
+            @*<div class="topnav">
             <NavLink class="fixed-top" style="float:right;" href="#" @onclick="Logout">
                 <span>Uitloggen</span>
             </NavLink>
-        </div>
+        </div>*@
             @Body
         </Authorized>
         <NotAuthorized>
             @Body
         </NotAuthorized>
     </AuthorizeView>
-@code{
+@*@code{
     private async void Logout()
     {
         await tokenhandler.UpdateAutenticationState(string.Empty);
         navigation.NavigateTo("/", false);
     }
-}
+}*@
