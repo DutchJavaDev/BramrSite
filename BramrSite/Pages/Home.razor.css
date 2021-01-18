@@ -263,7 +263,9 @@ svg#illustratie-about {
     letter-spacing: 2px;
     word-spacing: 5px;
 }
-
+.content-about {
+    padding-left: 100px;
+}
 .vl-about {
     border-left: 2px solid rgb(0, 207, 255);
     height: 450px;
