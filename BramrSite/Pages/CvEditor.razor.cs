@@ -59,6 +59,13 @@ namespace BramrSite.Pages
         {
             new ImageModel() { CssCode = "b-cvsqx07klj" }
         };
+        public List<int> Skills { get; private set; } = new List<int>()
+        {
+            50,
+            50,
+            50,
+            50
+        };
         public List<object> AllDesignElements { get; private set; } = new List<object>();
 
         private TextModel CurrentTextElement { get; set; } = new TextModel();
@@ -127,6 +134,10 @@ namespace BramrSite.Pages
                 AllDesignElements.Add(item);
             }
             foreach (var item in AllImageElements)
+            {
+                AllDesignElements.Add(item);
+            }
+            foreach (var item in Skills)
             {
                 AllDesignElements.Add(item);
             }
