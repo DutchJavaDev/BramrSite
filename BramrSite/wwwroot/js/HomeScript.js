@@ -26,17 +26,3 @@
 
     tl2.to(".whole-card", { y: 10, repeat: -1, yoyo: true })
 };
-
-export function scrollToId(elementId)
-{
-    var element = document.getElementById(elementId);
-
-    if (!element) {
-        console.warn('element was not found', elementId);
-        return;
-    }
-
-    element.preventDefault();
-
-    element.scrollIntoView();
-}

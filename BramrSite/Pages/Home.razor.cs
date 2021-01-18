@@ -6,6 +6,7 @@ using BramrSite.Auth;
 using Microsoft.JSInterop;
 using System;
 using BramrSite.Auth;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace BramrSite.Pages
 {
@@ -38,6 +39,8 @@ namespace BramrSite.Pages
 
         protected async override void OnInitialized()
         {
+            Navigation.LocationChanged += TryFragmentNavigation;
+
             if ( await Auth.HasToken())
             {
                 Navigation.NavigateTo("/account", true);
@@ -54,25 +57,26 @@ namespace BramrSite.Pages
             }
         }
 
+        private async void TryFragmentNavigation(object sender, LocationChangedEventArgs args)
+        {
+            await Navigation.NavigateToFragmentAsync(IJSRuntime);
+        }
+
+        public void Dispose()
+        {
+            Navigation.LocationChanged -= TryFragmentNavigation;
+        }
 
         /// <summary>
         /// Beter fix: https://chrissainty.com/fragment-routing-with-blazor/
         /// </summary>
-        public async void MeetTheTeam()
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            await Module.InvokeVoidAsync("scrollToId", "#meetTheTeam");
+            if (firstRender)
+            {
+                await Navigation.NavigateToFragmentAsync(IJSRuntime);
+            }
         }
-
-        public async void About()
-        {
-            await Module.InvokeVoidAsync("scrollToId", "#about");
-        }
-
-        public async void _Home()
-        {
-            await Module.InvokeVoidAsync("scrollToId", "#Home");
-        }
-
         public async Task SignUpSubmit()
         {
             Disabled = true;
