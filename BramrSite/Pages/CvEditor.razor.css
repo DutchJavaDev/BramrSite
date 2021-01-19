@@ -389,6 +389,14 @@ select {
     cursor: move;
 }
 
+#save-message{
+    position: absolute;
+    top: 0%;
+    margin-top: 10px;
+    left: 15%;
+    color: white;
+}
+
 .close {
     color: rgb(0, 207, 255);
     float: right;

@@ -80,6 +80,7 @@ namespace BramrSite.Pages
         private bool RedoButton { get; set; } = true;
 
         private bool IsText { get; set; }
+        private string SaveMessage { get; set; } = "";
 
         public delegate void CvImageDel(string uri, string src);
         public delegate void CvDel(bool IsText, int Index);
@@ -146,8 +147,16 @@ namespace BramrSite.Pages
 
             string json = JsonConvert.SerializeObject(AllDesignElements, Formatting.Indented);
 
-            await Api.UploadCV(json);
+            var result = await Api.UploadCV(json);
+            if (result.Success)
+            {
+                SaveMessage = result.Message;
+                StateHasChanged();
+            }
             await Api.DeleteAllFromHistory();
+            await Task.Delay(3000);
+            SaveMessage = "";
+            StateHasChanged();
         }
 
         private async void LoadSite()
