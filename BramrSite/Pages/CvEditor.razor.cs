@@ -132,6 +132,7 @@ namespace BramrSite.Pages
 
         private async void Save()
         {
+            AllDesignElements.Clear();
             foreach (var item in AllTextElements)
             {
                 AllDesignElements.Add(item);
