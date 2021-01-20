@@ -73,11 +73,18 @@
                             Here you can start with editing your very own CV. <br>
                             Don't forget to <a href="https://www.youtube.com/embed/JHRAhjLWXlE" target="_blank">watch</a> the instruction video to learn how to use the editor.
                         </h6>
-                        <a href="cv">
-                            <button class="createbtn">
-                                <i class="fa fa-plus"></i> @(HasCv ? "Edit" : "Create")
+                        @if (HasCv)
+                        {
+                            <button @onclick="@(() => { NavigateToPage("cv"); })" class="createbtn">
+                                <i class="fa fa-edit"></i> Edit
                             </button>
-                        </a>
+                        }
+                        else
+                        {
+                            <button @onclick="@(() => { NavigateToPage("cv"); })" class="createbtn">
+                                <i class="fa fa-plus"></i> Create
+                            </button>
+                        }
                     </div>
                     <div class="profile-Portfolio tab">
                         <h1>Your Portfolio-projects</h1>
@@ -85,11 +92,18 @@
                             Here you can start with editing your very own Portfolio. <br>
                             Don't forget to <a href="https://www.youtube.com/embed/JHRAhjLWXlE" target="_blank">watch</a> the instruction video to learn how to use the editor.
                         </h6>
-                        <a href="portfolio">
-                            <button class="createbtn">
-                                <i class="fa fa-plus"></i> @(HasPortfolio ? "Edit" : "Create")
-                            </button>
-                        </a>
+                            @if (HasPortfolio)
+                            {
+                                <button @onclick="@(() => { NavigateToPage("portfolio"); })" class="createbtn">
+                                    <i class="fa fa-edit"></i> Edit
+                                </button>
+                            }
+                            else
+                            {
+                                <button @onclick="@(() => { NavigateToPage("portfolio"); })" class="createbtn">
+                                    <i class="fa fa-plus"></i> Create
+                                </button>
+                            }
                     </div>
                     <div class="profile-Notepad tab">
                         <h1>Notepad</h1>

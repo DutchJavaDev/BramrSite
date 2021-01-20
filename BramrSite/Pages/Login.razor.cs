@@ -36,7 +36,7 @@ namespace BramrSite.Pages
         {
             if (await Auth.HasToken())
             {
-                Navigation.NavigateTo("/account", true);
+                Navigation.NavigateTo("/account");
             }
 
             if (ReturnUrl == "index" || ReturnUrl == "/")
@@ -44,12 +44,6 @@ namespace BramrSite.Pages
                 ReturnToIndex = true;
                 ReturnUrl = string.Empty;
             }
-            // eventuele delay
-            //await Task.Delay(5000);
-            //var module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/Imageclassification.js");
-
-            //await module.InvokeVoidAsync("setup");
-            //await module.InvokeVoidAsync("preload");
         }
         
         public async Task SignInSubmit()
@@ -73,7 +67,7 @@ namespace BramrSite.Pages
                     }
                     else if (!string.IsNullOrEmpty(ReturnUrl))
                     {
-                        Navigation.NavigateTo(ReturnUrl, true);
+                        Navigation.NavigateTo(ReturnUrl);
                     }
                     else
                     {

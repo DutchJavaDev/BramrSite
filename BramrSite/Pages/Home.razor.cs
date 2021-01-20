@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using BramrSite.Auth;
 using Microsoft.JSInterop;
-using System;
-using BramrSite.Auth;
 using Microsoft.AspNetCore.Components.Routing;
 
 namespace BramrSite.Pages
@@ -106,19 +104,17 @@ namespace BramrSite.Pages
                 else
                 {
                     SignUpMessage = "User created";
-                    Console.WriteLine(apiResult.Message);
-                }
+                    apiResult = await Api.SignUp(Model);
 
-                apiResult = await Api.SignUp(Model);
-
-                if (apiResult.Success)
-                {
-                    await Task.Delay(1000);
-                    Navigation.NavigateTo("/");
-                }
-                else
-                {
-                    SignUpMessage = apiResult.Message;
+                    if (apiResult.Success)
+                    {
+                        await Task.Delay(1000);
+                        Navigation.NavigateTo("/");
+                    }
+                    else
+                    {
+                        SignUpMessage = apiResult.Message;
+                    }
                 }
             }
 

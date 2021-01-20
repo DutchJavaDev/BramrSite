@@ -11,7 +11,7 @@ namespace BramrSite.Pages
         [Inject] IJSRuntime IJSRuntime { get; set; }
         [Inject] ApiService Api { get; set; }
         [Inject] NavigationManager Navigation { get; set; }
-        [Inject] BramrSite.Auth.ITokenHandler tokenhandler { get; set; }
+        [Inject] BramrSite.Auth.ITokenHandler Tokenhandler { get; set; }
         private IJSObjectReference Module;
 
         private List<NoteModel> Notes { get; set; }
@@ -35,8 +35,8 @@ namespace BramrSite.Pages
 
             UserInfo = await Api.GetUserInfo();
 
-            //HasCv = bool.Parse(UserInfo[5]);
-            //HasPortfolio = bool.Parse(UserInfo[6]);
+            HasCv = bool.Parse(UserInfo[5]);
+            HasPortfolio = bool.Parse(UserInfo[6]);
 
             Module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/AccountScript.js");
 
@@ -46,6 +46,10 @@ namespace BramrSite.Pages
             StateHasChanged();
         }
 
+        public void NavigateToPage(string page)
+        {
+            Navigation.NavigateTo(page);
+        }
 
         public async void Tab(int tabIndex)
         {
@@ -66,8 +70,8 @@ namespace BramrSite.Pages
         }
         private async void Logout()
         {
-            await tokenhandler.UpdateAutenticationState(string.Empty);
-            Navigation.NavigateTo("/", false);
+            await Tokenhandler.UpdateAutenticationState(string.Empty);
+            Navigation.NavigateTo("/");
         }
     }
 }
