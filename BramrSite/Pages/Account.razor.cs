@@ -35,8 +35,11 @@ namespace BramrSite.Pages
 
             UserInfo = await Api.GetUserInfo();
 
-            HasCv = bool.Parse(UserInfo[5]);
-            HasPortfolio = bool.Parse(UserInfo[6]);
+            if (UserInfo != null)
+            {
+                HasCv = bool.Parse(UserInfo[5]);
+                HasPortfolio = bool.Parse(UserInfo[6]);
+            }
 
             Module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/AccountScript.js");
 
@@ -53,6 +56,14 @@ namespace BramrSite.Pages
 
         public async void Tab(int tabIndex)
         {
+            if (Module == null)
+            {
+                Module = await IJSRuntime.InvokeAsync<IJSObjectReference>("import", "./js/AccountScript.js");
+
+                await Module.InvokeVoidAsync("Init");
+                await Module.InvokeVoidAsync("tabs", tabIndex);
+            }
+
             await Module.InvokeVoidAsync("tabs", tabIndex);
         }
 
