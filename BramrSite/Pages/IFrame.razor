@@ -1,0 +1,74 @@
+﻿@page "/cv/{UserName}"
+@page "/portfolio/{UserName}"
+
+<style type="text/css">
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #content {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0px;
+    }
+</style>
+
+@if (Valid)
+{
+<div id="content">
+    <iframe src="@Url" style="width:100%; height:100%" frameBorder="0">
+    </iframe>
+</div>
+}
+else
+{
+    <PageNotFound Url="@NavigationManager.Uri"></PageNotFound>
+}
+
+@code
+{
+    [Parameter] public string UserName { get; set; }
+
+    [Inject] NavigationManager NavigationManager { get; set; }
+
+    bool Valid { get; set; }
+
+    string Url { get; set; } = "";
+
+    protected override void OnInitialized()
+    {
+        Valid = !string.IsNullOrEmpty(UserName);
+
+        if (Valid)
+        {
+#if DEBUG
+
+            if (NavigationManager.Uri.ToLower().Contains("cv"))
+            {
+                Url = $"https://localhost:44372/api/test/cv/{UserName}";
+            }
+            else
+            {
+                /// portfolio
+                Url = $"https://localhost:44372/api/portfolio/{UserName}";
+            }
+#else
+            if (NavigationManager.Uri.ToLower().Contains("cv"))
+            {
+                Url = $"https://bramr.tech/api/cv/{UserName}";
+            }
+            else
+            {
+                /// portfolio
+                Url = $"https://bramr.tech/api/portfolio/{UserName}";
+            }
+#endif
+        }
+    }
+
+}
