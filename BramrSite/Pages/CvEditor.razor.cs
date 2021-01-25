@@ -166,15 +166,17 @@ namespace BramrSite.Pages
 
             if (AllDesignElements == null) return;
 
+            Console.WriteLine($"{AllDesignElements.Count} || {AllTextElements.Count}");
+
             if (AllDesignElements.Count != 0)
             {
                 for (int x = 0; x < AllTextElements.Count; x++)
                 {
                     AllTextElements[x] = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[x].ToString());
                 }
-                for (int y = 0; y < 1; y++)
+                for (int y = 0; y < AllImageElements.Count; y++)
                 {
-                    AllImageElements[y] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[y + 37].ToString());
+                    AllImageElements[y] = JsonConvert.DeserializeObject<ImageModel>(AllDesignElements[y + AllTextElements.Count].ToString());
 #if DEBUG
                     AllImageElements[y].Src = $"https://localhost:44372/api/image/download/{AllImageElements[y].FileUri}";
 #else
