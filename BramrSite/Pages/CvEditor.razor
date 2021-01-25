@@ -227,7 +227,7 @@
         {
             <h1>Text editor tool</h1>
             <div id="output">
-                <textarea name="comment" form="usrform" cols="60" rows="5" @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString());}" @bind="CurrentTextElement.Text"></textarea>
+                <textarea maxlength="500" name="comment" form="usrform" cols="60" rows="5" @oninput="async (e) => { CurrentTextElement.Text = e.Value.ToString(); await AddToDB(ChangeModel.Type.Text, e.Value.ToString());}" @bind="CurrentTextElement.Text"></textarea>
             </div>
             <div class="tool-list-text">
                 <li class="tool">
