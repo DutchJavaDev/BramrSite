@@ -150,9 +150,12 @@ namespace BramrSite.Pages
 
             string json = JsonConvert.SerializeObject(AllDesignElements, Formatting.Indented);
 
-            Console.WriteLine(json);
+            
 
             var result = await Api.UploadCV(json);
+
+            Console.WriteLine(result);
+
             if (result.Success)
             {
                 SaveMessage = result.Message;
