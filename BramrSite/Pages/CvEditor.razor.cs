@@ -146,7 +146,11 @@ namespace BramrSite.Pages
                 AllDesignElements.Add(item);
             }
 
+            Console.WriteLine($"[Save] {AllDesignElements.Count}");
+
             string json = JsonConvert.SerializeObject(AllDesignElements, Formatting.Indented);
+
+            Console.WriteLine(json);
 
             var result = await Api.UploadCV(json);
             if (result.Success)
@@ -166,7 +170,7 @@ namespace BramrSite.Pages
 
             if (AllDesignElements == null) return;
 
-            Console.WriteLine($"{AllDesignElements.Count} || {AllTextElements.Count}");
+            Console.WriteLine($"[LoadSite] {AllDesignElements.Count} || {AllTextElements.Count}");
 
             if (AllDesignElements.Count != 0)
             {
