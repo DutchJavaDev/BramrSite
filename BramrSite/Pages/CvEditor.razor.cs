@@ -168,7 +168,7 @@ namespace BramrSite.Pages
 
             if (AllDesignElements.Count != 0)
             {
-                for (int x = 0; x < 37; x++)
+                for (int x = 0; x < AllTextElements.Count; x++)
                 {
                     AllTextElements[x] = JsonConvert.DeserializeObject<TextModel>(AllDesignElements[x].ToString());
                 }
