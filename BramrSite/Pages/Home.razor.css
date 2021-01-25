@@ -1,7 +1,6 @@
 ﻿* {
     margin: 0;
     padding: 0;
-    box-sizing: unset !important;
 }
 
 image
@@ -354,7 +353,7 @@ section#meetTheTeam {
         transform: translateY(-10px);
     }
 
-    .card-MTT h1 {
+    .card-MTT h1, h2 {
         color: rgb(0, 207, 255);
     }
 
@@ -365,10 +364,14 @@ section#meetTheTeam {
 
 /* INLOGSYSTEEM */
 
-h1 {
+h1, h2 {
     font-weight: bold;
     margin: 0;
     color: rgb(255, 255, 255);
+}
+
+.h2, h2 {
+    font-size: 1.7rem !important;
 }
 
 p {

@@ -1,5 +1,5 @@
-﻿@page "/cv/{UserName}"
-@page "/portfolio/{UserName}"
+﻿@*@page "/cv/{UserName}"
+@page "/portfolio/{UserName}"*@
 
 <style type="text/css">
     body, html {
@@ -50,22 +50,22 @@ else
 
             if (NavigationManager.Uri.ToLower().Contains("cv"))
             {
-                Url = $"https://localhost:44372/api/test/cv/{UserName}";
+                Url = $"https://www.localhost:44372/api/test/cv/{UserName}";
             }
             else
             {
                 /// portfolio
-                Url = $"https://localhost:44372/api/portfolio/{UserName}";
+                Url = $"https://www.localhost:44372/api/portfolio/{UserName}";
             }
 #else
             if (NavigationManager.Uri.ToLower().Contains("cv"))
             {
-                Url = $"https://bramr.tech/api/cv/{UserName}";
+                Url = $"https://www.bramr.tech/api/cv/{UserName}";
             }
             else
             {
                 /// portfolio
-                Url = $"https://bramr.tech/api/portfolio/{UserName}";
+                Url = $"https://www.bramr.tech/api/portfolio/{UserName}";
             }
 #endif
         }
